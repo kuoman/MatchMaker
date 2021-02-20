@@ -5,7 +5,14 @@ VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchMaker", "MatchMaker\MatchMaker.csproj", "{5D1FF07B-93AB-4ECD-8813-8694EFFA09C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MatchMakerTests", "MatchMakerTests\MatchMakerTests.csproj", "{2B7AFD1F-F910-4910-8FCA-BC36CAB01BA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MatchMakerTests", "MatchMakerTests\MatchMakerTests.csproj", "{2B7AFD1F-F910-4910-8FCA-BC36CAB01BA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DF858F70-102F-4E3D-BD4B-D75093B875F9}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
