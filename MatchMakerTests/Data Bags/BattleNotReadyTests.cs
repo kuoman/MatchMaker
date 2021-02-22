@@ -10,8 +10,10 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldBeBattleNotReady()
         {
+            // arrange
             BattleNotReady battleNotReady = new BattleNotReady();
 
+            // act // assert
             battleNotReady.IsReadyToFight().Should().BeFalse();
         }
     }

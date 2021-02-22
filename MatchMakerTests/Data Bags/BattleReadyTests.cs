@@ -14,6 +14,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueIfTeamsAreReadyToFight()
         {
+            // arrange
             BattleReady battleReady = new BattleReady();
 
             for (int i = 0; i < 7; i++)
@@ -22,12 +23,14 @@ namespace MatchMakerTests.Data_Bags
                 battleReady.AddQueueItemToTeamB(new QueueItem(new Player(), new Tank()));
             }
 
+            // act // assert
             battleReady.IsReadyToFight().Should().BeTrue();
         }
 
         [TestMethod]
         public void ShouldReturnFalseIfTeamsBNotReadyToFight()
         {
+            // arrange
             BattleReady battleReady = new BattleReady();
 
             for (int i = 0; i < 7; i++)
@@ -39,13 +42,14 @@ namespace MatchMakerTests.Data_Bags
             {
                 battleReady.AddQueueItemToTeamB(new QueueItem(new Player(), new Tank()));
             }
-
+            // act // assert
             battleReady.IsReadyToFight().Should().BeFalse();
         }
 
         [TestMethod]
         public void ShouldReturnFalseIfTeamsANotReadyToFight()
         {
+            // arrange
             BattleReady battleReady = new BattleReady();
 
             for (int i = 0; i < 7; i++)
@@ -58,6 +62,7 @@ namespace MatchMakerTests.Data_Bags
                 battleReady.AddQueueItemToTeamA(new QueueItem(new Player(), new Tank()));
             }
 
+            // act // assert
             battleReady.IsReadyToFight().Should().BeFalse();
         }
     }

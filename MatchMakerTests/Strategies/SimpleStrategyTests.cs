@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 
 namespace MatchMakerTests.Strategies
 {
@@ -41,10 +39,9 @@ namespace MatchMakerTests.Strategies
                 queueItems.Add(new QueueItem(new Player(), new Tank()));
             }
 
-            // act
             BattleReady battleReady = (BattleReady)simpleStrategy.CreateBattle(queueItems);
 
-            // assert
+            // act // arrange
             battleReady.IsReadyToFight().Should().BeTrue();
         }
 
@@ -61,10 +58,9 @@ namespace MatchMakerTests.Strategies
 
             SimpleStrategy simpleStrategy = new SimpleStrategy();
 
-            // act
             IBattle battleReady = simpleStrategy.CreateBattle(queueItems);
 
-            // assert
+            // act // arrange
             battleReady.IsReadyToFight().Should().BeFalse();
         }
     }

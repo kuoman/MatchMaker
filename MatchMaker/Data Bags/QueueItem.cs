@@ -10,5 +10,10 @@
             _player = player;
             _tank = tank;
         }
+
+        public bool HasPlayer(Player player)
+        {
+            return player == _player;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MatchMaker.Data_Bags
 {
@@ -21,6 +22,11 @@ namespace MatchMaker.Data_Bags
         public bool TeamIsFull()
         {
             return (QueueItemList.Count == 7);
+        }
+
+        public bool HasPlayer(Player player)
+        {
+            return QueueItemList.Any(queueItem => queueItem.HasPlayer(player));
         }
     }
 }
