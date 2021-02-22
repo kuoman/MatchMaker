@@ -2,8 +2,9 @@ using System.Collections.Generic;
 using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
+using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SimpleStrategy = MatchMaker.Strategies.SimpleStrategy;
+
 
 namespace MatchMakerTests.Strategies
 {

@@ -18,7 +18,7 @@ namespace MatchMaker.Data_Bags
             QueueItemList.Add(queueItem);
         }
 
-        public bool StillLookingForAPlayer()
+        public bool TeamIsFull()
         {
             return (QueueItemList.Count == 7);
         }
