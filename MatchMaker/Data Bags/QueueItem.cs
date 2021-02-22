@@ -1,4 +1,4 @@
-﻿namespace MatchMaker
+﻿namespace MatchMaker.Data_Bags
 {
     public class QueueItem
     {
