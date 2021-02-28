@@ -16,7 +16,7 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 7; i++)
             {
-                team.QueueItemList.Add(new QueueItem(new Player(), new Tank()));
+                team.QueueItemList.Add(CreateQueueItem());
             }
             // act // assert
             team.HasFullTeam().Should().BeTrue();
@@ -30,7 +30,7 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 6; i++)
             {
-                team.QueueItemList.Add(new QueueItem(new Player(), new Tank()));
+                team.QueueItemList.Add(CreateQueueItem());
             }
             // act // assert
             team.HasFullTeam().Should().BeFalse();
@@ -44,7 +44,7 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 6; i++)
             {
-                team.AddQueueItem(new QueueItem(new Player(), new Tank()));
+                team.AddQueueItem(CreateQueueItem());
             }
             // act // assert
             team.TeamIsFull().Should().BeFalse();
@@ -58,7 +58,7 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 7; i++)
             {
-                team.AddQueueItem(new QueueItem(new Player(), new Tank()));
+                team.AddQueueItem(CreateQueueItem());
             }
             // act // assert
             team.TeamIsFull().Should().BeTrue();
@@ -70,9 +70,10 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            Player player = new Player();
+            Player player = new Player(1);
 
-            team.AddQueueItem(new QueueItem(player, new Tank()));
+            team.AddQueueItem(CreateQueueItem(player));
+
             // act // assert
             team.HasPlayer(player).Should().BeTrue();
         }
@@ -83,9 +84,20 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            team.AddQueueItem(new QueueItem(new Player(), new Tank()));
+            team.AddQueueItem(CreateQueueItem(new Player(2)));
+
             // act // assert
-            team.HasPlayer(new Player()).Should().BeFalse();
+            team.HasPlayer(new Player(3)).Should().BeFalse();
+        }
+
+        private QueueItem CreateQueueItem()
+        {
+            return CreateQueueItem(new Player(1));
+        }
+
+        private QueueItem CreateQueueItem(Player player)
+        {
+            return new QueueItem(player, new Tank(1));
         }
     }
 

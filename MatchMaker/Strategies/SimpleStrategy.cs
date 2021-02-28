@@ -3,7 +3,7 @@ using MatchMaker.Data_Bags;
 
 namespace MatchMaker.Strategies
 {
-    public class SimpleStrategy
+    public class SimpleStrategy : IStrategy
     {
         public IBattle CreateBattle(List<QueueItem> queueItems)
         {
@@ -11,14 +11,10 @@ namespace MatchMaker.Strategies
 
             BattleReady battleReady = new BattleReady();
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 14; i = i + 2)
             {
                 battleReady.AddQueueItemToTeamA(queueItems[i]);
-            }
-
-            for (int i = 7; i < 14; i++)
-            {
-                battleReady.AddQueueItemToTeamB(queueItems[i]);
+                battleReady.AddQueueItemToTeamB(queueItems[i + 1]);
             }
 
             return battleReady;

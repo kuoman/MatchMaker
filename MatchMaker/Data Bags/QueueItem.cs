@@ -13,7 +13,12 @@
 
         public bool HasPlayer(Player player)
         {
-            return player == _player;
+            return _player.Equals(player);
+        }
+
+        public bool IsTier(int tier)
+        {
+            return _tank.IsTier(tier);
         }
     }
 }

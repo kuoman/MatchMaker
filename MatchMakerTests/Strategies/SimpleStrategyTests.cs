@@ -17,7 +17,7 @@ namespace MatchMakerTests.Strategies
             List<QueueItem> queueItems = new List<QueueItem>();
             for (int i = 0; i < 14; i++)
             {
-                queueItems.Add(new QueueItem(new Player(), new Tank()));
+                queueItems.Add(CreateQueueItem());
             }
 
             // act
@@ -28,7 +28,7 @@ namespace MatchMakerTests.Strategies
         }
 
         [TestMethod]
-        public void ShouldReturnBattleWithTeamsWithPlayerLists()
+        public void ShouldReturnBattleReadyThatsReadyToFight()
         {
             // arrange
             SimpleStrategy simpleStrategy = new SimpleStrategy();
@@ -36,7 +36,7 @@ namespace MatchMakerTests.Strategies
             List<QueueItem> queueItems = new List<QueueItem>();
             for (int i = 0; i < 14; i++)
             {
-                queueItems.Add(new QueueItem(new Player(), new Tank()));
+                queueItems.Add(CreateQueueItem());
             }
 
             BattleReady battleReady = (BattleReady)simpleStrategy.CreateBattle(queueItems);
@@ -53,7 +53,7 @@ namespace MatchMakerTests.Strategies
 
             for (int i = 0; i < 13; i++)
             {
-                queueItems.Add(new QueueItem(new Player(), new Tank()));
+                queueItems.Add(CreateQueueItem());
             }
 
             SimpleStrategy simpleStrategy = new SimpleStrategy();
@@ -63,5 +63,10 @@ namespace MatchMakerTests.Strategies
             // act // arrange
             battleReady.IsReadyToFight().Should().BeFalse();
         }
+        private static QueueItem CreateQueueItem()
+        {
+            return new QueueItem(new Player(1), new Tank(1));
+        }
     }
+
 }

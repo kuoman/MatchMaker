@@ -19,8 +19,8 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 7; i++)
             {
-                battleReady.AddQueueItemToTeamA(new QueueItem(new Player(), new Tank()));
-                battleReady.AddQueueItemToTeamB(new QueueItem(new Player(), new Tank()));
+                battleReady.AddQueueItemToTeamA(CreateQueueItem());
+                battleReady.AddQueueItemToTeamB(CreateQueueItem());
             }
 
             // act // assert
@@ -35,12 +35,12 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 7; i++)
             {
-                battleReady.AddQueueItemToTeamA(new QueueItem(new Player(), new Tank()));
+                battleReady.AddQueueItemToTeamA(CreateQueueItem());
             }
 
             for (int i = 0; i < 6; i++)
             {
-                battleReady.AddQueueItemToTeamB(new QueueItem(new Player(), new Tank()));
+                battleReady.AddQueueItemToTeamB(CreateQueueItem());
             }
             // act // assert
             battleReady.IsReadyToFight().Should().BeFalse();
@@ -54,17 +54,24 @@ namespace MatchMakerTests.Data_Bags
 
             for (int i = 0; i < 7; i++)
             {
-                battleReady.AddQueueItemToTeamB(new QueueItem(new Player(), new Tank()));
+                battleReady.AddQueueItemToTeamB(CreateQueueItem());
             }
 
             for (int i = 0; i < 6; i++)
             {
-                battleReady.AddQueueItemToTeamA(new QueueItem(new Player(), new Tank()));
+                battleReady.AddQueueItemToTeamA(CreateQueueItem());
             }
 
             // act // assert
             battleReady.IsReadyToFight().Should().BeFalse();
         }
+
+        private static QueueItem CreateQueueItem()
+        {
+            return new QueueItem(new Player(1), new Tank(1));
+        }
+
+
     }
 }
 

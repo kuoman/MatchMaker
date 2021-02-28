@@ -11,9 +11,9 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldFindPlayer()
         {
             // arrange
-            Player player = new Player();
+            Player player = new Player(1);
 
-            QueueItem queueItem = new QueueItem(player, new Tank());
+            QueueItem queueItem = CreateQueueItem(1);
 
             // act // assert
             queueItem.HasPlayer(player).Should().BeTrue();
@@ -23,11 +23,38 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldNotFindPlayer()
         {
             // arrange
-            QueueItem queueItem = new QueueItem(new Player(), new Tank());
+            QueueItem queueItem = CreateQueueItem(1);
 
             // act // assert
-            queueItem.HasPlayer(new Player()).Should().BeFalse();
+            queueItem.HasPlayer(new Player(2)).Should().BeFalse();
         }
+
+        [TestMethod]
+        public void ShouldReturnTrueIfCorrectTier()
+        {
+            // arrange 
+            QueueItem queueItem = CreateQueueItem(5);
+
+            // act // assert
+            queueItem.IsTier(5).Should().BeTrue();
+        }
+
+
+        [TestMethod]
+        public void ShouldReturnFalseIfIncorrectTier()
+        {
+            // arrange 
+            QueueItem queueItem = CreateQueueItem(5);
+
+            // act // assert
+            queueItem.IsTier(4).Should().BeFalse();
+        }
+
+        private static QueueItem CreateQueueItem(int tier)
+        {
+            return new QueueItem(new Player(1), new Tank(tier));
+        }
+
     }
 }
 
