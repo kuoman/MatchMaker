@@ -6,5 +6,10 @@
         {
             return false;
         }
+
+        public bool ContainsPlayer(Player player)
+        {
+            return false;
+        }
     }
 }

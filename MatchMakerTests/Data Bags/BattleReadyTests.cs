@@ -68,7 +68,7 @@ namespace MatchMakerTests.Data_Bags
 
         private static QueueItem CreateQueueItem()
         {
-            return new QueueItem(new Player(1), new Tank(1));
+            return new QueueItem(new Player(1), new Tank(1, null));
         }
 
 

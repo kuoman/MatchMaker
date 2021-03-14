@@ -70,7 +70,7 @@ namespace MatchMakerTests.Strategies
 
         private static QueueItem CreateQueueItem(int tier)
         {
-            return new QueueItem(new Player(1), new Tank(tier));
+            return new QueueItem(new Player(1), new Tank(tier, null));
         }
     }
 }

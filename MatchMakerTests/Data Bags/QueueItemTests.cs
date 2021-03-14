@@ -39,7 +39,6 @@ namespace MatchMakerTests.Data_Bags
             queueItem.IsTier(5).Should().BeTrue();
         }
 
-
         [TestMethod]
         public void ShouldReturnFalseIfIncorrectTier()
         {
@@ -50,9 +49,35 @@ namespace MatchMakerTests.Data_Bags
             queueItem.IsTier(4).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ShouldReturnTrueIfCorrectTankType()
+        {
+            // arrange 
+            QueueItem queueItem = CreateQueueItemOfTankType("Heavy");
+
+            // act // assert
+            queueItem.IsTankType("Heavy").Should().BeTrue();
+        }
+
+
+        [TestMethod]
+        public void ShouldReturnFalseIfIncorrectTankType()
+        {
+            // arrange 
+            QueueItem queueItem = CreateQueueItemOfTankType("Light");
+
+            // act // assert
+            queueItem.IsTankType("Heavy").Should().BeFalse();
+        }
+
         private static QueueItem CreateQueueItem(int tier)
         {
-            return new QueueItem(new Player(1), new Tank(tier));
+            return new QueueItem(new Player(1), new Tank(tier, null));
+        }
+
+        private static QueueItem CreateQueueItemOfTankType(string tankType)
+        {
+            return new QueueItem(new Player(1), new Tank(1, tankType));
         }
 
     }

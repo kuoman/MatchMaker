@@ -20,5 +20,10 @@
         {
             return _tank.IsTier(tier);
         }
+
+        public bool IsTankType(string heavy)
+        {
+            return _tank.IsTankType(heavy);
+        }
     }
 }

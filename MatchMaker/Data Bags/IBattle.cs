@@ -3,5 +3,6 @@
     public interface IBattle
     {
         bool IsReadyToFight();
+        bool ContainsPlayer(Player player);
     }
 }

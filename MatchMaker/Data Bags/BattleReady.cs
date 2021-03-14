@@ -10,6 +10,11 @@
             return (TeamA.HasFullTeam() && TeamB.HasFullTeam());
         }
 
+        public bool ContainsPlayer(Player player)
+        {
+            return TeamA.HasPlayer(player) || TeamB.HasPlayer(player);
+        }
+
         public void AddQueueItemToTeamA(QueueItem queueItem)
         {
             AddToQueueItem(TeamA, queueItem);

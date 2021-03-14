@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
@@ -111,7 +109,7 @@ namespace MatchMakerTests.Strategies
 
         private static QueueItem CreateQueueItem(int tier)
         {
-            return new QueueItem(new Player(1), new Tank(tier));
+            return new QueueItem(new Player(1), new Tank(tier, null));
         }
 
         private static List<QueueItem> AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, List<QueueItem> list)
