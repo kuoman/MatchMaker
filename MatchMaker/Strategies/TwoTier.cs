@@ -51,7 +51,7 @@ namespace MatchMaker.Strategies
                 return SortForTier(queueItems, _tier + 1);
             }
 
-            return SortForTier(queueItems, _tier - 1); ;
+            return SortForTier(queueItems, _tier - 1);
         }
 
         private List<QueueItem> SortForTier(List<QueueItem> queueItems, int tier)

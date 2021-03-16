@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using MatchMaker.Data_Bags;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -46,9 +43,7 @@ namespace MatchMakerTests.Data_Bags
         {
             Player player = new Player(2);
 
-            bool value = player.Equals(4);
-
-            value.Should().BeFalse();
+            player.Equals(new Player(4)).Should().BeFalse();
         }
     }
 }

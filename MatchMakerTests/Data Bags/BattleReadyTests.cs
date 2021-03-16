@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
-using MatchMaker;
+﻿using FluentAssertions;
 using MatchMaker.Data_Bags;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
