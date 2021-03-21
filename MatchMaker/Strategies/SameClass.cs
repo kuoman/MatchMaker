@@ -34,6 +34,23 @@ namespace MatchMaker.Strategies
             return battleReady;
         }
 
+        public IBattle CreateBattle(QueueItems queueItems)
+        {
+           // if (13 >= queueItems.Count) return new BattleNotReady();
+
+            BattleReady battleReady = new BattleReady();
+
+            foreach (string tankType in _tankTypes)
+            {
+                if (!battleReady.IsReadyToFight())
+                {
+                   // SortAndAddByTankType(queueItems, battleReady, tankType);
+                }
+            }
+
+            return battleReady;
+        }
+
         private void SortAndAddByTankType(List<QueueItem> queueItems, BattleReady battleReady, string tankType)
         {
             List<QueueItem> sameTankType = SortForTankType(tankType, queueItems);
