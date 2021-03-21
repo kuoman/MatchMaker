@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using FluentAssertions;
+using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,7 +14,7 @@ namespace MatchMakerTests.Strategies
         {
             // arrange
             SimpleStrategy simpleStrategy = new SimpleStrategy();
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
             for (int i = 0; i < 14; i++)
             {
                 queueItems.Add(CreateQueueItem());
@@ -28,12 +28,12 @@ namespace MatchMakerTests.Strategies
         }
 
         [TestMethod]
-        public void ShouldReturnBattleReadyThatsReadyToFight()
+        public void ShouldReturnBattleReadyThatIsReadyToFight()
         {
             // arrange
             SimpleStrategy simpleStrategy = new SimpleStrategy();
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
             for (int i = 0; i < 14; i++)
             {
                 queueItems.Add(CreateQueueItem());
@@ -49,7 +49,7 @@ namespace MatchMakerTests.Strategies
         public void ShouldReturnBattleNotReadyIfTeamsAreNotReady()
         {
             // arrange
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
             for (int i = 0; i < 13; i++)
             {

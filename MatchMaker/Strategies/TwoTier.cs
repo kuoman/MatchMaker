@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MatchMaker.Data_Bags;
+﻿using MatchMaker.Data_Bags;
 
 namespace MatchMaker.Strategies
 {
@@ -12,58 +11,30 @@ namespace MatchMaker.Strategies
             _tier = tier;
         }
 
-        public IBattle CreateBattle(List<QueueItem> queueItems)
+        public IBattle CreateBattle(QueueItems queueItems)
         {
             BattleReady battleReady = new BattleReady();
 
-            List<QueueItem> sameTierTanks = SortForTier(queueItems, _tier);
-
-            int modSameTierTanks = (sameTierTanks.Count / 2) * 2;
-            for (int i = 0; i < modSameTierTanks ; i = i + 2)
-            {
-                battleReady.AddQueueItemToTeamA(sameTierTanks[i]);
-                battleReady.AddQueueItemToTeamB(sameTierTanks[i + 1]);
-            }
+            battleReady = queueItems.ByTier(_tier).AddTanksToBattleReady(battleReady, 7);
 
             if (!battleReady.IsReadyToFight())
             {
-                List<QueueItem> fallBackTierTanks = GetFallbackTierTanks(queueItems);
-
-                int modNextLowerTierTanks = (fallBackTierTanks.Count / 2) * 2;
-                for (int i = 0; i < modNextLowerTierTanks; i = i + 2)
-                {
-                    if (battleReady.IsReadyToFight()) break;
-
-                    battleReady.AddQueueItemToTeamA(fallBackTierTanks[i]);
-                    battleReady.AddQueueItemToTeamB(fallBackTierTanks[i + 1]);
-                }
+                queueItems.ByTier(GetFallbackTier(_tier)).AddTanksToBattleReady(battleReady, 7);
             }
 
-            if (13 >= queueItems.Count) return new BattleNotReady();
+            if (!battleReady.IsReadyToFight()) return new BattleNotReady();
 
             return battleReady;
         }
 
-        private List<QueueItem> GetFallbackTierTanks(List<QueueItem> queueItems)
+        private int GetFallbackTier(int tier)
         {
-            if (_tier == 1)
+            if (tier == 1)
             {
-                return SortForTier(queueItems, _tier + 1);
+                return tier + 1;
             }
 
-            return SortForTier(queueItems, _tier - 1);
-        }
-
-        private List<QueueItem> SortForTier(List<QueueItem> queueItems, int tier)
-        {
-            List<QueueItem> sameTierTanks = new List<QueueItem>();
-
-            foreach (QueueItem queueItem in queueItems)
-            {
-                if (queueItem.IsTier(tier)) sameTierTanks.Add(queueItem);
-            }
-
-            return sameTierTanks;
+            return tier - 1;
         }
     }
 }

@@ -44,9 +44,23 @@ namespace MatchMaker
             return returnItems;
         }
 
-        public bool HasEnoughTanksToFight()
+        public bool HasEnoughTanks(int count)
         {
-            return _queueItems.Count >= 14;
+            return _queueItems.Count >= count;
+        }
+
+        public BattleReady AddTanksToBattleReady(BattleReady battleReady, int maxToAdd)
+        {
+            int modTankCount = _queueItems.Count / 2;
+            if (modTankCount > maxToAdd) modTankCount = maxToAdd;
+
+            for (int i = 0; i < modTankCount * 2; i = i + 2)
+            {
+                battleReady.AddQueueItemToTeamA(_queueItems[i]);
+                battleReady.AddQueueItemToTeamB(_queueItems[i + 1]);
+            }
+
+            return battleReady;
         }
     }
 }

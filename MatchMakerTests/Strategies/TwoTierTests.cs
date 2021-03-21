@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
+using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,8 +15,9 @@ namespace MatchMakerTests.Strategies
             // arrange
             IStrategy strategy = new TwoTier(5);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
-            for (int i = 0; i < 7; i++)
+            QueueItems queueItems = new QueueItems();
+
+            for (int i = 0; i < 14; i++)
             {
                 queueItems.Add(CreateQueueItem(5));
                 queueItems.Add(CreateQueueItem(6));
@@ -35,7 +36,7 @@ namespace MatchMakerTests.Strategies
             // arrange
             IStrategy strategy = new TwoTier(5);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
             for (int i = 0; i < 3; i++)
             {
                 queueItems.Add(CreateQueueItem(5));
@@ -55,11 +56,11 @@ namespace MatchMakerTests.Strategies
             // arrange
             IStrategy strategy = new TwoTier(6);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
-            queueItems = AddGivenNumberOfTanksOfTier(4, 1, queueItems);
-            queueItems = AddGivenNumberOfTanksOfTier(7, 6, queueItems);
-            queueItems = AddGivenNumberOfTanksOfTier(8, 5, queueItems);
+            AddGivenNumberOfTanksOfTier(4, 1, queueItems);
+            AddGivenNumberOfTanksOfTier(7, 6, queueItems);
+            AddGivenNumberOfTanksOfTier(8, 5, queueItems);
 
             // act
             IBattle battleReady = strategy.CreateBattle(queueItems);
@@ -74,11 +75,11 @@ namespace MatchMakerTests.Strategies
             // arrange
             IStrategy strategy = new TwoTier(7);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
-            queueItems = AddGivenNumberOfTanksOfTier(4, 2, queueItems);
-            queueItems = AddGivenNumberOfTanksOfTier(7, 7, queueItems);
-            queueItems = AddGivenNumberOfTanksOfTier(8, 6, queueItems);
+            AddGivenNumberOfTanksOfTier(4, 2, queueItems);
+            AddGivenNumberOfTanksOfTier(7, 7, queueItems);
+            AddGivenNumberOfTanksOfTier(8, 6, queueItems);
 
             // act
             IBattle battleReady = strategy.CreateBattle(queueItems);
@@ -94,11 +95,11 @@ namespace MatchMakerTests.Strategies
             // arrange
             IStrategy strategy = new TwoTier(1);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
-            queueItems = AddGivenNumberOfTanksOfTier(4, 6, queueItems);
-            queueItems = AddGivenNumberOfTanksOfTier(7, 1, queueItems);
-            queueItems = AddGivenNumberOfTanksOfTier(8, 2, queueItems);
+            AddGivenNumberOfTanksOfTier(4, 6, queueItems);
+            AddGivenNumberOfTanksOfTier(7, 1, queueItems);
+            AddGivenNumberOfTanksOfTier(8, 2, queueItems);
 
             // act
             IBattle battleReady = strategy.CreateBattle(queueItems);
@@ -107,19 +108,18 @@ namespace MatchMakerTests.Strategies
             battleReady.IsReadyToFight().Should().BeTrue();
         }
 
-        private static QueueItem CreateQueueItem(int tier)
+
+        private QueueItem CreateQueueItem(int tier)
         {
-            return new QueueItem(new Player(1), new Tank(tier, null));
+            return new QueueItem(new Player(1), new Tank(tier, "Heavy"));
         }
 
-        private static List<QueueItem> AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, List<QueueItem> list)
+        private void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, QueueItems queueItems)
         {
             for (int i = 0; i < numberToAdd; i++)
             {
-                list.Add(CreateQueueItem(tier));
+                queueItems.Add(CreateQueueItem(tier));
             }
-
-            return list;
         }
     }
 }

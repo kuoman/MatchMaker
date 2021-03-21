@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
+using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,8 +14,8 @@ namespace MatchMakerTests.Strategies
         {
             // arrange
             SameTier matchingStrategy = new SameTier(5);
-            
-            List<QueueItem> queueItems = new List<QueueItem>();
+
+            QueueItems queueItems = new QueueItems();
             for (int i = 0; i < 14; i++)
             {
                 queueItems.Add(CreateQueueItem(5));
@@ -34,7 +34,7 @@ namespace MatchMakerTests.Strategies
             // arrange
             SameTier strategy = new SameTier(5);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
             for (int i = 0; i < 14; i++)
             {
                 queueItems.Add(CreateQueueItem(1));
@@ -53,7 +53,7 @@ namespace MatchMakerTests.Strategies
             // arrange
             SameTier strategy = new SameTier(5);
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
             for (int i = 0; i < 13; i++)
             {
                 queueItems.Add(CreateQueueItem(1));

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using MatchMaker.Data_Bags;
+﻿using MatchMaker.Data_Bags;
 
 namespace MatchMaker.Strategies
 {
@@ -11,34 +10,9 @@ namespace MatchMaker.Strategies
         {
             _tier = tier;
         }
-
-        public IBattle CreateBattle(List<QueueItem> queueItems)
+        public IBattle CreateBattle(QueueItems queueItems)
         {
-            List<QueueItem> sameTierTanks = SortForTier(queueItems);
-
-            if (13 >= sameTierTanks.Count) return new BattleNotReady();
-
-            BattleReady battleReady = new BattleReady();
-
-            for (int i = 0; i < 14; i = i + 2)
-            {
-                battleReady.AddQueueItemToTeamA(sameTierTanks[i]);
-                battleReady.AddQueueItemToTeamB(sameTierTanks[i + 1]);
-            }
-
-            return battleReady;
-        }
-
-        private List<QueueItem> SortForTier(List<QueueItem> queueItems)
-        {
-            List<QueueItem> sameTierTanks = new List<QueueItem>();
-
-            foreach (QueueItem queueItem in queueItems)
-            {
-                if (queueItem.IsTier(_tier)) sameTierTanks.Add(queueItem);
-            }
-
-            return sameTierTanks;
+            return queueItems.ByTier(_tier).AddTanksToBattleReady(new BattleReady(), 7);
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
+using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
+using MatchMakerTests.TestDoubles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MatchMakerTests.Strategies
 {
@@ -9,31 +10,12 @@ namespace MatchMakerTests.Strategies
     public class SameClassTests
     {
         [TestMethod]
-        public void ShouldCreateBattleReadyWith14QueueItemsOfSameClass()
-        {
-            // arrange
-            SameClass matchingStrategy = new SameClass();
-
-            List<QueueItem> queueItems = new List<QueueItem>();
-            for (int i = 0; i < 14; i++)
-            {
-                queueItems.Add(CreateQueueItem("Heavy"));
-            }
-
-            // act
-            IBattle battleReady = matchingStrategy.CreateBattle(queueItems);
-
-            // assert
-            battleReady.Should().NotBeNull();
-        }
-
-        [TestMethod]
         public void ShouldCreateBattleNotReadyIfFewerThan14Tanks()
         {
             // arrange
             SameClass matchingStrategy = new SameClass();
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
             AddGivenNumberOfTanksOfTier(13, 3, "Heavy", queueItems);
 
@@ -50,7 +32,7 @@ namespace MatchMakerTests.Strategies
             // arrange
             SameClass matchingStrategy = new SameClass();
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
             AddGivenNumberOfTanksOfTier(13, 3, "Heavy", queueItems);
             AddGivenNumberOfTanksOfTier(1, 3, "Light", queueItems);
@@ -68,7 +50,7 @@ namespace MatchMakerTests.Strategies
             // arrange
             SameClass matchingStrategy = new SameClass();
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
             AddGivenNumberOfTanksOfTier(4, 3, "Heavy", queueItems);
             AddGivenNumberOfTanksOfTier(3, 3, "Medium", queueItems);
@@ -88,7 +70,7 @@ namespace MatchMakerTests.Strategies
             // arrange
             SameClass matchingStrategy = new SameClass();
 
-            List<QueueItem> queueItems = new List<QueueItem>();
+            QueueItems queueItems = new QueueItems();
 
             AddGivenNumberOfTanksOfTier(3, 3, "Heavy", queueItems);
             AddGivenNumberOfTanksOfTier(3, 3, "Medium", queueItems);
@@ -102,14 +84,15 @@ namespace MatchMakerTests.Strategies
             battleReady.IsReadyToFight().Should().BeTrue();
         }
 
+
         [TestMethod]
         public void ShouldNotContainMoreThanThreeTanksOfType()
         {
             // arrange
-            SameClass matchingStrategy = new SameClass();
+            SameClass matchingStrategy = new SameClass(new TestNotRandom());
 
-            List<QueueItem> queueItems = new List<QueueItem>();
-
+            QueueItems queueItems = new QueueItems();
+ 
             queueItems.Add(new QueueItem(new Player(0), new Tank(3, "Heavy")));
             queueItems.Add(new QueueItem(new Player(1), new Tank(3, "Heavy")));
             queueItems.Add(new QueueItem(new Player(2), new Tank(3, "Heavy")));
@@ -162,23 +145,17 @@ namespace MatchMakerTests.Strategies
             battleReady.ContainsPlayer(new Player(36)).Should().BeFalse();
         }
 
-        private static QueueItem CreateQueueItem(string tankType)
-        {
-            return CreateQueueItem(3, tankType);
-        }
-
-        private static QueueItem CreateQueueItem(int tier, string tankType)
+        private QueueItem CreateQueueItem(int tier, string tankType)
         {
             return new QueueItem(new Player(1), new Tank(tier, tankType));
         }
 
-        private static void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, string tankType, List<QueueItem> list)
+        private void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, string tankType, QueueItems queueItems)
         {
             for (int i = 0; i < numberToAdd; i++)
             {
-                list.Add(CreateQueueItem(tier, tankType));
+                queueItems.Add(CreateQueueItem(tier, tankType));
             }
-
         }
     }
 }
