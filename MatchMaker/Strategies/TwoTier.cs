@@ -17,12 +17,12 @@ namespace MatchMaker.Strategies
 
             battleReady = queueItems.ByTier(_tier).AddTanksToBattleReady(battleReady, 7);
 
-            if (!battleReady.IsReadyToFight())
+            if (battleReady.IsNotReadyToFight())
             {
                 queueItems.ByTier(GetFallbackTier(_tier)).AddTanksToBattleReady(battleReady, 7);
             }
 
-            if (!battleReady.IsReadyToFight()) return new BattleNotReady();
+            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
             return battleReady;
         }

@@ -2,27 +2,32 @@
 {
     public class BattleReady : IBattle
     {
-        private Team TeamA = new Team();
-        private Team TeamB = new Team();
+        private readonly Team _teamA = new Team();
+        private readonly Team _teamB = new Team();
 
         public bool IsReadyToFight()
         {
-            return (TeamA.HasFullTeam() && TeamB.HasFullTeam());
+            return (_teamA.HasFullTeam() && _teamB.HasFullTeam());
+        }
+
+        public bool IsNotReadyToFight()
+        {
+            return !IsReadyToFight();
         }
 
         public bool ContainsPlayer(Player player)
         {
-            return TeamA.HasPlayer(player) || TeamB.HasPlayer(player);
+            return _teamA.HasPlayer(player) || _teamB.HasPlayer(player);
         }
 
         public void AddQueueItemToTeamA(QueueItem queueItem)
         {
-            AddToQueueItem(TeamA, queueItem);
+            AddToQueueItem(_teamA, queueItem);
         }
 
         public void AddQueueItemToTeamB(QueueItem queueItem)
         {
-            AddToQueueItem(TeamB, queueItem);
+            AddToQueueItem(_teamB, queueItem);
         }
 
         private void AddToQueueItem(Team team, QueueItem queueItem)

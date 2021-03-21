@@ -21,6 +21,7 @@ namespace MatchMakerTests.Data_Bags
 
             // act // assert
             battleReady.IsReadyToFight().Should().BeTrue();
+            battleReady.IsNotReadyToFight().Should().BeFalse();
         }
 
         [TestMethod]
@@ -40,6 +41,7 @@ namespace MatchMakerTests.Data_Bags
             }
             // act // assert
             battleReady.IsReadyToFight().Should().BeFalse();
+            battleReady.IsNotReadyToFight().Should().BeTrue();
         }
 
         [TestMethod]

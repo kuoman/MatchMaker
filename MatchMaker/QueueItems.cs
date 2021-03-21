@@ -30,6 +30,7 @@ namespace MatchMaker
             {
                 if (item.IsTier(tier)) returnItems.Add(item);
             }
+
             return returnItems;
         }
 
@@ -41,6 +42,7 @@ namespace MatchMaker
             {
                 if (item.IsTankType(tankType)) returnItems.Add(item);
             }
+
             return returnItems;
         }
 

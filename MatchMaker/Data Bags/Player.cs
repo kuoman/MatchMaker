@@ -14,17 +14,12 @@ namespace MatchMaker.Data_Bags
         public bool Equals(Player other)
         {
             //Check for null and compare run-time types.
-            if ((other == null) || this.GetType() != other.GetType())
+            if ((other == null) || GetType() != other.GetType())
             {
                 return false;
             }
 
             return _id == other._id;
-        }
-
-        public override int GetHashCode()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace MatchMaker.Strategies
 
             foreach (string tankType in _tankTypes)
             {
-                if (!battleReady.IsReadyToFight())
+                if (battleReady.IsNotReadyToFight())
                 {
                     battleReady = queueItems.ByTankType(tankType).AddTanksToBattleReady(battleReady, _maxTanksOfSameType);
                 }

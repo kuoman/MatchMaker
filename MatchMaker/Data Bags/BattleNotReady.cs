@@ -7,6 +7,11 @@
             return false;
         }
 
+        public bool IsNotReadyToFight()
+        {
+            return true;
+        }
+
         public bool ContainsPlayer(Player player)
         {
             return false;
