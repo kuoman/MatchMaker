@@ -18,10 +18,15 @@ namespace MatchMaker.Strategies
 
         public IBattle CreateBattle(QueueItems queueItems)
         {
-            if (!queueItems.HasEnoughTanks(14)) return new BattleNotReady();
+            BattleReady battleReady = IterateOverTankTypes(queueItems, new BattleReady());
 
-            BattleReady battleReady = new BattleReady();
+            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
+            return battleReady;
+        }
+
+        private BattleReady IterateOverTankTypes(QueueItems queueItems, BattleReady battleReady)
+        {
             foreach (string tankType in _tankTypes)
             {
                 if (battleReady.IsNotReadyToFight())

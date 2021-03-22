@@ -6,7 +6,11 @@ namespace MatchMaker.Strategies
     {
         public IBattle CreateBattle(QueueItems queueItems)
         {
-            return queueItems.AddTanksToBattleReady(new BattleReady(), 7);
+            BattleReady battleReady =  queueItems.AddTanksToBattleReady(new BattleReady(), 7);
+
+            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
+
+            return battleReady;
         }
     }
 }
