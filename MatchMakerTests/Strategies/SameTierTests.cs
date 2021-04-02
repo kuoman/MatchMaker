@@ -86,7 +86,7 @@ namespace MatchMakerTests.Strategies
             BattleReady battleReady = (BattleReady)matchingStrategy.CreateBattle(queueItems);
 
             // assert
-            battleReady.Should().NotBeNull();
+            battleReady.ContainsPlayer(new Player(333)).Should().BeTrue();
             queueItems.Contains(queueItem).Should().BeFalse();
         }
 
