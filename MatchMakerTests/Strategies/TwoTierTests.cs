@@ -117,6 +117,8 @@ namespace MatchMakerTests.Strategies
             QueueItem queueItem = new QueueItem(new Player(345), new Tank(1, "Heavy"));
 
             QueueItems queueItems = new QueueItems();
+            
+            queueItems.Add(queueItem);
             AddGivenNumberOfTanksOfTier(4, 6, queueItems);
             AddGivenNumberOfTanksOfTier(6, 1, queueItems);
             AddGivenNumberOfTanksOfTier(8, 2, queueItems);
@@ -128,7 +130,6 @@ namespace MatchMakerTests.Strategies
             queueItems.Contains(queueItem).Should().BeFalse();
             battleReady.ContainsPlayer(new Player(345)).Should().BeTrue();
         }
-
 
         private QueueItem CreateQueueItem(int tier)
         {
