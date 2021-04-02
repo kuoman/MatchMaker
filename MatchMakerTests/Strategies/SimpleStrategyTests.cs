@@ -63,6 +63,32 @@ namespace MatchMakerTests.Strategies
             // act // arrange
             battleReady.IsReadyToFight().Should().BeFalse();
         }
+
+        [TestMethod]
+        public void ShouldFinalizeBattle()
+        {
+            // arrange
+            SimpleStrategy simpleStrategy = new SimpleStrategy();
+
+            QueueItem queueItem = new QueueItem(new Player(1), new Tank(3, "Medium"));
+
+            QueueItems queueItems = new QueueItems();
+            queueItems.Add(queueItem);
+
+            for (int i = 0; i < 13; i++)
+            {
+                queueItems.Add(CreateQueueItem());
+            }
+
+            // act
+            BattleReady battleReady = (BattleReady)simpleStrategy.CreateBattle(queueItems);
+
+            // assert
+            battleReady.Should().NotBeNull();
+            battleReady.ContainsPlayer(new Player(1)).Should().BeTrue();
+            queueItems.Contains(queueItem).Should().BeFalse();
+        }
+
         private static QueueItem CreateQueueItem()
         {
             return new QueueItem(new Player(1), new Tank(1, null));

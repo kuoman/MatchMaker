@@ -10,6 +10,8 @@ namespace MatchMaker.Strategies
 
             if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
+            battleReady.FinalizeBattle(queueItems);
+
             return battleReady;
         }
     }

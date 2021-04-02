@@ -228,7 +228,6 @@ namespace MatchMakerTests
             returnBattleReady.ContainsPlayer(new Player(7)).Should().Be(false);
         }
 
-
         [TestMethod]
         public void ShouldAddTanksToBattleInPairsUnderMaxCount()
         {
@@ -256,6 +255,53 @@ namespace MatchMakerTests
             returnBattleReady.ContainsPlayer(new Player(3)).Should().Be(true);
             returnBattleReady.ContainsPlayer(new Player(4)).Should().Be(true);
             returnBattleReady.ContainsPlayer(new Player(7)).Should().Be(false);
+        }
+
+        [Ignore]
+        [TestMethod]
+        public void ShouldRemoveTanksFromAvailableQueue()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem10A = CreateQueueItem(1, 10, "Heavy");
+            QueueItem queueItem10B = CreateQueueItem(2, 10, "Light");
+            QueueItem queueItem09A = CreateQueueItem(3, 9, "Heavy");
+            QueueItem queueItem09B = CreateQueueItem(4, 9, "Light");
+            QueueItem queueItem03C = CreateQueueItem(7, 3, "Medium");
+
+            queueItems.Add(queueItem10A);
+            queueItems.Add(queueItem10B);
+            queueItems.Add(queueItem09A);
+            queueItems.Add(queueItem09B);
+            queueItems.Add(queueItem03C);
+
+            // act
+            BattleReady returnBattleReady = queueItems.AddTanksToBattleReady(new BattleReady(), 3);
+
+            // assert
+            queueItems.Contains(queueItem10A).Should().BeFalse();
+            queueItems.Contains(queueItem10B).Should().BeFalse();
+            queueItems.Contains(queueItem09A).Should().BeFalse();
+            queueItems.Contains(queueItem09B).Should().BeFalse();
+            queueItems.Contains(queueItem03C).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldRemoveQueueItem()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem = new QueueItem(new Player(1), new Tank(1, "Light"));
+            queueItems.Add(queueItem);
+
+            // act
+            bool success = queueItems.Remove(queueItem);
+
+            // 
+            success.Should().BeTrue();
+            queueItems.Contains(queueItem).Should().BeFalse();
         }
 
         private QueueItem CreateQueueItem(int tier, string tankType)

@@ -34,5 +34,11 @@
         {
             team.AddQueueItem(queueItem);
         }
+
+        public void FinalizeBattle(QueueItems queueItems)
+        {
+            _teamA.FinalizeBattle(queueItems);
+            _teamB.FinalizeBattle(queueItems);
+        }
     }
 }

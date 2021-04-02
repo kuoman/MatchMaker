@@ -56,13 +56,19 @@ namespace MatchMaker
             int modTankCount = _queueItems.Count / 2;
             if (modTankCount > maxToAdd) modTankCount = maxToAdd;
 
-            for (int i = 0; i < modTankCount * 2; i = i + 2)
+            int tankCount = modTankCount * 2;
+            for (int i = 0; i < tankCount; i = i + 2)
             {
                 battleReady.AddQueueItemToTeamA(_queueItems[i]);
                 battleReady.AddQueueItemToTeamB(_queueItems[i + 1]);
             }
 
             return battleReady;
+        }
+
+        public bool Remove(QueueItem queueItem)
+        {
+            return _queueItems.Remove(queueItem);
         }
     }
 }

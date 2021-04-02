@@ -84,7 +84,6 @@ namespace MatchMakerTests.Strategies
             battleReady.IsReadyToFight().Should().BeTrue();
         }
 
-
         [TestMethod]
         public void ShouldNotContainMoreThanThreeTanksOfType()
         {
@@ -92,8 +91,9 @@ namespace MatchMakerTests.Strategies
             SameClass matchingStrategy = new SameClass(new TestNotRandom());
 
             QueueItems queueItems = new QueueItems();
- 
-            queueItems.Add(new QueueItem(new Player(0), new Tank(3, "Heavy")));
+
+            QueueItem queueItem = new QueueItem(new Player(0), new Tank(3, "Heavy"));
+            queueItems.Add(queueItem);
             queueItems.Add(new QueueItem(new Player(1), new Tank(3, "Heavy")));
             queueItems.Add(new QueueItem(new Player(2), new Tank(3, "Heavy")));
             queueItems.Add(new QueueItem(new Player(3), new Tank(3, "Heavy")));
@@ -143,6 +143,64 @@ namespace MatchMakerTests.Strategies
             battleReady.ContainsPlayer(new Player(16)).Should().BeFalse();
             battleReady.ContainsPlayer(new Player(26)).Should().BeFalse();
             battleReady.ContainsPlayer(new Player(36)).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldFinalizeBattle()
+        {
+            // arrange
+            SameClass matchingStrategy = new SameClass(new TestNotRandom());
+
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem = new QueueItem(new Player(0), new Tank(3, "Heavy"));
+            queueItems.Add(queueItem);
+            queueItems.Add(new QueueItem(new Player(1), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(2), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(3), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(4), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(5), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(6), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(7), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(8), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(9), new Tank(3, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(10), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(11), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(12), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(13), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(14), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(15), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(16), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(17), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(18), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(19), new Tank(3, "Medium")));
+            queueItems.Add(new QueueItem(new Player(20), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(21), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(22), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(23), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(24), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(25), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(26), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(27), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(28), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(29), new Tank(3, "TankDestroyer")));
+            queueItems.Add(new QueueItem(new Player(30), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(31), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(32), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(33), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(34), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(35), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(36), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(37), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(38), new Tank(3, "Light")));
+            queueItems.Add(new QueueItem(new Player(39), new Tank(3, "Light")));
+
+            // act
+            IBattle battleReady = matchingStrategy.CreateBattle(queueItems);
+
+            // assert
+            queueItems.Contains(queueItem).Should().BeFalse();
+            battleReady.ContainsPlayer(new Player(1)).Should().BeTrue();
         }
 
         private QueueItem CreateQueueItem(int tier, string tankType)

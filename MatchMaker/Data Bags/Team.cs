@@ -1,32 +1,53 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MatchMaker.Data_Bags
 {
     public class Team
     {
-        public List<QueueItem> QueueItemList = new List<QueueItem>();
+        private List<QueueItem> _queueItemList = new List<QueueItem>();
 
         public bool HasFullTeam()
         {
-            return QueueItemList.Count == 7;
+            return _queueItemList.Count == 7;
         }
 
         public void AddQueueItem(QueueItem queueItem)
         {
-            if (QueueItemList.Count == 7) return;
+            if (_queueItemList.Count == 7) return;
 
-            QueueItemList.Add(queueItem);
+            _queueItemList.Add(queueItem);
         }
 
         public bool TeamIsFull()
         {
-            return (QueueItemList.Count == 7);
+            return (_queueItemList.Count == 7);
         }
 
         public bool HasPlayer(Player player)
         {
-            return QueueItemList.Any(queueItem => queueItem.HasPlayer(player));
+            return _queueItemList.Any(queueItem => queueItem.HasPlayer(player));
+        }
+
+        public QueueItems ResetQueueItems(QueueItems queueItems)
+        {
+            foreach (QueueItem queueItem in _queueItemList)
+            {
+                queueItems.Add(queueItem);
+            }
+
+            _queueItemList = new List<QueueItem>();
+
+            return queueItems;
+        }
+
+        public void FinalizeBattle(QueueItems queueItems)
+        {
+            foreach (QueueItem queueItem in _queueItemList)
+            {
+                queueItems.Remove(queueItem);
+            }
         }
     }
 }

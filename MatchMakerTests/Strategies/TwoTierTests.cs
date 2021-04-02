@@ -108,6 +108,27 @@ namespace MatchMakerTests.Strategies
             battleReady.IsReadyToFight().Should().BeTrue();
         }
 
+        [TestMethod]
+        public void ShouldFinalizeBattle()
+        {
+            // arrange
+            IStrategy strategy = new TwoTier(1);
+
+            QueueItem queueItem = new QueueItem(new Player(345), new Tank(1, "Heavy"));
+
+            QueueItems queueItems = new QueueItems();
+            AddGivenNumberOfTanksOfTier(4, 6, queueItems);
+            AddGivenNumberOfTanksOfTier(6, 1, queueItems);
+            AddGivenNumberOfTanksOfTier(8, 2, queueItems);
+
+            // act
+            IBattle battleReady = strategy.CreateBattle(queueItems);
+
+            // assert
+            queueItems.Contains(queueItem).Should().BeFalse();
+            battleReady.ContainsPlayer(new Player(345)).Should().BeTrue();
+        }
+
 
         private QueueItem CreateQueueItem(int tier)
         {

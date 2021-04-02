@@ -66,6 +66,30 @@ namespace MatchMakerTests.Strategies
             battleReady.IsReadyToFight().Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ShouldFinalizeBattle()
+        {
+            // arrange
+            SameTier matchingStrategy = new SameTier(5);
+
+            QueueItem queueItem = new QueueItem(new Player(333), new Tank(5, "Heavy"));
+
+            QueueItems queueItems = new QueueItems();
+            queueItems.Add(queueItem);
+
+            for (int i = 0; i < 13; i++)
+            {
+                queueItems.Add(CreateQueueItem(5));
+            }
+
+            // act
+            BattleReady battleReady = (BattleReady)matchingStrategy.CreateBattle(queueItems);
+
+            // assert
+            battleReady.Should().NotBeNull();
+            queueItems.Contains(queueItem).Should().BeFalse();
+        }
+
         private static QueueItem CreateQueueItem(int tier)
         {
             return new QueueItem(new Player(1), new Tank(tier, null));
