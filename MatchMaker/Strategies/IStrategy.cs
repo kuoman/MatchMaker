@@ -5,5 +5,6 @@ namespace MatchMaker.Strategies
     public interface IStrategy
     {
         IBattle CreateBattle(QueueItems queueItems);
+        IMatchPair CreateMatchPair(QueueItems queueItems);
     }
 }

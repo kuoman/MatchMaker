@@ -304,6 +304,42 @@ namespace MatchMakerTests
             queueItems.Contains(queueItem).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ShouldReturnNullMatchPairObjectIfQueueItemsDoesNotHaveTwoElements()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Light"));
+         //   queueItems.Add(queueItem01);
+
+            // act
+            IMatchPair matchPair = queueItems.GetMatchPair(); 
+
+            // assert
+            matchPair.Contains(queueItem01).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void Should()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Light"));
+            queueItems.Add(queueItem01);
+
+            QueueItem queueItem02 = new QueueItem(new Player(1), new Tank(1, "Light"));
+            queueItems.Add(queueItem02);
+
+            // act
+            IMatchPair matchPair = queueItems.GetMatchPair();
+
+            // assert
+            matchPair.Contains(queueItem01).Should().BeTrue();
+            matchPair.Contains(queueItem02).Should().BeTrue();
+        }
+
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
             return CreateQueueItem(1,tier, tankType);

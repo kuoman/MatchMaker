@@ -27,6 +27,15 @@ namespace MatchMaker.Strategies
             return battleReady;
         }
 
+        public IMatchPair CreateMatchPair(QueueItems queueItems)
+        {
+            IMatchPair matchPair = queueItems.ByTier(_tier).GetMatchPair();
+
+            if (matchPair.IsPairFull()) return matchPair;
+
+            return queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPair();
+        }
+
         private int GetFallbackTier(int tier)
         {
             if (tier == 1)

@@ -6,10 +6,16 @@ namespace MatchMaker.Strategies
 {
     public class SameClass : IStrategy
     {
+        private readonly string _tankType;
         private readonly int _maxTanksOfSameType = 3;
         private readonly List<string> _tankTypes = new List<String> {"Heavy", "Light", "TankDestroyer", "Medium"};
 
         public SameClass() : this(RandomFactory.Create()) { }
+
+        public SameClass(string tankType)
+        {
+            _tankType = tankType;
+        }
 
         public SameClass(IRandom random)
         {
@@ -25,6 +31,11 @@ namespace MatchMaker.Strategies
             battleReady.FinalizeBattle(queueItems);
 
             return battleReady;
+        }
+
+        public IMatchPair CreateMatchPair(QueueItems queueItems)
+        {
+            return queueItems.ByTankType(_tankType).GetMatchPair();
         }
 
         private BattleReady IterateOverTankTypes(QueueItems queueItems, BattleReady battleReady)

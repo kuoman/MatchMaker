@@ -20,5 +20,10 @@ namespace MatchMaker.Strategies
 
             return battleReady;
         }
+
+        public IMatchPair CreateMatchPair(QueueItems queueItems)
+        {
+            return queueItems.ByTier(3).GetMatchPair();
+        }
     }
 }

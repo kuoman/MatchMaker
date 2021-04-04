@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MatchMaker.Data_Bags;
 
 namespace MatchMaker
@@ -69,6 +70,13 @@ namespace MatchMaker
         public bool Remove(QueueItem queueItem)
         {
             return _queueItems.Remove(queueItem);
+        }
+
+        public IMatchPair GetMatchPair()
+        {
+            if (1 >=_queueItems.Count) return new MatchNotPaired();
+
+            return new MatchPair(_queueItems[0], _queueItems[1]);
         }
     }
 }
