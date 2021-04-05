@@ -2,7 +2,6 @@ using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
-using MatchMakerTests.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests
