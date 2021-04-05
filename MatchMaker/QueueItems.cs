@@ -52,20 +52,15 @@ namespace MatchMaker
             return _queueItems.Count >= count;
         }
 
-        public IBattle AddTanksToBattleReady(IBattle battleReady, int maxToAdd)
+        public IBattle AddTanksToBattleReady(IBattle battleReady, int matchesToAdd)
         {
-            int modTankCount = _queueItems.Count / 2;
-            if (modTankCount > maxToAdd) modTankCount = maxToAdd;
+            int matchesToCreate = _queueItems.Count / 2;
+            if (matchesToCreate > matchesToAdd) matchesToCreate = matchesToAdd;
 
-            int tankCount = modTankCount * 2;
+            int tankCount = matchesToCreate * 2;
             for (int i = 0; i < tankCount; i = i + 2)
             {
-                IMatchPair matchPair = GetMatchPair();
-
-                battleReady = matchPair.AddMatchToBattle(battleReady);
-
-              //  battleReady.AddQueueItemToTeamA(_queueItems[i]);
-              //  battleReady.AddQueueItemToTeamB(_queueItems[i + 1]);
+                battleReady = GetMatchPair().AddMatchToBattle(battleReady);
             }
 
             return battleReady;
