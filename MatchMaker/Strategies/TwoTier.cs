@@ -12,23 +12,13 @@ namespace MatchMaker.Strategies
         }
 
         public IBattle CreateBattle(QueueItems queueItems)
-        {
-            IBattle battleReady = new BattleReady();//queueItems.ByTier(_tier).AddTanksToBattleReady(new BattleReady(), 7);
+        { 
+            IBattle battleReady = new BattleReady();
 
             for (int i = 0; i < 7; i++)
             {
-                battleReady = queueItems.ByTier(_tier).GetMatchPair(queueItems).AddMatchToBattle(battleReady);
+                battleReady = PopulateBattle(queueItems, battleReady);
             }
-
-            if (battleReady.IsNotReadyToFight())
-            {
-                for (int i = 0; i < 7; i++)
-                {
-                    battleReady = queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPair(queueItems).AddMatchToBattle(battleReady);
-                }
-            }
-
-            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
             return battleReady;
         }

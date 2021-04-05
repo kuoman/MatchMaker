@@ -10,10 +10,8 @@ namespace MatchMaker.Strategies
 
             for (int i = 0; i < 7; i++)
             {
-                battleReady = CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
+                battleReady = PopulateBattle(queueItems, battleReady);
             }
-
-            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
             return battleReady;
         }

@@ -24,11 +24,7 @@ namespace MatchMaker.Strategies
 
         public IBattle CreateBattle(QueueItems queueItems)
         {
-            IBattle battleReady = IterateOverTankTypes(queueItems, new BattleReady());
-
-            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
-
-            return battleReady;
+            return IterateOverTankTypes(queueItems, new BattleReady());
         }
 
         public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)

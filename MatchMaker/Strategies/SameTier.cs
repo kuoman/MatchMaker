@@ -19,8 +19,6 @@ namespace MatchMaker.Strategies
                 battleReady = CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
             }
 
-            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
-
             return battleReady;
         }
 

@@ -30,6 +30,25 @@ namespace MatchMakerTests
         }
 
         [TestMethod]
+        public void ShouldReturnBattleNotReadyForIncompleteNumbers()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+            for (int i = 0; i < 13; i++)
+            {
+                queueItems.Add(CreateQueueItem(i, 1, "Heavy"));
+            }
+
+            BattleFactory battleFactory = new BattleFactory();
+
+            // act
+            IBattle battle = battleFactory.Create(new SimpleStrategy(), queueItems);
+
+            //arrange
+            battle.IsReadyToFight().Should().BeFalse();
+        }
+
+        [TestMethod]
         public void ShouldCreateBattleForSameClassStrategy()
         {
             // arrange

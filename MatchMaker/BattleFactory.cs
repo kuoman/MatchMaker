@@ -14,8 +14,6 @@ namespace MatchMaker
                 battleReady = strategy.PopulateBattle(queueItems, battleReady);
             }
 
-            if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
-
             return battleReady;
         }
     }
