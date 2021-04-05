@@ -16,7 +16,7 @@ namespace MatchMaker
 
         public IBattle AddMatchToBattle(IBattle battle)
         {
-            return new BattleNotReady();
+            return battle;
         }
     }
 }

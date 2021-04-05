@@ -14,9 +14,14 @@ namespace MatchMaker.Strategies
             _tankType = tankType;
         }
 
+        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
+        {
+            return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
+        }
+
         public IMatchPair CreateMatchPair(QueueItems queueItems)
         {
-            return queueItems.ByTier(_tier).ByTankType(_tankType).GetMatchPair();
+            return queueItems.ByTier(_tier).ByTankType(_tankType).GetMatchPair(queueItems);
         }
 
         public IBattle CreateBattle(QueueItems queueItems)

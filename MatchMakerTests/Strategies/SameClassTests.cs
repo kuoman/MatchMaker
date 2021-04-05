@@ -223,6 +223,27 @@ namespace MatchMakerTests.Strategies
             matchPair.Contains(queueItem2).Should().BeTrue();
         }
 
+
+        [TestMethod]
+        public void ShouldPopulateBattle()
+        {
+            // arrange
+            QueueItem queueItem1 = new QueueItem(new Player(1), new Tank(6, "Medium"));
+            QueueItem queueItem2 = new QueueItem(new Player(2), new Tank(3, "Medium"));
+
+            QueueItems queueItems = new QueueItems();
+            queueItems.Add(new QueueItem(new Player(5), new Tank(4, "Heavy")));
+            queueItems.Add(queueItem1);
+            queueItems.Add(queueItem2);
+
+            // act 
+            IBattle battle = new SameClass("Medium").PopulateBattle(queueItems, new BattleReady());
+
+            // assert
+            battle.ContainsPlayer(new Player(1)).Should().BeTrue();
+            battle.ContainsPlayer(new Player(2)).Should().BeTrue();
+        }
+
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
             return new QueueItem(new Player(1), new Tank(tier, tankType));

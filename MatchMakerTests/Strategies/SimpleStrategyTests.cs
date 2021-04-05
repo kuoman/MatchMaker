@@ -10,24 +10,6 @@ namespace MatchMakerTests.Strategies
     public class SimpleStrategyTests
     {
         [TestMethod]
-        public void ShouldReturnBattle()
-        {
-            // arrange
-            SimpleStrategy simpleStrategy = new SimpleStrategy();
-            QueueItems queueItems = new QueueItems();
-            for (int i = 0; i < 14; i++)
-            {
-                queueItems.Add(CreateQueueItem());
-            }
-
-            // act
-            IBattle battleReady = simpleStrategy.CreateBattle(queueItems);
-
-            // assert
-            battleReady.Should().NotBeNull();
-        }
-
-        [TestMethod]
         public void ShouldReturnBattleReadyThatIsReadyToFight()
         {
             // arrange
@@ -146,6 +128,26 @@ namespace MatchMakerTests.Strategies
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();
             matchPair.Contains(queueItem2).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldPopulateBattle()
+        {
+            // arrange
+            QueueItem queueItem1 = new QueueItem(new Player(1), new Tank(3, "Medium"));
+            QueueItem queueItem2 = new QueueItem(new Player(2), new Tank(3, "Medium"));
+
+            QueueItems queueItems = new QueueItems();
+            queueItems.Add(new QueueItem(new Player(5), new Tank(5, "Heavy")));
+            queueItems.Add(queueItem1);
+            queueItems.Add(queueItem2);
+
+            // act 
+            IBattle battle = new TwoTier(4).PopulateBattle(queueItems, new BattleReady());
+
+            // assert
+            battle.ContainsPlayer(new Player(1)).Should().BeTrue();
+            battle.ContainsPlayer(new Player(2)).Should().BeTrue();
         }
 
         private static QueueItem CreateQueueItem()

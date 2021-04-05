@@ -28,14 +28,17 @@ namespace MatchMaker.Strategies
 
             if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
-            battleReady.FinalizeBattle(queueItems);
-
             return battleReady;
+        }
+
+        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
+        {
+            return IterateOverTankTypes(queueItems, battleReady);
         }
 
         public IMatchPair CreateMatchPair(QueueItems queueItems)
         {
-            return queueItems.ByTankType(_tankType).GetMatchPair();
+            return queueItems.ByTankType(_tankType).GetMatchPair(queueItems);
         }
 
         private IBattle IterateOverTankTypes(QueueItems queueItems, IBattle battleReady)
@@ -44,7 +47,10 @@ namespace MatchMaker.Strategies
             {
                 if (battleReady.IsNotReadyToFight())
                 {
-                    battleReady = queueItems.ByTankType(tankType).AddTanksToBattleReady(battleReady, _maxTanksOfSameType);
+                    for (int i = 0; i < _maxTanksOfSameType; i++)
+                    {
+                        battleReady = new SameClass(tankType).CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
+                    }
                 }
             }
 

@@ -314,7 +314,7 @@ namespace MatchMakerTests
          //   queueItems.Add(queueItem01);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(); 
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems); 
 
             // assert
             matchPair.Contains(queueItem01).Should().BeFalse();
@@ -333,7 +333,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem02);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair();
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems);
 
             // assert
             matchPair.Contains(queueItem01).Should().BeTrue();
@@ -353,7 +353,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem02);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair();
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems);
 
             // assert
             queueItems.Contains(queueItem01).Should().BeFalse();

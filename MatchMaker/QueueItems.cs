@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MatchMaker.Data_Bags;
 
 namespace MatchMaker
@@ -60,7 +59,7 @@ namespace MatchMaker
             int tankCount = matchesToCreate * 2;
             for (int i = 0; i < tankCount; i = i + 2)
             {
-                battleReady = GetMatchPair().AddMatchToBattle(battleReady);
+                battleReady = GetMatchPair(this).AddMatchToBattle(battleReady);
             }
 
             return battleReady;
@@ -71,13 +70,17 @@ namespace MatchMaker
             return _queueItems.Remove(queueItem);
         }
 
-        public IMatchPair GetMatchPair()
+        public IMatchPair GetMatchPair(QueueItems baseQueue)
         {
             if (1 >=_queueItems.Count) return new MatchNotPaired();
 
-            MatchPair matchPair = new MatchPair(_queueItems[0], _queueItems[1]);
+            QueueItem queueItem01 = _queueItems[0];
+            QueueItem queueItem02 = _queueItems[1];
 
-            _queueItems.RemoveRange(0, 2);
+            MatchPair matchPair = new MatchPair(queueItem01, queueItem02);
+
+            baseQueue.Remove(queueItem02);
+            baseQueue.Remove(queueItem01);
 
             return matchPair;
         }
