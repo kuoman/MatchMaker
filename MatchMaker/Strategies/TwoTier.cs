@@ -13,7 +13,7 @@ namespace MatchMaker.Strategies
 
         public IBattle CreateBattle(QueueItems queueItems)
         {
-            BattleReady battleReady = queueItems.ByTier(_tier).AddTanksToBattleReady(new BattleReady(), 7);
+            IBattle battleReady = queueItems.ByTier(_tier).AddTanksToBattleReady(new BattleReady(), 7);
 
             if (battleReady.IsNotReadyToFight())
             {

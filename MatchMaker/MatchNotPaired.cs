@@ -13,5 +13,10 @@ namespace MatchMaker
         {
             return false;
         }
+
+        public IBattle AddMatchToBattle(IBattle battle)
+        {
+            return new BattleNotReady();
+        }
     }
 }

@@ -22,5 +22,13 @@ namespace MatchMaker
         {
             return _queueItem01 != null && _queueItem02 != null;
         }
+
+        public IBattle AddMatchToBattle(IBattle battle)
+        {
+            battle.AddQueueItemToTeamA(_queueItem01);
+            battle.AddQueueItemToTeamB(_queueItem02);
+
+            return battle;
+        }
     }
 }

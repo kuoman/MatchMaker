@@ -49,5 +49,23 @@ namespace MatchMakerTests
             // assert
             matchPair.IsPairFull().Should().BeFalse();
         }
+
+        [TestMethod]
+        public void ShouldAddMatchQueueItemsToBattle()
+        {
+            // arrange 
+            QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Medium"));
+            QueueItem queueItem02 = new QueueItem(new Player(3), new Tank(1, "Medium"));
+            MatchPair matchPair = new MatchPair(queueItem01, queueItem02);
+
+            IBattle battleReady = new BattleReady();
+
+            // act
+            IBattle returnBattle = matchPair.AddMatchToBattle(battleReady);
+
+            // assert
+            returnBattle.ContainsPlayer(new Player(1));
+            returnBattle.ContainsPlayer(new Player(3));
+        }
     }
 }

@@ -52,7 +52,7 @@ namespace MatchMaker
             return _queueItems.Count >= count;
         }
 
-        public BattleReady AddTanksToBattleReady(BattleReady battleReady, int maxToAdd)
+        public IBattle AddTanksToBattleReady(IBattle battleReady, int maxToAdd)
         {
             int modTankCount = _queueItems.Count / 2;
             if (modTankCount > maxToAdd) modTankCount = maxToAdd;
@@ -60,8 +60,12 @@ namespace MatchMaker
             int tankCount = modTankCount * 2;
             for (int i = 0; i < tankCount; i = i + 2)
             {
-                battleReady.AddQueueItemToTeamA(_queueItems[i]);
-                battleReady.AddQueueItemToTeamB(_queueItems[i + 1]);
+                IMatchPair matchPair = GetMatchPair();
+
+                battleReady = matchPair.AddMatchToBattle(battleReady);
+
+              //  battleReady.AddQueueItemToTeamA(_queueItems[i]);
+              //  battleReady.AddQueueItemToTeamB(_queueItems[i + 1]);
             }
 
             return battleReady;
@@ -76,7 +80,11 @@ namespace MatchMaker
         {
             if (1 >=_queueItems.Count) return new MatchNotPaired();
 
-            return new MatchPair(_queueItems[0], _queueItems[1]);
+            MatchPair matchPair = new MatchPair(_queueItems[0], _queueItems[1]);
+
+            _queueItems.RemoveRange(0, 2);
+
+            return matchPair;
         }
     }
 }

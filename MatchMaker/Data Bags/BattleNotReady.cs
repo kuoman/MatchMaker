@@ -16,5 +16,20 @@
         {
             return false;
         }
+
+        public void AddQueueItemToTeamA(QueueItem queueItem)
+        {
+            
+        }
+
+        public void AddQueueItemToTeamB(QueueItem queueItem)
+        {
+            
+        }
+
+        public void FinalizeBattle(QueueItems queueItems)
+        {
+            
+        }
     }
 }

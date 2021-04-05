@@ -24,7 +24,7 @@ namespace MatchMaker.Strategies
 
         public IBattle CreateBattle(QueueItems queueItems)
         {
-            BattleReady battleReady = IterateOverTankTypes(queueItems, new BattleReady());
+            IBattle battleReady = IterateOverTankTypes(queueItems, new BattleReady());
 
             if (battleReady.IsNotReadyToFight()) return new BattleNotReady();
 
@@ -38,7 +38,7 @@ namespace MatchMaker.Strategies
             return queueItems.ByTankType(_tankType).GetMatchPair();
         }
 
-        private BattleReady IterateOverTankTypes(QueueItems queueItems, BattleReady battleReady)
+        private IBattle IterateOverTankTypes(QueueItems queueItems, IBattle battleReady)
         {
             foreach (string tankType in _tankTypes)
             {
