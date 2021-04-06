@@ -1,11 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using MatchMaker.Data_Bags;
 
 namespace MatchMaker
 {
     public class QueueItems
     {
-        readonly List<QueueItem> _queueItems = new List<QueueItem>();
+        readonly List<QueueItem> _queueItems;
+
+        public QueueItems() : this(new List<QueueItem>())
+        { }
+
+        private QueueItems(List<QueueItem> itemList)
+        {
+            _queueItems = itemList;
+        }
 
         public void Add(QueueItem queueItem)
         {
@@ -19,7 +29,8 @@ namespace MatchMaker
                 if (item == queueItem) return true;
             }
 
-            return false;
+            return false; 
+        //    return _queueItems.Any(item => item == queueItem);
         }
 
         public QueueItems ByTier(int tier)
@@ -32,11 +43,13 @@ namespace MatchMaker
             }
 
             return returnItems;
+        //    return new QueueItems(_queueItems.FindAll(x => x.IsTier(tier)));
         }
 
         public QueueItems ByTankType(string tankType)
         {
             QueueItems returnItems = new QueueItems();
+
 
             foreach (QueueItem item in _queueItems)
             {
@@ -44,6 +57,7 @@ namespace MatchMaker
             }
 
             return returnItems;
+          //  return new QueueItems(_queueItems.FindAll(x => x.IsTankType(tankType)));
         }
 
         public bool HasEnoughTanks(int count)
