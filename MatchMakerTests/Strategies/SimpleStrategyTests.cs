@@ -10,68 +10,6 @@ namespace MatchMakerTests.Strategies
     public class SimpleStrategyTests
     {
         [TestMethod]
-        public void ShouldReturnBattleReadyThatIsReadyToFight()
-        {
-            // arrange
-            SimpleStrategy simpleStrategy = new SimpleStrategy();
-
-            QueueItems queueItems = new QueueItems();
-            for (int i = 0; i < 14; i++)
-            {
-                queueItems.Add(CreateQueueItem());
-            }
-
-            IBattle battleReady = simpleStrategy.CreateBattle(queueItems);
-
-            // act // arrange
-            battleReady.IsReadyToFight().Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void ShouldReturnBattleNotReadyIfTeamsAreNotReady()
-        {
-            // arrange
-            QueueItems queueItems = new QueueItems();
-
-            for (int i = 0; i < 13; i++)
-            {
-                queueItems.Add(CreateQueueItem());
-            }
-
-            SimpleStrategy simpleStrategy = new SimpleStrategy();
-
-            IBattle battleReady = simpleStrategy.CreateBattle(queueItems);
-
-            // act // arrange
-            battleReady.IsReadyToFight().Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void ShouldFinalizeBattle()
-        {
-            // arrange
-            SimpleStrategy simpleStrategy = new SimpleStrategy();
-
-            QueueItem queueItem = new QueueItem(new Player(1), new Tank(3, "Medium"));
-
-            QueueItems queueItems = new QueueItems();
-            queueItems.Add(queueItem);
-
-            for (int i = 0; i < 13; i++)
-            {
-                queueItems.Add(CreateQueueItem());
-            }
-
-            // act
-            IBattle battleReady = simpleStrategy.CreateBattle(queueItems);
-
-            // assert
-            battleReady.Should().NotBeNull();
-            battleReady.ContainsPlayer(new Player(1)).Should().BeTrue();
-            queueItems.Contains(queueItem).Should().BeFalse();
-        }
-
-        [TestMethod]
         public void ShouldCreateMatchPair()
         {
             // arrange

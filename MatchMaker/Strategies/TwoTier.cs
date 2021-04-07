@@ -11,25 +11,9 @@ namespace MatchMaker.Strategies
             _tier = tier;
         }
 
-        public IBattle CreateBattle(QueueItems queueItems)
-        { 
-            IBattle battleReady = new BattleReady();
-
-            for (int i = 0; i < 7; i++)
-            {
-                battleReady = PopulateBattle(queueItems, battleReady);
-            }
-
-            return battleReady;
-        }
-
         public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
         {
-            IMatchPair matchPair = queueItems.ByTier(_tier).GetMatchPair(queueItems);
-
-            if (!matchPair.IsPairFull()) matchPair = queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPair(queueItems);
-
-            return matchPair.AddMatchToBattle(battleReady);
+            return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
         }
 
         public IMatchPair CreateMatchPair(QueueItems queueItems)

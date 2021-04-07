@@ -14,11 +14,6 @@ namespace MatchMaker.Strategies
             _tankType = tankType;
         }
 
-        public IBattle CreateBattle(QueueItems queueItems)
-        {
-           throw new NotImplementedException();
-        }
-
         public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
         {
             return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);

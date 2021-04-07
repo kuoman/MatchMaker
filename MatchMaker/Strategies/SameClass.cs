@@ -7,50 +7,23 @@ namespace MatchMaker.Strategies
     public class SameClass : IStrategy
     {
         private readonly string _tankType;
-        private readonly int _maxTanksOfSameType = 3;
-        private readonly List<string> _tankTypes = new List<String> {"Heavy", "Light", "TankDestroyer", "Medium"};
 
-        public SameClass() : this(RandomFactory.Create()) { }
+        public SameClass()
+        {
+        }
 
         public SameClass(string tankType)
         {
             _tankType = tankType;
         }
-
-        public SameClass(IRandom random)
-        {
-            _tankTypes = random.Shuffle(_tankTypes);
-        }
-
-        public IBattle CreateBattle(QueueItems queueItems)
-        {
-            return IterateOverTankTypes(queueItems, new BattleReady());
-        }
-
         public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
         {
-            return IterateOverTankTypes(queueItems, battleReady);
+            return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
         }
 
         public IMatchPair CreateMatchPair(QueueItems queueItems)
         {
             return queueItems.ByTankType(_tankType).GetMatchPair(queueItems);
-        }
-
-        private IBattle IterateOverTankTypes(QueueItems queueItems, IBattle battleReady)
-        {
-            foreach (string tankType in _tankTypes)
-            {
-                if (battleReady.IsNotReadyToFight())
-                {
-                    for (int i = 0; i < _maxTanksOfSameType; i++)
-                    {
-                        battleReady = new SameClass(tankType).CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
-                    }
-                }
-            }
-
-            return battleReady;
         }
     }
 }

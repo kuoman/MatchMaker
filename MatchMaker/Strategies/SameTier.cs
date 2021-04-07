@@ -10,17 +10,6 @@ namespace MatchMaker.Strategies
         {
             _tier = tier;
         }
-        public IBattle CreateBattle(QueueItems queueItems)
-        {
-            IBattle battleReady = new BattleReady();
-
-            for (int i = 0; i < 7; i++)
-            {
-                battleReady = CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
-            }
-
-            return battleReady;
-        }
 
         public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
         {

@@ -22,6 +22,7 @@ namespace MatchMaker
             _queueItems.Add(queueItem);
         }
 
+        //public bool Contains(QueueItem queueItem) => _queueItems.Any(item => item == queueItem);
         public bool Contains(QueueItem queueItem)
         {
             foreach (QueueItem item in _queueItems)
@@ -29,13 +30,14 @@ namespace MatchMaker
                 if (item == queueItem) return true;
             }
 
-            return false; 
-        //    return _queueItems.Any(item => item == queueItem);
+            return false;
         }
 
+
+        //public QueueItems ByTier(int tier) => new QueueItems(_queueItems.FindAll(x => x.IsTier(tier)));
         public QueueItems ByTier(int tier)
-        { 
-            QueueItems returnItems  = new QueueItems();
+        {
+            QueueItems returnItems = new QueueItems();
 
             foreach (QueueItem item in _queueItems)
             {
@@ -43,9 +45,9 @@ namespace MatchMaker
             }
 
             return returnItems;
-        //    return new QueueItems(_queueItems.FindAll(x => x.IsTier(tier)));
         }
 
+        //   public QueueItems ByTankType(string tankType) => new QueueItems(_queueItems.FindAll(x => x.IsTankType(tankType)));
         public QueueItems ByTankType(string tankType)
         {
             QueueItems returnItems = new QueueItems();
@@ -57,7 +59,6 @@ namespace MatchMaker
             }
 
             return returnItems;
-          //  return new QueueItems(_queueItems.FindAll(x => x.IsTankType(tankType)));
         }
 
         public bool HasEnoughTanks(int count)
