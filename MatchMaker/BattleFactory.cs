@@ -25,7 +25,7 @@ namespace MatchMaker
 
             foreach (string tankClass in shuffledTankClasses)
             {
-                // todo: remove or generalize this SameClass call
+                // todo: remove or generalize this SameClass call ?
                 battle = PopulateBattleByMatches(new SameClass(tankClass), queueItems, battle, MaxTanksOfSameType);
             }
 

@@ -19,6 +19,8 @@ namespace MatchMaker
 
         public void Add(QueueItem queueItem)
         {
+            if (_queueItems.Contains(queueItem)) return;
+
             _queueItems.Add(queueItem);
         }
 

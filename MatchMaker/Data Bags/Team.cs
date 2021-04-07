@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace MatchMaker.Data_Bags
 {
@@ -16,6 +17,8 @@ namespace MatchMaker.Data_Bags
         public void AddQueueItem(QueueItem queueItem)
         {
             if (_queueItemList.Count == 7) return;
+
+            if (_queueItemList.Contains(queueItem)) return;
 
             _queueItemList.Add(queueItem);
         }
@@ -34,6 +37,8 @@ namespace MatchMaker.Data_Bags
         {
             foreach (QueueItem queueItem in _queueItemList)
             {
+                if ( queueItems.Contains(queueItem) ) continue;
+
                 queueItems.Add(queueItem);
             }
 
