@@ -30,6 +30,13 @@
             AddToQueueItem(_teamB, queueItem);
         }
 
+        public QueueItems FlushTeamsBackToQueue(QueueItems queueItems)
+        {
+            queueItems = _teamA.ResetQueueItems(queueItems);
+            queueItems = _teamB.ResetQueueItems(queueItems);
+            return queueItems;
+        }
+
         private void AddToQueueItem(Team team, QueueItem queueItem)
         {
             team.AddQueueItem(queueItem);

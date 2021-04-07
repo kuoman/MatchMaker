@@ -33,9 +33,14 @@ namespace MatchMakerTests
         {
             // arrange
             QueueItems queueItems = new QueueItems();
-            for (int i = 0; i < 13; i++)
+
+            QueueItem item00 = CreateQueueItem(100, 1, "Heavy");
+            queueItems.Add(item00);
+
+            for (int i = 0; i < 12; i++)
             {
-                queueItems.Add(CreateQueueItem(i, 1, "Heavy"));
+                QueueItem queueItem = CreateQueueItem(i, 1, "Heavy");
+                queueItems.Add(queueItem);
             }
 
             // act
@@ -43,6 +48,8 @@ namespace MatchMakerTests
 
             //arrange
             battle.IsReadyToFight().Should().BeFalse();
+            battle.ContainsPlayer(new Player(100)).Should().BeFalse();
+            queueItems.Contains(item00).Should().BeTrue();
         }
 
         [TestMethod]
@@ -134,6 +141,29 @@ namespace MatchMakerTests
 
             // assert
             battleReady.IsReadyToFight().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldFlushTanksIfNotEnoughForBattle()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem item00 = CreateQueueItem(100, 1, "Heavy");
+            queueItems.Add(item00);
+
+            AddGivenNumberOfTanksOfTier(3, 3, "Heavy", queueItems, 1);
+            AddGivenNumberOfTanksOfTier(3, 3, "Medium", queueItems, 10);
+            AddGivenNumberOfTanksOfTier(5, 3, "TankDestroyer", queueItems, 20);
+            AddGivenNumberOfTanksOfTier(1, 3, "Light", queueItems, 30);
+
+            // act
+            IBattle battleReady = BattleFactory.CreateFillBattle(new SameClass(), new TestNotRandom(), queueItems);
+
+            // assert
+            battleReady.IsReadyToFight().Should().BeFalse();
+            queueItems.Contains(item00).Should().BeTrue();
+            battleReady.ContainsPlayer(new Player(100)).Should().BeFalse();
         }
 
         [TestMethod]

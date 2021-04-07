@@ -7,5 +7,6 @@
         bool ContainsPlayer(Player player);
         void AddQueueItemToTeamA(QueueItem queueItem);
         void AddQueueItemToTeamB(QueueItem queueItem);
+        QueueItems FlushTeamsBackToQueue(QueueItems queueItems);
     }
 }

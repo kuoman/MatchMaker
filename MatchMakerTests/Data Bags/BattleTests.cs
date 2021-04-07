@@ -1,17 +1,18 @@
 ﻿using FluentAssertions;
+using MatchMaker;
 using MatchMaker.Data_Bags;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests.Data_Bags
 {
     [TestClass]
-    public class BattleReadyTests
+    public class BattleTests
     {
         [TestMethod]
         public void ShouldReturnTrueIfTeamsAreReadyToFight()
         {
             // arrange
-            Battle battle = new Battle();
+            IBattle battle = new Battle();
 
             for (int i = 0; i < 7; i++)
             {
@@ -28,7 +29,7 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldReturnFalseIfTeamsBNotReadyToFight()
         {
             // arrange
-            Battle battle = new Battle();
+            IBattle battle = new Battle();
 
             for (int i = 0; i < 7; i++)
             {
@@ -48,7 +49,7 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldReturnFalseIfTeamsANotReadyToFight()
         {
             // arrange
-            Battle battle = new Battle();
+            IBattle battle = new Battle();
 
             for (int i = 0; i < 7; i++)
             {
@@ -62,6 +63,30 @@ namespace MatchMakerTests.Data_Bags
 
             // act // assert
             battle.IsReadyToFight().Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnAssignedQueueItemsToQueueItemsList()
+        {
+            // arrange
+            IBattle battle = new Battle();
+
+            QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Heavy"));
+            battle.AddQueueItemToTeamA(queueItem01);
+
+            QueueItem queueItem02 = new QueueItem(new Player(2), new Tank(1, "Heavy"));
+            battle.AddQueueItemToTeamB(queueItem02);
+
+            QueueItems queueItems = new QueueItems();
+
+            // act
+            QueueItems returnQueueItems = battle.FlushTeamsBackToQueue(queueItems);
+
+            // assert
+            battle.ContainsPlayer(new Player(1)).Should().BeFalse();
+            battle.ContainsPlayer(new Player(1)).Should().BeFalse();
+            returnQueueItems.Contains(queueItem01).Should().BeTrue();
+            returnQueueItems.Contains(queueItem02).Should().BeTrue();
         }
 
         private static QueueItem CreateQueueItem()

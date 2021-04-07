@@ -10,6 +10,8 @@ namespace MatchMaker
         {
             IBattle battle =  PopulateBattleByMatches(strategy, queueItems, new Battle(), 7);
 
+            if (battle.IsNotReadyToFight()) battle.FlushTeamsBackToQueue(queueItems);
+
             return battle;
         }
 
@@ -27,7 +29,7 @@ namespace MatchMaker
                 battle = PopulateBattleByMatches(new SameClass(tankClass), queueItems, battle, MaxTanksOfSameType);
             }
 
-            // if battle not ready flush players from battle
+            if (battle.IsNotReadyToFight()) battle.FlushTeamsBackToQueue(queueItems);
 
             return battle;
         }
