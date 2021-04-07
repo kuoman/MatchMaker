@@ -8,7 +8,9 @@ namespace MatchMaker
     {
         public static IBattle Create(IStrategy strategy, QueueItems queueItems)
         {
-            return PopulateBattleByMatches(strategy, queueItems, new BattleReady(), 7);
+            IBattle battle =  PopulateBattleByMatches(strategy, queueItems, new Battle(), 7);
+
+            return battle;
         }
 
         private static readonly List<string> TankClasses = new List<string> { "Heavy", "Medium", "TankDestroyer", "Light" };
@@ -17,15 +19,17 @@ namespace MatchMaker
         {
             List<string> shuffledTankClasses = random.Shuffle(TankClasses);
 
-            IBattle battleReady = new BattleReady();
+            IBattle battle = new Battle();
 
             foreach (string tankClass in shuffledTankClasses)
             {
                 // todo: remove or generalize this SameClass call
-                battleReady = PopulateBattleByMatches(new SameClass(tankClass), queueItems, battleReady, MaxTanksOfSameType);
+                battle = PopulateBattleByMatches(new SameClass(tankClass), queueItems, battle, MaxTanksOfSameType);
             }
 
-            return battleReady;
+            // if battle not ready flush players from battle
+
+            return battle;
         }
 
         private static IBattle PopulateBattleByMatches(IStrategy strategy, QueueItems queueItems, IBattle battleReady, int loopMax)
@@ -33,7 +37,6 @@ namespace MatchMaker
             for (int i = 0; i < loopMax; i++)
             {
                 if (battleReady.IsNotReadyToFight()) battleReady = strategy.PopulateBattle(queueItems, battleReady);
-              //  battleReady = strategy.PopulateBattle(queueItems, battleReady);
             }
 
             return battleReady;

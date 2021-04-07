@@ -60,7 +60,7 @@ namespace MatchMakerTests.Strategies
             IStrategy sameTierSameClass = new SameTierSameClass(4, "Light");
 
             //Act
-            IBattle battle = sameTierSameClass.PopulateBattle(queueItems, new BattleReady());
+            IBattle battle = sameTierSameClass.PopulateBattle(queueItems, new Battle());
 
             //Assert
             battle.ContainsPlayer(new Player(12)).Should().BeTrue();

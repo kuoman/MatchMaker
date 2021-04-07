@@ -58,7 +58,7 @@ namespace MatchMakerTests
             QueueItem queueItem02 = new QueueItem(new Player(3), new Tank(1, "Medium"));
             MatchPair matchPair = new MatchPair(queueItem01, queueItem02);
 
-            IBattle battleReady = new BattleReady();
+            IBattle battleReady = new Battle();
 
             // act
             IBattle returnBattle = matchPair.AddMatchToBattle(battleReady);

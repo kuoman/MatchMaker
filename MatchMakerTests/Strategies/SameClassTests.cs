@@ -43,24 +43,11 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IBattle battle = new SameClass("Medium").PopulateBattle(queueItems, new BattleReady());
+            IBattle battle = new SameClass("Medium").PopulateBattle(queueItems, new Battle());
 
             // assert
             battle.ContainsPlayer(new Player(1)).Should().BeTrue();
             battle.ContainsPlayer(new Player(2)).Should().BeTrue();
-        }
-
-        private QueueItem CreateQueueItem(int tier, string tankType)
-        {
-            return new QueueItem(new Player(1), new Tank(tier, tankType));
-        }
-
-        private void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, string tankType, QueueItems queueItems)
-        {
-            for (int i = 0; i < numberToAdd; i++)
-            {
-                queueItems.Add(CreateQueueItem(tier, tankType));
-            }
         }
     }
 }

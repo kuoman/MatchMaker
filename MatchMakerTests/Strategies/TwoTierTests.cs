@@ -83,7 +83,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IBattle battle = new TwoTier(4).PopulateBattle(queueItems, new BattleReady());
+            IBattle battle = new TwoTier(4).PopulateBattle(queueItems, new Battle());
 
             // assert
             battle.ContainsPlayer(new Player(1)).Should().BeTrue();
@@ -92,14 +92,6 @@ namespace MatchMakerTests.Strategies
         private QueueItem CreateQueueItem(int tier)
         {
             return new QueueItem(new Player(1), new Tank(tier, "Heavy"));
-        }
-
-        private void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, QueueItems queueItems)
-        {
-            for (int i = 0; i < numberToAdd; i++)
-            {
-                queueItems.Add(CreateQueueItem(tier));
-            }
         }
     }
 }

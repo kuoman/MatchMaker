@@ -216,7 +216,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new BattleReady(), 3);
+            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new Battle(), 3);
 
             // assert
             returnBattleReady.ContainsPlayer(new Player(1)).Should().Be(true);
@@ -247,7 +247,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new BattleReady(), 3);
+            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new Battle(), 3);
 
             // assert
             returnBattleReady.ContainsPlayer(new Player(1)).Should().Be(true);
@@ -277,7 +277,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new BattleReady(), 3);
+            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new Battle(), 3);
 
             // assert
             queueItems.Contains(queueItem10A).Should().BeFalse();

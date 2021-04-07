@@ -1,6 +1,6 @@
 ﻿namespace MatchMaker.Data_Bags
 {
-    public class BattleReady : IBattle
+    public class Battle : IBattle
     {
         private readonly Team _teamA = new Team();
         private readonly Team _teamB = new Team();
@@ -33,12 +33,6 @@
         private void AddToQueueItem(Team team, QueueItem queueItem)
         {
             team.AddQueueItem(queueItem);
-        }
-
-        public void FinalizeBattle(QueueItems queueItems)
-        {
-            _teamA.FinalizeBattle(queueItems);
-            _teamB.FinalizeBattle(queueItems);
         }
     }
 }

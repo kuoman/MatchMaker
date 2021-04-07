@@ -41,13 +41,5 @@ namespace MatchMaker.Data_Bags
 
             return queueItems;
         }
-
-        public void FinalizeBattle(QueueItems queueItems)
-        {
-            foreach (QueueItem queueItem in _queueItemList)
-            {
-                queueItems.Remove(queueItem);
-            }
-        }
     }
 }

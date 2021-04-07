@@ -112,26 +112,6 @@ namespace MatchMakerTests.Data_Bags
             team.HasPlayer(player).Should().BeFalse();
         }
 
-        [TestMethod]
-        public void ShouldRemovePickedTanksFromQueueItems()
-        {
-            QueueItem queueItem = new QueueItem(new Player(1), new Tank(1, "Heavy"));
-
-            QueueItems queueItems = new QueueItems();
-
-            Team team = new Team();
-
-            team.AddQueueItem(queueItem);
-            queueItems.Add(queueItem);
-
-            // act
-            team.FinalizeBattle(queueItems);
-
-            // assert
-            queueItems.Contains(queueItem).Should().BeFalse();
-            team.HasPlayer(new Player(1)).Should().BeTrue();
-        }
-
         private QueueItem CreateQueueItem()
         {
             return CreateQueueItem(new Player(1));
