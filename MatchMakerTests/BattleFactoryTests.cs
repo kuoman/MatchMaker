@@ -34,8 +34,8 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem item00 = CreateQueueItem(100, 1, "Heavy");
-            queueItems.Add(item00);
+            QueueItem item100 = CreateQueueItem(100, 1, "Heavy");
+            queueItems.Add(item100);
 
             for (int i = 0; i < 12; i++)
             {
@@ -49,7 +49,7 @@ namespace MatchMakerTests
             //arrange
             battle.IsReadyToFight().Should().BeFalse();
             battle.ContainsPlayer(new Player(100)).Should().BeFalse();
-            queueItems.Contains(item00).Should().BeTrue();
+            queueItems.Contains(item100).Should().BeTrue();
         }
 
         [TestMethod]

@@ -84,7 +84,7 @@ namespace MatchMakerTests.Data_Bags
 
             // assert
             battle.ContainsPlayer(new Player(1)).Should().BeFalse();
-            battle.ContainsPlayer(new Player(1)).Should().BeFalse();
+            battle.ContainsPlayer(new Player(2)).Should().BeFalse();
             returnQueueItems.Contains(queueItem01).Should().BeTrue();
             returnQueueItems.Contains(queueItem02).Should().BeTrue();
         }
