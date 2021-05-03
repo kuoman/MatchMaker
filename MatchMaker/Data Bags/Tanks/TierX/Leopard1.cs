@@ -1,24 +1,9 @@
 ﻿namespace MatchMaker.Data_Bags.Tanks.TierX
 {
-    public class Leopard1 : ITank
+    public class Leopard1 : Tank
     {
-        private readonly int _tier = 10;
-        private readonly string _tankType = "Heavy";
-        private readonly string _ranking = "Super Heavy";
-
-        public bool IsTier(int tier)
+        public Leopard1() : base(10, "Medium", "Damage Medium")
         {
-            return tier == _tier;
-        }
-
-        public bool IsTankType(string tankType)
-        {
-            return _tankType == tankType;
-        }
-
-        public bool IsRanking(string tankRanking)
-        {
-            return _ranking == tankRanking;
         }
     }
 }

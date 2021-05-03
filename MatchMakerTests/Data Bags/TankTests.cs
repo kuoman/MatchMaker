@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using MatchMaker.Data_Bags;
+using MatchMaker.Data_Bags.Tanks;
+using MatchMaker.Data_Bags.Tanks.TierX;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests.Data_Bags
@@ -37,6 +39,22 @@ namespace MatchMakerTests.Data_Bags
             Tank tank = new Tank(5, "Light");
 
             tank.IsTankType("Heavy").Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueIfSameRank()
+        {
+            ITank tank = new E50M();
+
+            tank.IsRanking("Damage Medium").Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfNotSameRank()
+        {
+            ITank tank = new E50M();
+
+            tank.IsRanking("Medium").Should().BeFalse();
         }
     }
 }

@@ -1,11 +1,13 @@
-﻿namespace MatchMaker.Data_Bags
+﻿using MatchMaker.Data_Bags.Tanks;
+
+namespace MatchMaker.Data_Bags
 {
     public class QueueItem
     {
         private readonly Player _player;
-        private readonly Tank _tank;
+        private readonly ITank _tank;
 
-        public QueueItem(Player player, Tank tank)
+        public QueueItem(Player player, ITank tank)
         {
             _player = player;
             _tank = tank;
@@ -24,6 +26,11 @@
         public bool IsTankType(string heavy)
         {
             return _tank.IsTankType(heavy);
+        }
+
+        public bool IsRank(string rank)
+        {
+            return _tank.IsRanking(rank);
         }
     }
 }

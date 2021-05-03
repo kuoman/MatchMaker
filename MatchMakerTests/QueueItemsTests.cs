@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
+using MatchMaker.Data_Bags.Tanks.TierX;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests
@@ -360,6 +361,34 @@ namespace MatchMakerTests
             queueItems.Contains(queueItem02).Should().BeFalse();
             matchPair.Contains(queueItem01).Should().BeTrue();
             matchPair.Contains(queueItem02).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldFilterByRank()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem01 = new QueueItem(new Player(1), new E100());
+            queueItems.Add(queueItem01);
+
+            QueueItem queueItem02 = new QueueItem(new Player(1), new Maus());
+            queueItems.Add(queueItem02);
+
+            QueueItem queueItem03 = new QueueItem(new Player(1), new Maus());
+            queueItems.Add(queueItem03);
+
+            QueueItem queueItem04 = new QueueItem(new Player(1), new T110E5());
+            queueItems.Add(queueItem04);
+
+            // act
+           QueueItems items = queueItems.ByRank("Heavy");
+
+            // assert
+            items.Contains(queueItem01).Should().BeTrue();
+            items.Contains(queueItem02).Should().BeTrue();
+            items.Contains(queueItem03).Should().BeTrue();
+            items.Contains(queueItem04).Should().BeFalse();
         }
 
         private QueueItem CreateQueueItem(int tier, string tankType)

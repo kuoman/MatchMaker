@@ -53,7 +53,7 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldReturnTrueIfCorrectTankType()
         {
             // arrange 
-            QueueItem queueItem = CreateQueueItemOfTankType("Heavy");
+            QueueItem queueItem = CreateQueueItemOfTankType("Heavy", "Light");
 
             // act // assert
             queueItem.IsTankType("Heavy").Should().BeTrue();
@@ -64,10 +64,30 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldReturnFalseIfIncorrectTankType()
         {
             // arrange 
-            QueueItem queueItem = CreateQueueItemOfTankType("Light");
+            QueueItem queueItem = CreateQueueItemOfTankType("Light", "Light");
 
             // act // assert
             queueItem.IsTankType("Heavy").Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueIfCorrectTankRank()
+        {
+            // arrange 
+            QueueItem queueItem = CreateQueueItemOfTankType("Heavy", "Heavy");
+
+            // act // assert
+            queueItem.IsRank("Heavy").Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfIncorrectTankRank()
+        {
+            // arrange 
+            QueueItem queueItem = CreateQueueItemOfTankType("Heavy", "Heavy");
+
+            // act // assert
+            queueItem.IsRank("Light").Should().BeFalse();
         }
 
         private static QueueItem CreateQueueItem(int tier)
@@ -75,9 +95,9 @@ namespace MatchMakerTests.Data_Bags
             return new QueueItem(new Player(1), new Tank(tier, null));
         }
 
-        private static QueueItem CreateQueueItemOfTankType(string tankType)
+        private static QueueItem CreateQueueItemOfTankType(string tankType, string rank)
         {
-            return new QueueItem(new Player(1), new Tank(1, tankType));
+            return new QueueItem(new Player(1), new Tank(1, tankType, rank));
         }
 
     }

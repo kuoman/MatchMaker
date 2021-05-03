@@ -1,8 +1,8 @@
 ﻿namespace MatchMaker.Data_Bags.Tanks.TierX
 {
-    public class Maus : Tank
+    public class E100 : Tank
     {
-        public Maus() : base(10, "Heavy", "Heavy")
+        public E100() : base(10, "Heavy", "Heavy")
         {
         }
     }

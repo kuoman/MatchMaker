@@ -1,24 +1,9 @@
 ﻿namespace MatchMaker.Data_Bags.Tanks.TierX
 {
-    public class Sheridan : ITank
+    public class Sheridan : Tank
     {
-        private readonly int _tier = 10;
-        private readonly string _tankType = "Light";
-        private readonly string _ranking = "Light";
-
-        public bool IsTier(int tier)
+        public Sheridan() : base(10, "Light", "Light")
         {
-            return tier == _tier;
-        }
-
-        public bool IsTankType(string tankType)
-        {
-            return _tankType == tankType;
-        }
-
-        public bool IsRanking(string tankRanking)
-        {
-            return _ranking == tankRanking;
         }
     }
 }

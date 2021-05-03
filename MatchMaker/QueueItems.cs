@@ -54,10 +54,20 @@ namespace MatchMaker
         {
             QueueItems returnItems = new QueueItems();
 
-
             foreach (QueueItem item in _queueItems)
             {
                 if (item.IsTankType(tankType)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+        public QueueItems ByRank(string rank)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsRank(rank)) returnItems.Add(item);
             }
 
             return returnItems;
