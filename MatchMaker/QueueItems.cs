@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MatchMaker.Data_Bags;
 using MatchMaker.Data_Bags.Tanks;
 
@@ -34,8 +35,6 @@ namespace MatchMaker
             return false;
         }
 
-
-        //public QueueItems ByTier(int tier) => new QueueItems(_queueItems.FindAll(x => x.IsTier(tier)));
         public QueueItems ByTier(int tier)
         {
             QueueItems returnItems = new QueueItems();
@@ -60,19 +59,19 @@ namespace MatchMaker
             return returnItems;
         }
 
+        //public QueueItems ByTier(QueueItem queueItem) => new QueueItems(_queueItems.FindAll(x => x.IsTier(queueItem)));
         public QueueItems ByTier(QueueItem queueItem)
         {
             QueueItems returnItems = new QueueItems();
 
-            foreach (QueueItem item in _queueItems)
+            foreach (QueueItem item in _queueItems.Where(item => item.IsTier(queueItem)))
             {
-                if (item.IsTier(queueItem)) returnItems.Add(item);
+                returnItems.Add(item);
             }
 
-            return returnItems;
+            return new QueueItems(_queueItems.FindAll(x => x.IsTier(queueItem))); 
         }
 
-        //   public QueueItems ByTankType(string tankType) => new QueueItems(_queueItems.FindAll(x => x.IsTankType(tankType)));
         public QueueItems ByTankType(string tankType)
         {
             QueueItems returnItems = new QueueItems();
@@ -97,6 +96,7 @@ namespace MatchMaker
             return returnItems;
         }
 
+        //public QueueItems ByTankType(QueueItem queueItem) => new QueueItems(_queueItems.FindAll(x => x.IsTankType(queueItem)));
         public QueueItems ByTankType(QueueItem queueItem)
         {
             QueueItems returnItems = new QueueItems();
@@ -121,6 +121,7 @@ namespace MatchMaker
             return returnItems;
         }
 
+        //public QueueItems ByRank(QueueItem queueItem) => new QueueItems(_queueItems.FindAll(x => x.IsRank(queueItem)));
         public QueueItems ByRank(QueueItem queueItem)
         {
             QueueItems returnItems = new QueueItems();
@@ -145,6 +146,7 @@ namespace MatchMaker
             return returnItems;
         }
 
+        //public QueueItems ByWinRate(QueueItem queueItem) => new QueueItems(_queueItems.FindAll(x => x.IsSameWinRateCategory(queueItem)));
         public QueueItems ByWinRate(QueueItem queueItem)
         {
             QueueItems returnItems = new QueueItems();
