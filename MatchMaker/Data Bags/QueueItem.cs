@@ -32,5 +32,10 @@ namespace MatchMaker.Data_Bags
         {
             return _tank.IsRanking(rank);
         }
+
+        public bool IsSameWinRateCategory(int winRateCategory)
+        {
+            return _player.IsSameWinRateCategory(winRateCategory);
+        }
     }
 }

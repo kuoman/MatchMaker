@@ -1,20 +1,16 @@
-﻿using MatchMaker.Data_Bags;
+using MatchMaker.Data_Bags;
 
 namespace MatchMaker.Strategies
 {
-    public class SameClass : IStrategy
+    public class SameWinRateCategory: IStrategy
     {
-        private readonly string _tankType;
+        private readonly int _winRateCategory;
 
-        public SameClass()
+        public SameWinRateCategory(int winRateCategory)
         {
-            
+            _winRateCategory = winRateCategory;
         }
 
-        public SameClass(string tankType)
-        {
-            _tankType = tankType;
-        }
         public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
         {
             return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
@@ -22,7 +18,7 @@ namespace MatchMaker.Strategies
 
         public IMatchPair CreateMatchPair(QueueItems queueItems)
         {
-            return queueItems.ByTankType(_tankType).GetMatchPair(queueItems);
+            return queueItems.ByWinRate(_winRateCategory).GetMatchPair(queueItems);
         }
     }
 }

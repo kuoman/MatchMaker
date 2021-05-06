@@ -73,6 +73,18 @@ namespace MatchMaker
             return returnItems;
         }
 
+        public QueueItems ByWinRate(int winRateCategory)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsSameWinRateCategory(winRateCategory)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
         public bool HasEnoughTanks(int count)
         {
             return _queueItems.Count >= count;
@@ -111,5 +123,6 @@ namespace MatchMaker
 
             return matchPair;
         }
+
     }
 }

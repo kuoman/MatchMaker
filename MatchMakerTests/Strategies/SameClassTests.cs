@@ -2,7 +2,6 @@
 using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Strategies;
-using MatchMakerTests.TestDoubles;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace MatchMakerTests.Strategies
 {
@@ -28,7 +27,6 @@ namespace MatchMakerTests.Strategies
             matchPair.Contains(queueItem1).Should().BeTrue();
             matchPair.Contains(queueItem2).Should().BeTrue();
         }
-
 
         [TestMethod]
         public void ShouldPopulateBattle()

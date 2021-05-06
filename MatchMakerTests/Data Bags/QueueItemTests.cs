@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using MatchMaker.Data_Bags;
+using MatchMaker.Data_Bags.Tanks.TierX;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests.Data_Bags
@@ -88,6 +89,24 @@ namespace MatchMakerTests.Data_Bags
 
             // act // assert
             queueItem.IsRank("Light").Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameWinRate()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 50), new E100());
+
+
+            queueItem.IsSameWinRateCategory(3).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseForSameWinRate()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 50), new E100());
+            Player player = new Player(2, 38);
+
+            queueItem.IsSameWinRateCategory(1).Should().BeFalse();
         }
 
         private static QueueItem CreateQueueItem(int tier)

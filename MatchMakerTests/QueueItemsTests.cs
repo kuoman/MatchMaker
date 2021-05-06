@@ -391,6 +391,36 @@ namespace MatchMakerTests
             items.Contains(queueItem04).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ShouldFilterByWinRate()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            Player player01 = new Player(1, 55);
+            QueueItem queueItem01 = new QueueItem(player01, new E100());
+            queueItems.Add(queueItem01);
+
+            QueueItem queueItem02 = new QueueItem(new Player(2, 47), new E100());
+            queueItems.Add(queueItem02);
+
+            QueueItem queueItem03 = new QueueItem(new Player(3, 49), new E100());
+            queueItems.Add(queueItem03);
+
+            Player player02 = new Player(4, 56);
+            QueueItem queueItem04 = new QueueItem(player02, new E100());
+            queueItems.Add(queueItem04);
+
+            // act
+            QueueItems items = queueItems.ByWinRate(4);
+
+            // assert
+            items.Contains(queueItem01).Should().BeTrue();
+            items.Contains(queueItem04).Should().BeTrue();
+            items.Contains(queueItem02).Should().BeFalse();
+            items.Contains(queueItem03).Should().BeFalse();
+        }
+
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
             return CreateQueueItem(1,tier, tankType);
