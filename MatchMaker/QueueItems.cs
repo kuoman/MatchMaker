@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using MatchMaker.Data_Bags;
+using MatchMaker.Data_Bags.Tanks;
 
 namespace MatchMaker
 {
@@ -49,6 +50,30 @@ namespace MatchMaker
             return returnItems;
         }
 
+        public QueueItems ByTier(ITank tank)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsTier(tank)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
+        public QueueItems ByTier(QueueItem queueItem)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsTier(queueItem)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
         //   public QueueItems ByTankType(string tankType) => new QueueItems(_queueItems.FindAll(x => x.IsTankType(tankType)));
         public QueueItems ByTankType(string tankType)
         {
@@ -61,6 +86,31 @@ namespace MatchMaker
 
             return returnItems;
         }
+
+        public QueueItems ByTankType(ITank tank)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsTankType(tank)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
+        public QueueItems ByTankType(QueueItem queueItem)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsTankType(queueItem)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
         public QueueItems ByRank(string rank)
         {
             QueueItems returnItems = new QueueItems();
@@ -73,6 +123,18 @@ namespace MatchMaker
             return returnItems;
         }
 
+        public QueueItems ByRank(QueueItem queueItem)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsRank(queueItem)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
         public QueueItems ByWinRate(int winRateCategory)
         {
             QueueItems returnItems = new QueueItems();
@@ -80,6 +142,18 @@ namespace MatchMaker
             foreach (QueueItem item in _queueItems)
             {
                 if (item.IsSameWinRateCategory(winRateCategory)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
+        public QueueItems ByWinRate(QueueItem queueItem)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsSameWinRateCategory(queueItem)) returnItems.Add(item);
             }
 
             return returnItems;
