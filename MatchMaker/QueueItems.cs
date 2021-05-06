@@ -69,7 +69,7 @@ namespace MatchMaker
                 returnItems.Add(item);
             }
 
-            return new QueueItems(_queueItems.FindAll(x => x.IsTier(queueItem))); 
+            return returnItems; 
         }
 
         public QueueItems ByTankType(string tankType)
