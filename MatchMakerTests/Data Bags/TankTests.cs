@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using MatchMaker.Data_Bags;
 using MatchMaker.Data_Bags.Tanks;
+using MatchMaker.Data_Bags.Tanks.TierIX;
 using MatchMaker.Data_Bags.Tanks.TierX;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -55,6 +56,67 @@ namespace MatchMakerTests.Data_Bags
             ITank tank = new E50M();
 
             tank.IsRanking("Medium").Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueIfSameTankWithTank()
+        {
+            ITank e100 = new E100();
+
+            ITank maus = new Maus();
+
+            maus.IsSameTankType(e100).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfNotSameTankWithTank()
+        {
+            ITank e50M = new E50M();
+
+            ITank maus = new Maus();
+
+            maus.IsSameTankType(e50M).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueIfSameTierWithTank()
+        {
+            ITank otherTank = new E100();
+
+            ITank maus = new Maus();
+
+            maus.IsSameTankTier(otherTank).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfNotSameTierWithTank()
+        {
+            ITank otherTank = new E75();
+
+            ITank maus = new Maus();
+
+            maus.IsSameTankTier(otherTank).Should().BeFalse();
+        }
+
+
+        [TestMethod]
+        public void ShouldReturnTrueIfSameRankWithTank()
+        {
+            ITank otherTank = new E100();
+
+            ITank maus = new Maus();
+
+            maus.IsSameTankRank(otherTank).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfNotSameRankWithTank()
+        {
+            ITank otherTank = new T110E5();
+
+            ITank maus = new Maus();
+
+            maus.IsSameTankRank(otherTank).Should().BeFalse();
         }
     }
 }

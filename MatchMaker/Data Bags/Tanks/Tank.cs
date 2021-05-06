@@ -34,5 +34,20 @@ namespace MatchMaker.Data_Bags
         {
             return _rank == tankRanking;
         }
+
+        public bool IsSameTankType(ITank tank)
+        {
+            return tank.IsTankType(_tankType);
+        }
+
+        public bool IsSameTankTier(ITank tank)
+        {
+            return tank.IsTier(_tier);
+        }
+
+        public bool IsSameTankRank(ITank tank)
+        {
+            return tank.IsRanking(_rank);
+        }
     }
 }

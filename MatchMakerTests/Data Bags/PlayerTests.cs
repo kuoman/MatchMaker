@@ -128,6 +128,32 @@ namespace MatchMakerTests.Data_Bags
             bool result = player1.IsSameWinRateCategory(5);
             result.Should().BeFalse();
         }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameWinRateCategoryFromPlayer()
+        {
+            // arrange
+            Player player1 = new Player(1, 40);
+            Player player2 = new Player(1, 43);
+
+            // act
+            bool result = player1.IsSameWinRateCategory(player2);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseForNotSameWinRateCategoryFromPlayer()
+        {
+            // arrange
+            Player player1 = new Player(1, 45);
+            Player player2 = new Player(2, 20.0d);
+
+            // act
+            bool result = player1.IsSameWinRateCategory(player2);
+            result.Should().BeFalse();
+        }
     }
 }
 

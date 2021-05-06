@@ -37,6 +37,11 @@ namespace MatchMaker.Data_Bags
             
         }
 
+        public bool IsSameWinRateCategory(Player otherPlayer)
+        {
+            return otherPlayer.IsSameWinRateCategory(GetWinRateCategory(_winRate));
+        }
+
         private int GetWinRateCategory(in double winRate)
         {
             if (winRate >= 60.0d) return 5;
