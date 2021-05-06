@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
+using MatchMaker.Data_Bags.Tanks;
 using MatchMaker.Data_Bags.Tanks.TierX;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -448,7 +449,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new Battle(), 3);
+            queueItems.AddTanksToBattleReady(new Battle(), 3);
 
             // assert
             queueItems.Contains(queueItem10A).Should().BeFalse();

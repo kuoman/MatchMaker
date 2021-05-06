@@ -1,6 +1,4 @@
-﻿using MatchMaker.Data_Bags.Tanks;
-
-namespace MatchMaker.Data_Bags
+﻿namespace MatchMaker.Data_Bags.Tanks
 {
     public class Tank : ITank
     {

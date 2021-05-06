@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MatchMaker.Data_Bags
+﻿namespace MatchMaker.Data_Bags
 {
     public class Player
     {
