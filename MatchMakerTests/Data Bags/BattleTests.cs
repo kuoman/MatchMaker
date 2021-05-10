@@ -27,7 +27,7 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
-        public void ShouldReturnFalseIfTeamsBNotReadyToFight()
+        public void ShouldReturnFalseIfTeamBNotReadyToFight()
         {
             // arrange
             IBattle battle = new Battle();
@@ -47,7 +47,7 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
-        public void ShouldReturnFalseIfTeamsANotReadyToFight()
+        public void ShouldReturnFalseIfTeamANotReadyToFight()
         {
             // arrange
             IBattle battle = new Battle();
@@ -94,8 +94,6 @@ namespace MatchMakerTests.Data_Bags
         {
             return new QueueItem(new Player(1), new Tank(1, null));
         }
-
-
     }
 }
 
