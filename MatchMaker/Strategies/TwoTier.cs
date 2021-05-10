@@ -2,7 +2,7 @@
 
 namespace MatchMaker.Strategies
 {
-    public class TwoTier : IStrategy
+    public class TwoTier : Strategy
     {
         private readonly int _tier;
 
@@ -11,11 +11,7 @@ namespace MatchMaker.Strategies
             _tier = tier;
         }
 
-        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady, QueueItem queueItem)
-        {
-            return CreateMatchPair(queueItems, queueItem).AddMatchToBattle(battleReady);
-        }
-
+        override 
         public IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
             IMatchPair matchPair = queueItems.ByTier(queueItem).GetMatchPair(queueItems, queueItem);

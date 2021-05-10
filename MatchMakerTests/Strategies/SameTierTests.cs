@@ -29,7 +29,7 @@ namespace MatchMakerTests.Strategies
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();
-            matchPair.Contains(queueItem2).Should().BeTrue();
+            matchPair.Contains(anchorItem).Should().BeTrue();
         }
 
         [TestMethod]

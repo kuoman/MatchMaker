@@ -28,7 +28,7 @@ namespace MatchMakerTests.Strategies
             QueueItem queueItem04 = new QueueItem(new Player(14), new Tank(4, "Light"));
             queueItems.Add(queueItem04);
 
-            IStrategy sameTierSameClass = new SameTierSameClass(4, "Light");
+            IStrategy sameTierSameClass = new SameTierSameClass();
 
             //Act
             IMatchPair matchPair = sameTierSameClass.CreateMatchPair(queueItems, queueItem02);
@@ -58,7 +58,7 @@ namespace MatchMakerTests.Strategies
             QueueItem queueItem04 = new QueueItem(new Player(14), new Tank(4, "Light"));
             queueItems.Add(queueItem04);
 
-            IStrategy sameTierSameClass = new SameTierSameClass(4, "Light");
+            IStrategy sameTierSameClass = new SameTierSameClass();
 
             //Act
             IBattle battle = sameTierSameClass.PopulateBattle(queueItems, new Battle(), queueItem02);
