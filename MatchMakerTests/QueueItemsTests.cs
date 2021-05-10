@@ -218,7 +218,6 @@ namespace MatchMakerTests
             result.Contains(queueItem03C).Should().Be(false);
         }
 
-
         [TestMethod]
         public void ShouldSortByTankTypeByQueueItem()
         {
@@ -366,100 +365,6 @@ namespace MatchMakerTests
         }
 
         [TestMethod]
-        public void ShouldAddTanksToBattleInPairsToMaxCount()
-        {
-            // arrange
-            QueueItems queueItems = new QueueItems();
-
-            QueueItem queueItem10A = CreateQueueItem(1, 10, "Heavy");
-            QueueItem queueItem10B = CreateQueueItem(2, 10, "Light");
-            QueueItem queueItem09A = CreateQueueItem(3, 9, "Heavy");
-            QueueItem queueItem09B = CreateQueueItem(4, 9, "Light");
-            QueueItem queueItem09C = CreateQueueItem(5, 9, "Medium");
-            QueueItem queueItem03B = CreateQueueItem(6, 3, "Light");
-            QueueItem queueItem03C = CreateQueueItem(7, 3, "Medium");
-
-            queueItems.Add(queueItem10A);
-            queueItems.Add(queueItem10B);
-            queueItems.Add(queueItem09A);
-            queueItems.Add(queueItem09B);
-            queueItems.Add(queueItem09C);
-            queueItems.Add(queueItem03B);
-            queueItems.Add(queueItem03C);
-
-            // act
-            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new Battle(), 3);
-
-            // assert
-            returnBattleReady.ContainsPlayer(new Player(1)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(2)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(3)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(4)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(5)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(6)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(7)).Should().Be(false);
-        }
-
-        [TestMethod]
-        public void ShouldAddTanksToBattleInPairsUnderMaxCount()
-        {
-            // arrange
-            QueueItems queueItems = new QueueItems();
-
-            QueueItem queueItem10A = CreateQueueItem(1, 10, "Heavy");
-            QueueItem queueItem10B = CreateQueueItem(2, 10, "Light");
-            QueueItem queueItem09A = CreateQueueItem(3, 9, "Heavy");
-            QueueItem queueItem09B = CreateQueueItem(4, 9, "Light");
-            QueueItem queueItem03C = CreateQueueItem(7, 3, "Medium");
-
-            queueItems.Add(queueItem10A);
-            queueItems.Add(queueItem10B);
-            queueItems.Add(queueItem09A);
-            queueItems.Add(queueItem09B);
-            queueItems.Add(queueItem03C);
-
-            // act
-            IBattle returnBattleReady = queueItems.AddTanksToBattleReady(new Battle(), 3);
-
-            // assert
-            returnBattleReady.ContainsPlayer(new Player(1)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(2)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(3)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(4)).Should().Be(true);
-            returnBattleReady.ContainsPlayer(new Player(7)).Should().Be(false);
-        }
-
-        [Ignore]
-        [TestMethod]
-        public void ShouldRemoveTanksFromAvailableQueue()
-        {
-            // arrange
-            QueueItems queueItems = new QueueItems();
-
-            QueueItem queueItem10A = CreateQueueItem(1, 10, "Heavy");
-            QueueItem queueItem10B = CreateQueueItem(2, 10, "Light");
-            QueueItem queueItem09A = CreateQueueItem(3, 9, "Heavy");
-            QueueItem queueItem09B = CreateQueueItem(4, 9, "Light");
-            QueueItem queueItem03C = CreateQueueItem(7, 3, "Medium");
-
-            queueItems.Add(queueItem10A);
-            queueItems.Add(queueItem10B);
-            queueItems.Add(queueItem09A);
-            queueItems.Add(queueItem09B);
-            queueItems.Add(queueItem03C);
-
-            // act
-            queueItems.AddTanksToBattleReady(new Battle(), 3);
-
-            // assert
-            queueItems.Contains(queueItem10A).Should().BeFalse();
-            queueItems.Contains(queueItem10B).Should().BeFalse();
-            queueItems.Contains(queueItem09A).Should().BeFalse();
-            queueItems.Contains(queueItem09B).Should().BeFalse();
-            queueItems.Contains(queueItem03C).Should().BeTrue();
-        }
-
-        [TestMethod]
         public void ShouldRemoveQueueItem()
         {
             // arrange
@@ -477,16 +382,15 @@ namespace MatchMakerTests
         }
 
         [TestMethod]
-        public void ShouldReturnNullMatchPairObjectIfQueueItemsDoesNotHaveTwoElements()
+        public void ShouldReturnNullMatchPairObjectIfQueueItemsDoesNotHaveAnyElements()
         {
             // arrange
             QueueItems queueItems = new QueueItems();
 
             QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Light"));
-         //   queueItems.Add(queueItem01);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems); 
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01); 
 
             // assert
             matchPair.Contains(queueItem01).Should().BeFalse();
@@ -499,17 +403,33 @@ namespace MatchMakerTests
             QueueItems queueItems = new QueueItems();
 
             QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Light"));
-            queueItems.Add(queueItem01);
 
             QueueItem queueItem02 = new QueueItem(new Player(1), new Tank(1, "Light"));
             queueItems.Add(queueItem02);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems);
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01);
 
             // assert
             matchPair.Contains(queueItem01).Should().BeTrue();
             matchPair.Contains(queueItem02).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldHandleOneQueueItemThatHasNotBeenCleanedUpRight()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Light"));
+            queueItems.Add(queueItem01);
+
+            // act
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01);
+
+            // assert
+            queueItems.Contains(queueItem01).Should().BeTrue();
+            matchPair.Contains(queueItem01).Should().BeFalse();
         }
 
         [TestMethod]
@@ -525,7 +445,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem02);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems);
+            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01);
 
             // assert
             queueItems.Contains(queueItem01).Should().BeFalse();

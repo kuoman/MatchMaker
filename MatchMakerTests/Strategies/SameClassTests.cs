@@ -10,11 +10,13 @@ namespace MatchMakerTests.Strategies
     public class SameClassTests
     {
         [TestMethod]
-        public void ShouldCreateMatchPair()
+        public void ShouldCreateMatchPairByQueueItem()
         {
             // arrange
             QueueItem queueItem1 = new QueueItem(new Player(1), new Tank(6, "Medium"));
             QueueItem queueItem2 = new QueueItem(new Player(2), new Tank(3, "Medium"));
+
+            QueueItem anchorItem = new QueueItem(new Player(1), new Tank(4, "Medium"));
 
             QueueItems queueItems = new QueueItems();
             queueItems.Add(new QueueItem(new Player(5), new Tank(4, "Heavy")));
@@ -22,7 +24,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new SameClass("Medium").CreateMatchPair(queueItems);
+            IMatchPair matchPair = new SameClass().CreateMatchPair(queueItems, anchorItem);
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();
@@ -42,7 +44,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IBattle battle = new SameClass("Medium").PopulateBattle(queueItems, new Battle());
+            IBattle battle = new SameClass().PopulateBattle(queueItems, new Battle(), queueItem1);
 
             // assert
             battle.ContainsPlayer(new Player(1)).Should().BeTrue();

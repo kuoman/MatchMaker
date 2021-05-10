@@ -17,13 +17,15 @@ namespace MatchMakerTests.Strategies
             QueueItem queueItem1 = new QueueItem(new Player(1), new Maus());
             QueueItem queueItem2 = new QueueItem(new Player(2), new E100());
 
+            QueueItem anchorItem = new QueueItem(new Player(2), new E100());
+
             QueueItems queueItems = new QueueItems();
             queueItems.Add(queueItem1);
             queueItems.Add(new QueueItem(new Player(5), new T110E5()));
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new SameRank("Heavy").CreateMatchPair(queueItems);
+            IMatchPair matchPair = new SameRank().CreateMatchPair(queueItems, anchorItem);
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();

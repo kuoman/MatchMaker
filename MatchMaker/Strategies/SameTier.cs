@@ -4,21 +4,14 @@ namespace MatchMaker.Strategies
 {
     public class SameTier : IStrategy
     {
-        private readonly int _tier;
-
-        public SameTier(int tier)
+        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady, QueueItem queueItem)
         {
-            _tier = tier;
+            return CreateMatchPair(queueItems, queueItem).AddMatchToBattle(battleReady);
         }
 
-        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
+        public IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
-            return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
-        }
-
-        public IMatchPair CreateMatchPair(QueueItems queueItems)
-        {
-            return queueItems.ByTier(_tier).GetMatchPair(queueItems);
+            return queueItems.ByTier(queueItem).GetMatchPair(queueItems, queueItem);
         }
     }
 }

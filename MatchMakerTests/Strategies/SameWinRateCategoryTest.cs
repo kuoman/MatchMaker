@@ -11,7 +11,7 @@ namespace MatchMakerTests.Strategies
     public class SameWinRateCategoryTest
     {
         [TestMethod]
-        public void ShouldCreateMatchPair()
+        public void ShouldCreateMatchPairByQueueItem()
         {
             // arrange
             Player player = new Player(1, 51);
@@ -24,7 +24,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new SameWinRateCategory(3).CreateMatchPair(queueItems);
+            IMatchPair matchPair = new SameWinRateCategory().CreateMatchPair(queueItems, queueItem1);
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();
@@ -45,7 +45,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new SameWinRateCategory(3).CreateMatchPair(queueItems);
+            IMatchPair matchPair = new SameWinRateCategory().CreateMatchPair(queueItems, queueItem1);
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();

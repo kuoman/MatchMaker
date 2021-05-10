@@ -4,7 +4,7 @@ namespace MatchMaker.Strategies
 {
     public interface IStrategy
     {
-        IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady);
-        IMatchPair CreateMatchPair(QueueItems queueItems);
+        IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady, QueueItem queueItem);
+        IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem);
     }
 }

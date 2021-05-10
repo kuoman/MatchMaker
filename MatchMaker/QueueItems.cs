@@ -164,36 +164,28 @@ namespace MatchMaker
             return _queueItems.Count >= count;
         }
 
-        public IBattle AddTanksToBattleReady(IBattle battleReady, int matchesToAdd)
-        {
-            int matchesToCreate = _queueItems.Count / 2;
-            if (matchesToCreate > matchesToAdd) matchesToCreate = matchesToAdd;
-
-            int tankCount = matchesToCreate * 2;
-            for (int i = 0; i < tankCount; i = i + 2)
-            {
-                battleReady = GetMatchPair(this).AddMatchToBattle(battleReady);
-            }
-
-            return battleReady;
-        }
-
         public bool Remove(QueueItem queueItem)
         {
             return _queueItems.Remove(queueItem);
         }
 
-        public IMatchPair GetMatchPair(QueueItems baseQueue)
+        public IMatchPair GetMatchPair(QueueItems baseQueue, QueueItem queueItem)
         {
-            if (1 >=_queueItems.Count) return new MatchNotPaired();
+            if (0 == _queueItems.Count) return new MatchNotPaired();
 
-            QueueItem queueItem01 = _queueItems[0];
-            QueueItem queueItem02 = _queueItems[1];
+            QueueItem queueItemToAdd = _queueItems[0];
 
-            MatchPair matchPair = new MatchPair(queueItem01, queueItem02);
+            if (queueItemToAdd == queueItem)
+            {
+                if (1 >= _queueItems.Count ) return new MatchNotPaired();
 
-            baseQueue.Remove(queueItem02);
-            baseQueue.Remove(queueItem01);
+                queueItemToAdd = _queueItems[1];
+            }
+
+            MatchPair matchPair = new MatchPair(queueItem, queueItemToAdd);
+
+            baseQueue.Remove(queueItem);
+            baseQueue.Remove(queueItemToAdd);
 
             return matchPair;
         }

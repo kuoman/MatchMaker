@@ -31,7 +31,7 @@ namespace MatchMakerTests.Strategies
             IStrategy sameTierSameClass = new SameTierSameClass(4, "Light");
 
             //Act
-            IMatchPair matchPair = sameTierSameClass.CreateMatchPair(queueItems);
+            IMatchPair matchPair = sameTierSameClass.CreateMatchPair(queueItems, queueItem02);
 
             //Assert
             matchPair.Contains(queueItem01).Should().BeFalse();
@@ -61,7 +61,7 @@ namespace MatchMakerTests.Strategies
             IStrategy sameTierSameClass = new SameTierSameClass(4, "Light");
 
             //Act
-            IBattle battle = sameTierSameClass.PopulateBattle(queueItems, new Battle());
+            IBattle battle = sameTierSameClass.PopulateBattle(queueItems, new Battle(), queueItem02);
 
             //Assert
             battle.ContainsPlayer(new Player(12)).Should().BeTrue();

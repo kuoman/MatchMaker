@@ -4,21 +4,14 @@ namespace MatchMaker.Strategies
 {
     public class SameWinRateCategory: IStrategy
     {
-        private readonly int _winRateCategory;
-
-        public SameWinRateCategory(int winRateCategory)
+        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady, QueueItem queueItem)
         {
-            _winRateCategory = winRateCategory;
+            return CreateMatchPair(queueItems, queueItem).AddMatchToBattle(battleReady);
         }
 
-        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
+        public IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
-            return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
-        }
-
-        public IMatchPair CreateMatchPair(QueueItems queueItems)
-        {
-            return queueItems.ByWinRate(_winRateCategory).GetMatchPair(queueItems);
+            return queueItems.ByWinRate(queueItem).GetMatchPair(queueItems, queueItem);
         }
     }
 }

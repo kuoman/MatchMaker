@@ -23,7 +23,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new TwoTier(3).CreateMatchPair(queueItems);
+            IMatchPair matchPair = new TwoTier(3).CreateMatchPair(queueItems, queueItem1);
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();
@@ -43,7 +43,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new TwoTier(4).CreateMatchPair(queueItems);
+            IMatchPair matchPair = new TwoTier(4).CreateMatchPair(queueItems, queueItem1);
 
             // assert
             matchPair.Contains(queueItem1).Should().BeTrue();
@@ -64,7 +64,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IMatchPair matchPair = new TwoTier(4).CreateMatchPair(queueItems);
+            IMatchPair matchPair = new TwoTier(4).CreateMatchPair(queueItems, queueItem1);
 
             // assert
             matchPair.IsPairFull().Should().BeFalse();
@@ -84,7 +84,7 @@ namespace MatchMakerTests.Strategies
             queueItems.Add(queueItem2);
 
             // act 
-            IBattle battle = new TwoTier(4).PopulateBattle(queueItems, new Battle());
+            IBattle battle = new TwoTier(4).PopulateBattle(queueItems, new Battle(), queueItem1);
 
             // assert
             battle.ContainsPlayer(new Player(1)).Should().BeTrue();

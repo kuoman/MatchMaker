@@ -11,20 +11,21 @@ namespace MatchMaker.Strategies
             _tier = tier;
         }
 
-        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady)
+        public IBattle PopulateBattle(QueueItems queueItems, IBattle battleReady, QueueItem queueItem)
         {
-            return CreateMatchPair(queueItems).AddMatchToBattle(battleReady);
+            return CreateMatchPair(queueItems, queueItem).AddMatchToBattle(battleReady);
         }
 
-        public IMatchPair CreateMatchPair(QueueItems queueItems)
+        public IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
-            IMatchPair matchPair = queueItems.ByTier(_tier).GetMatchPair(queueItems);
+            IMatchPair matchPair = queueItems.ByTier(queueItem).GetMatchPair(queueItems, queueItem);
 
             if (matchPair.IsPairFull()) return matchPair;
 
-            return queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPair(queueItems);
+            return queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPair(queueItems, queueItem);
         }
 
+        // todo: how do I do that with good OOP
         private int GetFallbackTier(int tier)
         {
             if (tier == 1)
