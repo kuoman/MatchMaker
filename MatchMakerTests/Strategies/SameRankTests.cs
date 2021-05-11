@@ -1,7 +1,7 @@
 using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
-using MatchMaker.Data_Bags.Tanks.TierX;
+using MatchMaker.Data_Bags.Tanks.Tier10;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 

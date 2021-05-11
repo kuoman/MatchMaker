@@ -1,4 +1,5 @@
 ﻿using MatchMaker.Data_Bags.Tanks;
+using MatchMaker.Data_Bags.Tanks.Tier02;
 
 namespace MatchMaker.Data_Bags
 {
@@ -75,6 +76,11 @@ namespace MatchMaker.Data_Bags
         public bool IsSameWinRateCategory(QueueItem queueItem)
         {
             return queueItem.IsSameWinRateCategory(_player);
+        }
+
+        public bool IsNextTierTank(ITank tank)
+        {
+            return _tank.IsNextTierTank(tank);
         }
     }
 }

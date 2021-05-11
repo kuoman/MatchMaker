@@ -22,10 +22,18 @@
         {
             return tier == _tier;
         }
+        public bool IsSameTankTier(ITank tank)
+        {
+            return tank.IsTier(_tier);
+        }
 
         public bool IsTankType(string tankType)
         {
             return _tankType == tankType;
+        }
+        public bool IsSameTankType(ITank tank)
+        {
+            return tank.IsTankType(_tankType);
         }
 
         public bool IsRanking(string tankRanking)
@@ -33,19 +41,23 @@
             return _rank == tankRanking;
         }
 
-        public bool IsSameTankType(ITank tank)
-        {
-            return tank.IsTankType(_tankType);
-        }
-
-        public bool IsSameTankTier(ITank tank)
-        {
-            return tank.IsTier(_tier);
-        }
-
         public bool IsSameTankRank(ITank tank)
         {
             return tank.IsRanking(_rank);
+        }
+
+        public bool IsNextTierTank(int tier)
+        {
+            if (_tier == 10) return 9 == tier;
+
+            if (_tier == 2) return 1 == tier;
+           
+            return _tier == tier - 1;
+        }
+
+        public bool IsNextTierTank(ITank tank)
+        {
+            return tank.IsNextTierTank(_tier);
         }
     }
 }

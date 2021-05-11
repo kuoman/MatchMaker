@@ -1,4 +1,4 @@
-﻿namespace MatchMaker.Data_Bags.Tanks.TierIX
+﻿namespace MatchMaker.Data_Bags.Tanks.Tier09
 {
     public class LeopardPta : Tank
     {

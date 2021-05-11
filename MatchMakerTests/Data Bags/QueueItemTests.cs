@@ -1,8 +1,10 @@
 ﻿using FluentAssertions;
 using MatchMaker.Data_Bags;
 using MatchMaker.Data_Bags.Tanks;
-using MatchMaker.Data_Bags.Tanks.TierIX;
-using MatchMaker.Data_Bags.Tanks.TierX;
+using MatchMaker.Data_Bags.Tanks.Tier01;
+using MatchMaker.Data_Bags.Tanks.Tier02;
+using MatchMaker.Data_Bags.Tanks.Tier09;
+using MatchMaker.Data_Bags.Tanks.Tier10;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests.Data_Bags
@@ -274,6 +276,30 @@ namespace MatchMakerTests.Data_Bags
             QueueItem queueItemOther = new QueueItem(new Player(2, 38), new E100());
 
             queueItem.IsSameWinRateCategory(queueItemOther).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldValidateNextTierTankMin()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 1), new PzKpfwIi());
+
+            queueItem.IsNextTierTank(new M3Stewart()).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldInValidateNextTierTank()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 1), new M3Stewart());
+
+            queueItem.IsNextTierTank(new M3Stewart()).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldValidateNextTierTankMax()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 1), new E75());
+
+            queueItem.IsNextTierTank(new E100()).Should().BeTrue();
         }
 
         private static QueueItem CreateQueueItem(int tier)

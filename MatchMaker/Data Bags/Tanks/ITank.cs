@@ -8,5 +8,7 @@
         bool IsSameTankType(ITank tank);
         bool IsSameTankTier(ITank tank);
         bool IsSameTankRank(ITank tank);
+        bool IsNextTierTank(ITank tank);
+        bool IsNextTierTank(int tank);
     }
 }

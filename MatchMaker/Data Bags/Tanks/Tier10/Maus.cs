@@ -1,4 +1,4 @@
-﻿namespace MatchMaker.Data_Bags.Tanks.TierX
+﻿namespace MatchMaker.Data_Bags.Tanks.Tier10
 {
     public class Maus : Tank
     {
