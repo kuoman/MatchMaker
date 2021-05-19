@@ -26,7 +26,6 @@
 
         public bool Equals(Player other)
         {
-            //Check for null and compare run-time types.
             if ((other == null) || GetType() != other.GetType())
             {
                 return false;
