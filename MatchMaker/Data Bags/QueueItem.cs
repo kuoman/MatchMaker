@@ -1,5 +1,4 @@
 ﻿using MatchMaker.Data_Bags.Tanks;
-using MatchMaker.Data_Bags.Tanks.Tier02;
 
 namespace MatchMaker.Data_Bags
 {
@@ -81,6 +80,16 @@ namespace MatchMaker.Data_Bags
         public bool IsNextTierTank(ITank tank)
         {
             return _tank.IsNextTierTank(tank);
+        }
+
+        public bool IsSameNumBattlesCategory(Player player)
+        {
+            return _player.IsSameNumBattlesCategory(player);
+        }
+
+        public bool IsSameNumBattlesCategory(QueueItem queueItemOther)
+        {
+            return queueItemOther.IsSameNumBattlesCategory(_player);
         }
     }
 }

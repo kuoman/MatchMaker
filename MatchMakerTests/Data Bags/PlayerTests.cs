@@ -118,6 +118,84 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategory0()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 290);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(0);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategory1()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 2150);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(1);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategory2()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 5098);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(2);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategory3()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 10987);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(3);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategory4()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 15890);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(4);
+
+            // assert
+            result.Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseForDifferentNumBattlesCategory()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 290);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(2);
+
+            // assert
+            result.Should().BeFalse();
+        }
+
+        [TestMethod]
         public void ShouldReturnFalseForNotSameWinRateCategory()
         {
             // arrange
@@ -153,6 +231,20 @@ namespace MatchMakerTests.Data_Bags
             // act
             bool result = player1.IsSameWinRateCategory(player2);
             result.Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategoryFromPlayer()
+        {
+            // arrange
+            Player player1 = new Player(1, 40, 5600);
+            Player player2 = new Player(1, 43, 7800);
+
+            // act
+            bool result = player1.IsSameNumBattlesCategory(player2);
+
+            // assert
+            result.Should().BeTrue();
         }
     }
 }

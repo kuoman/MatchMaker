@@ -159,6 +159,19 @@ namespace MatchMaker
             return returnItems;
         }
 
+        //public QueueItems ByWinRate(QueueItem queueItem) => new QueueItems(_queueItems.FindAll(x => x.IsSameWinRateCategory(queueItem)));
+        public QueueItems ByNumBattles(QueueItem queueItem)
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsSameNumBattlesCategory(queueItem)) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
         public bool HasEnoughTanks(int count)
         {
             return _queueItems.Count >= count;
@@ -189,6 +202,7 @@ namespace MatchMaker
 
             return matchPair;
         }
+
 
     }
 }

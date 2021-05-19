@@ -575,6 +575,39 @@ namespace MatchMakerTests
             items.Contains(queueItem03).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ShouldFilterByNumBattlesCategoryByQueueItem()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            Player player01 = new Player(1, 47, 9000);
+            QueueItem queueItem01 = new QueueItem(player01, new E100());
+            queueItems.Add(queueItem01);
+
+            QueueItem queueItem02 = new QueueItem(new Player(2, 47,17890), new E100());
+            queueItems.Add(queueItem02);
+
+            QueueItem queueItem03 = new QueueItem(new Player(3, 49, 110000), new E100());
+            queueItems.Add(queueItem03);
+
+            Player player02 = new Player(4, 47, 8000);
+            QueueItem queueItem04 = new QueueItem(player02, new E100());
+            queueItems.Add(queueItem04);
+
+            Player playerX = new Player(1, 47, 7800);
+            QueueItem queueItemX = new QueueItem(playerX, new E100());
+
+            // act
+            QueueItems items = queueItems.ByNumBattles(queueItemX);
+
+            // assert
+            items.Contains(queueItem01).Should().BeTrue();
+            items.Contains(queueItem04).Should().BeTrue();
+            items.Contains(queueItem02).Should().BeFalse();
+            items.Contains(queueItem03).Should().BeFalse();
+        }
+
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
             return CreateQueueItem(1,tier, tankType);

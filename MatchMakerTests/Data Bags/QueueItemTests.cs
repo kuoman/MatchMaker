@@ -270,12 +270,48 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
-        public void ShouldReturnFalseForSameWinRateByQueueItem()
+        public void ShouldReturnFalseForNotSameWinRateByQueueItem()
         {
             QueueItem queueItem = new QueueItem(new Player(1, 50), new E100());
             QueueItem queueItemOther = new QueueItem(new Player(2, 38), new E100());
 
             queueItem.IsSameWinRateCategory(queueItemOther).Should().BeFalse();
+        }
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategoryByPlayer()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 50, 3000), new E100());
+            Player player = new Player(2, 53, 4000);
+
+            queueItem.IsSameNumBattlesCategory(player).Should().BeTrue();
+        }
+
+        
+        [TestMethod]
+        public void ShouldReturnFalseForSameNumBattlesCategoryByPlayer()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 50, 15000), new E100());
+            Player player = new Player(2, 38, 1000);
+
+            queueItem.IsSameNumBattlesCategory(player).Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void ShouldReturnTrueForSameNumBattlesCategoryByQueueItem()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 50, 800), new E100());
+            QueueItem queueItemOther = new QueueItem(new Player(2, 53, 1500), new E100());
+
+            queueItem.IsSameNumBattlesCategory(queueItemOther).Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseForNotSameNumBattlesByQueueItem()
+        {
+            QueueItem queueItem = new QueueItem(new Player(1, 50, 1788), new E100());
+            QueueItem queueItemOther = new QueueItem(new Player(2, 38, 9000), new E100());
+
+            queueItem.IsSameNumBattlesCategory(queueItemOther).Should().BeFalse();
         }
 
         [TestMethod]
