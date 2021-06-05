@@ -133,5 +133,108 @@ namespace MatchMakerTests
         // how to get next tier down sort.  
         // what do you do if your subsearch has no items?
 
+        [Ignore]
+        [TestMethod]
+        public void ShouldPopulateBattleWithPlatoons()
+        {
+            QueueItems queueItems = new QueueItems();
+
+            Player playerA1 = new Player(1, 50);
+            QueueItem queueItemA1 = new QueueItem(playerA1, new E100());
+            queueItems.Add(queueItemA1);
+            Player playerA1B = new Player(8, 50);
+            QueueItem queueItemA1B = new QueueItem(playerA1B, new Tortoise());
+            queueItems.Add(queueItemA1B);
+            QueueItem queueItemB1 = new QueueItem(new Player(11, 50), new E100());
+            queueItems.Add(queueItemB1);
+            QueueItem queueItemA2 = new QueueItem(new Player(2, 50), new E100());
+            queueItems.Add(queueItemA2);
+            QueueItem queueItemB2 = new QueueItem(new Player(12, 50), new E100());
+            queueItems.Add(queueItemB2);
+            QueueItem queueItemA3 = new QueueItem(new Player(3, 50), new E100());
+            queueItems.Add(queueItemA3);
+            QueueItem queueItemB3 = new QueueItem(new Player(13, 50), new E100());
+            queueItems.Add(queueItemB3);
+            QueueItem queueItemA4 = new QueueItem(new Player(4, 50), new E100());
+            queueItems.Add(queueItemA4);
+            QueueItem queueItemB4 = new QueueItem(new Player(14, 50), new E100());
+            queueItems.Add(queueItemB4);
+            QueueItem queueItemA5 = new QueueItem(new Player(5, 50), new E100());
+            queueItems.Add(queueItemA5);
+            QueueItem queueItemB5 = new QueueItem(new Player(15, 50), new E100());
+            queueItems.Add(queueItemB5);
+            QueueItem queueItemA6 = new QueueItem(new Player(6, 50), new E100());
+            queueItems.Add(queueItemA6);
+            QueueItem queueItemB6 = new QueueItem(new Player(16, 50), new E100());
+            queueItems.Add(queueItemB6);
+            Player playerA7 = new Player(7, 50);
+            QueueItem queueItemA7 = new QueueItem(playerA7, new E100());
+            queueItems.Add(queueItemA7);
+            Player playerB7 = new Player(17, 50);
+            QueueItem queueItemB7 = new QueueItem(playerB7, new E100());
+            queueItems.Add(queueItemB7);
+
+
+            Player playerB8 = new Player(18, 50);
+            QueueItem queueItemB3PlatoonMate = new QueueItem(playerB8, new E100());
+            queueItemB3.AddPlatoonMate(queueItemB3PlatoonMate);
+
+            Player playerA8 = new Player(8, 50);
+            QueueItem queueItemA1PlatoonMate = new QueueItem(playerA8, new E100());
+            queueItemA1.AddPlatoonMate(queueItemA1PlatoonMate);
+
+
+            // need 2 platoons Team A gets 1 platoon Team B gets another platoon
+            // 
+
+            List<QueueItem> items = new List<QueueItem> {queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7 };
+
+            QueueItems tierXQueue = queueItems.ByTier(queueItemA1);
+
+            IBattle battle = new Battle();
+
+            // get oldest queueItem (we don't have sort by date yet)
+
+            QueueItem queueItemOldest = queueItemA1;
+
+
+            if (queueItemOldest.IsInPlatoon())
+            {
+                // add myself to battle with match with another player that is not in a platoon on team A
+                IMatchPair matchPair = tierXQueue.GetMatchPair(tierXQueue, queueItemOldest);
+                matchPair.AddMatchToBattle(battle);
+
+                // add my platoon mate to battle with match with another player that is not in a platoon on team A
+
+              //  IMatchPair platoonMateMatchPair = queueItemOldest.GetMatchForPlatoonMate(tierXQueue);
+              //  platoonMateMatchPair.AddMatchToBattle(battle);
+
+                // find another platoon (same tier)
+
+                // add other platoon to match with other players that are not in a platoon on team B
+
+                // fill the rest of the battle with players not in platoons
+            }
+
+
+            for (int i = 0; i < 6; i++)
+            {
+                IMatchPair matchPair = tierXQueue.GetMatchPair(tierXQueue, items[i]);
+                matchPair.AddMatchToBattle(battle);
+            }
+
+            battle.IsReadyToFight().Should().BeTrue();
+            battle.ContainsPlayer(playerA1);
+            battle.ContainsPlayer(playerA8).Should().BeTrue();
+
+            battle.ContainsPlayer(playerB8).Should().BeTrue();
+            
+            battle.ContainsPlayer(playerB7).Should().BeFalse();
+            battle.ContainsPlayer(playerA1B).Should().BeFalse();
+            battle.ContainsPlayer(playerA7).Should().BeFalse();
+            queueItems.Contains(queueItemA1B).Should().BeTrue();
+
+        }
+
     }
 }

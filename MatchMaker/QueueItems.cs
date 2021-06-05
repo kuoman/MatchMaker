@@ -172,13 +172,25 @@ namespace MatchMaker
             return returnItems;
         }
 
-        public QueueItems ByPlatoon()
+        public QueueItems ByInPlatoon()
         {
             QueueItems returnItems = new QueueItems();
 
             foreach (QueueItem item in _queueItems)
             {
                 if (item.IsInPlatoon()) returnItems.Add(item);
+            }
+
+            return returnItems;
+        }
+
+        public QueueItems ByNotInPlatoon()
+        {
+            QueueItems returnItems = new QueueItems();
+
+            foreach (QueueItem item in _queueItems)
+            {
+                if (item.IsNotInPlatoon()) returnItems.Add(item);
             }
 
             return returnItems;
@@ -214,6 +226,5 @@ namespace MatchMaker
 
             return matchPair;
         }
-
     }
 }

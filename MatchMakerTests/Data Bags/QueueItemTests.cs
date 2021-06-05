@@ -360,6 +360,27 @@ namespace MatchMakerTests.Data_Bags
             queueItem1.IsInPlatoon().Should().BeFalse();
         }
 
+
+        [TestMethod]
+        public void ShouldReturnTrueIfNotInPlatoon()
+        {
+            QueueItem queueItem1 = new QueueItem(new Player(1, 1), new E75());
+
+            queueItem1.IsNotInPlatoon().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void ShouldReturnFalseIfInPlatoon()
+        {
+            QueueItem queueItem1 = new QueueItem(new Player(1, 1), new E75());
+            QueueItem queueItem2 = new QueueItem(new Player(2, 1), new E75());
+
+            queueItem1.AddPlatoonMate(queueItem2);
+
+            queueItem1.IsNotInPlatoon().Should().BeFalse();
+            queueItem2.IsNotInPlatoon().Should().BeFalse();
+        }
+
         private static QueueItem CreateQueueItem(int tier)
         {
             return new QueueItem(new Player(1), new Tank(tier, null));

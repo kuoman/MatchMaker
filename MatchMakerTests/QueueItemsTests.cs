@@ -626,7 +626,7 @@ namespace MatchMakerTests
             queueItems.Add(qi3);
 
             // act
-            QueueItems platoonedQueueItems = queueItems.ByPlatoon();
+            QueueItems platoonedQueueItems = queueItems.ByInPlatoon();
 
             // assert
             platoonedQueueItems.Contains(qi1).Should().BeTrue();
@@ -635,6 +635,31 @@ namespace MatchMakerTests
         }
 
 
+        [TestMethod]
+        public void ShouldFindQueueItemsNotInPlatoon()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem qi1 = CreateQueueItem(11, 1, "Heavy");
+            queueItems.Add(qi1);
+
+            QueueItem qi2 = CreateQueueItem(21, 1, "Heavy");
+            queueItems.Add(qi2);
+
+            qi1.AddPlatoonMate(qi2);
+
+            QueueItem qi3 = CreateQueueItem(31, 1, "Heavy");
+            queueItems.Add(qi3);
+
+            // act
+            QueueItems platoonedQueueItems = queueItems.ByNotInPlatoon();
+
+            // assert
+            platoonedQueueItems.Contains(qi1).Should().BeFalse();
+            platoonedQueueItems.Contains(qi2).Should().BeFalse();
+            platoonedQueueItems.Contains(qi3).Should().BeTrue();
+        }
 
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
