@@ -6,6 +6,7 @@ namespace MatchMaker.Data_Bags
     {
         private readonly Player _player;
         private readonly ITank _tank;
+        private QueueItem _platoonMate;
 
         public QueueItem(Player player, ITank tank)
         {
@@ -90,6 +91,17 @@ namespace MatchMaker.Data_Bags
         public bool IsSameNumBattlesCategory(QueueItem queueItemOther)
         {
             return queueItemOther.IsSameNumBattlesCategory(_player);
+        }
+
+        public void AddPlatoonMate(QueueItem queueItem)
+        {
+            _platoonMate = queueItem;
+            queueItem._platoonMate = this;
+        }
+
+        public bool IsInPlatoon()
+        {
+            return _platoonMate != null;
         }
     }
 }

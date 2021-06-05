@@ -608,6 +608,34 @@ namespace MatchMakerTests
             items.Contains(queueItem03).Should().BeFalse();
         }
 
+        [TestMethod]
+        public void ShouldFindQueueItemsInPlatoon()
+        {
+            // arrange
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem qi1 = CreateQueueItem(11, 1, "Heavy");
+            queueItems.Add(qi1);
+
+            QueueItem qi2 = CreateQueueItem(21, 1, "Heavy");
+            queueItems.Add(qi2);
+
+            qi1.AddPlatoonMate(qi2);
+
+            QueueItem qi3 = CreateQueueItem(31, 1, "Heavy");
+            queueItems.Add(qi3);
+
+            // act
+            QueueItems platoonedQueueItems = queueItems.ByPlatoon();
+
+            // assert
+            platoonedQueueItems.Contains(qi1).Should().BeTrue();
+            platoonedQueueItems.Contains(qi2).Should().BeTrue();
+            platoonedQueueItems.Contains(qi3).Should().BeFalse();
+        }
+
+
+
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
             return CreateQueueItem(1,tier, tankType);

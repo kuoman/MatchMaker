@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Reflection.Metadata.Ecma335;
+using FluentAssertions;
 using MatchMaker.Data_Bags;
 using MatchMaker.Data_Bags.Tanks;
 using MatchMaker.Data_Bags.Tanks.Tier01;
@@ -263,7 +264,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueForSameWinRateByQueueItem()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50), new E100()); 
+            QueueItem queueItem = new QueueItem(new Player(1, 50), new E100());
             QueueItem queueItemOther = new QueueItem(new Player(2, 53), new E100());
 
             queueItem.IsSameWinRateCategory(queueItemOther).Should().BeTrue();
@@ -277,6 +278,7 @@ namespace MatchMakerTests.Data_Bags
 
             queueItem.IsSameWinRateCategory(queueItemOther).Should().BeFalse();
         }
+
         [TestMethod]
         public void ShouldReturnTrueForSameNumBattlesCategoryByPlayer()
         {
@@ -286,7 +288,7 @@ namespace MatchMakerTests.Data_Bags
             queueItem.IsSameNumBattlesCategory(player).Should().BeTrue();
         }
 
-        
+
         [TestMethod]
         public void ShouldReturnFalseForSameNumBattlesCategoryByPlayer()
         {
@@ -338,6 +340,26 @@ namespace MatchMakerTests.Data_Bags
             queueItem.IsNextTierTank(new E100()).Should().BeTrue();
         }
 
+        [TestMethod]
+        public void ShouldReturnTrueIfInPlatoon()
+        {
+            QueueItem queueItem1 = new QueueItem(new Player(1, 1), new E75());
+            QueueItem queueItem2 = new QueueItem(new Player(2, 1), new E75());
+            
+            queueItem1.AddPlatoonMate(queueItem2);
+
+            queueItem1.IsInPlatoon().Should().BeTrue();
+            queueItem2.IsInPlatoon().Should().BeTrue();
+        }
+
+        [TestMethod] 
+        public void ShouldReturnFalseIfNotInPlatoon()
+        {
+            QueueItem queueItem1 = new QueueItem(new Player(1, 1), new E75());
+
+            queueItem1.IsInPlatoon().Should().BeFalse();
+        }
+
         private static QueueItem CreateQueueItem(int tier)
         {
             return new QueueItem(new Player(1), new Tank(tier, null));
@@ -347,7 +369,6 @@ namespace MatchMakerTests.Data_Bags
         {
             return new QueueItem(new Player(1), new Tank(1, tankType, rank));
         }
-
     }
 }
 
