@@ -11,7 +11,7 @@ namespace MatchMaker.Strategies
 
         public virtual IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
-            return queueItems.GetMatchPair(queueItems, queueItem);
+            return queueItems.GetMatchPairTeamA(queueItems, queueItem);
         }
     }
 }

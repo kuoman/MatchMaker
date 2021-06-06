@@ -390,7 +390,7 @@ namespace MatchMakerTests
             QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Light"));
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01); 
+            IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01); 
 
             // assert
             matchPair.Contains(queueItem01).Should().BeFalse();
@@ -408,7 +408,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem02);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01);
+            IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01);
 
             // assert
             matchPair.Contains(queueItem01).Should().BeTrue();
@@ -425,7 +425,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem01);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01);
+            IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01);
 
             // assert
             queueItems.Contains(queueItem01).Should().BeTrue();
@@ -445,7 +445,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem02);
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPair(queueItems, queueItem01);
+            IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01);
 
             // assert
             queueItems.Contains(queueItem01).Should().BeFalse();

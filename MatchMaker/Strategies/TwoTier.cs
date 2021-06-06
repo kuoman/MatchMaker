@@ -14,11 +14,11 @@ namespace MatchMaker.Strategies
         override 
         public IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
-            IMatchPair matchPair = queueItems.ByTier(queueItem).GetMatchPair(queueItems, queueItem);
+            IMatchPair matchPair = queueItems.ByTier(queueItem).GetMatchPairTeamA(queueItems, queueItem);
 
             if (matchPair.IsPairFull()) return matchPair;
 
-            return queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPair(queueItems, queueItem);
+            return queueItems.ByTier(GetFallbackTier(_tier)).GetMatchPairTeamA(queueItems, queueItem);
         }
 
         // todo: how do I do that with good OOP

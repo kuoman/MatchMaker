@@ -52,7 +52,7 @@ namespace MatchMakerTests
             IBattle battle = new Battle();
             for (int i = 0; i < 7; i++)
             {
-                IMatchPair matchPair = queueItems.GetMatchPair(queueItems, items[i]);
+                IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, items[i]);
                 matchPair.AddMatchToBattle(battle);
             }
 
@@ -106,7 +106,7 @@ namespace MatchMakerTests
             IBattle battle = new Battle();
             for (int i = 0; i < 7; i++)
             {
-                IMatchPair matchPair = sortedQueue.GetMatchPair(sortedQueue, items[i]);
+                IMatchPair matchPair = sortedQueue.GetMatchPairTeamA(sortedQueue, items[i]);
                 matchPair.AddMatchToBattle(battle);
             }
 
@@ -133,7 +133,7 @@ namespace MatchMakerTests
         // how to get next tier down sort.  
         // what do you do if your subsearch has no items?
 
-        [Ignore]
+      //  [Ignore]
         [TestMethod]
         public void ShouldPopulateBattleWithPlatoons()
         {
@@ -142,9 +142,9 @@ namespace MatchMakerTests
             Player playerA1 = new Player(1, 50);
             QueueItem queueItemA1 = new QueueItem(playerA1, new E100());
             queueItems.Add(queueItemA1);
-            Player playerA1B = new Player(8, 50);
-            QueueItem queueItemA1B = new QueueItem(playerA1B, new Tortoise());
-            queueItems.Add(queueItemA1B);
+            Player playerA1B = new Player(9, 50);
+            QueueItem queueItemTortoise = new QueueItem(playerA1B, new Tortoise());
+            queueItems.Add(queueItemTortoise);
             QueueItem queueItemB1 = new QueueItem(new Player(11, 50), new E100());
             queueItems.Add(queueItemB1);
             QueueItem queueItemA2 = new QueueItem(new Player(2, 50), new E100());
@@ -153,7 +153,8 @@ namespace MatchMakerTests
             queueItems.Add(queueItemB2);
             QueueItem queueItemA3 = new QueueItem(new Player(3, 50), new E100());
             queueItems.Add(queueItemA3);
-            QueueItem queueItemB3 = new QueueItem(new Player(13, 50), new E100());
+            Player playerB3 = new Player(13, 50);
+            QueueItem queueItemB3 = new QueueItem(playerB3, new E100());
             queueItems.Add(queueItemB3);
             QueueItem queueItemA4 = new QueueItem(new Player(4, 50), new E100());
             queueItems.Add(queueItemA4);
@@ -189,9 +190,7 @@ namespace MatchMakerTests
 
             List<QueueItem> items = new List<QueueItem> {queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7 };
 
-            QueueItems tierXQueue = queueItems.ByTier(queueItemA1);
-
-            IBattle battle = new Battle();
+            Battle battle = new Battle();
 
             // get oldest queueItem (we don't have sort by date yet)
 
@@ -201,25 +200,30 @@ namespace MatchMakerTests
             if (queueItemOldest.IsInPlatoon())
             {
                 // add myself to battle with match with another player that is not in a platoon on team A
-                IMatchPair matchPair = tierXQueue.GetMatchPair(tierXQueue, queueItemOldest);
+                IMatchPair matchPair = queueItems.ByTier(queueItemA1).GetMatchPairTeamA(queueItems, queueItemOldest);
                 matchPair.AddMatchToBattle(battle);
 
                 // add my platoon mate to battle with match with another player that is not in a platoon on team A
 
-              //  IMatchPair platoonMateMatchPair = queueItemOldest.GetMatchForPlatoonMate(tierXQueue);
-              //  platoonMateMatchPair.AddMatchToBattle(battle);
+                IMatchPair platoonMateMatchPair = queueItemOldest.GetMatchForPlatoonMateTeamA(queueItems.ByTier(queueItemA1));
+                platoonMateMatchPair.AddMatchToBattle(battle);
 
                 // find another platoon (same tier)
+                QueueItems byInPlatoon = queueItems.ByTier(queueItemA1).ByInPlatoon();
 
-                // add other platoon to match with other players that are not in a platoon on team B
+                // todo: figure out how to get matched platoon
 
-                // fill the rest of the battle with players not in platoons
+                IMatchPair teamB_PrimaryPlayer_match = queueItems.ByTier(queueItemB3).GetMatchPairTeamB(queueItems.ByTier(queueItemB3), queueItemB3);
+                teamB_PrimaryPlayer_match.AddMatchToBattle(battle);
+
+                IMatchPair teamB_SecondaryPlayer_match = queueItemB3.GetMatchForPlatoonMateTeamB(queueItems.ByTier(queueItemB3));
+                teamB_SecondaryPlayer_match.AddMatchToBattle(battle);
             }
 
 
             for (int i = 0; i < 6; i++)
             {
-                IMatchPair matchPair = tierXQueue.GetMatchPair(tierXQueue, items[i]);
+                IMatchPair matchPair = queueItems.ByTier(queueItemA1).GetMatchPairTeamA(queueItems, items[i]);
                 matchPair.AddMatchToBattle(battle);
             }
 
@@ -227,13 +231,19 @@ namespace MatchMakerTests
             battle.ContainsPlayer(playerA1);
             battle.ContainsPlayer(playerA8).Should().BeTrue();
 
+            battle.ContainsPlayer(playerB3).Should().BeTrue();
             battle.ContainsPlayer(playerB8).Should().BeTrue();
             
             battle.ContainsPlayer(playerB7).Should().BeFalse();
-            battle.ContainsPlayer(playerA1B).Should().BeFalse();
             battle.ContainsPlayer(playerA7).Should().BeFalse();
-            queueItems.Contains(queueItemA1B).Should().BeTrue();
 
+            queueItems.Contains(queueItemTortoise).Should().BeTrue();
+
+            battle.ContainsPlayer(playerA1B).Should().BeFalse();
+            battle.PlayerOnTeamA(playerA1).Should().BeTrue();
+            battle.PlayerOnTeamA(playerA8).Should().BeTrue();
+            battle.PlayerOnTeamB(playerB3).Should().BeTrue();
+            battle.PlayerOnTeamB(playerB8).Should().BeTrue();
         }
 
     }

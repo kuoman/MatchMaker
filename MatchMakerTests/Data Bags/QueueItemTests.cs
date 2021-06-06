@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using FluentAssertions;
+using MatchMaker;
 using MatchMaker.Data_Bags;
 using MatchMaker.Data_Bags.Tanks;
 using MatchMaker.Data_Bags.Tanks.Tier01;
@@ -370,13 +371,44 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
+        public void ShouldGetMatchForPlatoonMate()
+        {
+            // arrange
+
+            QueueItem queueItem1 = new QueueItem(new Player(1, 1), new E75());
+            QueueItem queueItem12 = new QueueItem(new Player(12, 1), new E75());
+
+            queueItem12.AddPlatoonMate(queueItem1);
+
+            QueueItems queueItems = new QueueItems();
+
+            QueueItem queueItemB = new QueueItem(new Player(2, 1), new E75());
+            queueItems.Add(queueItemB);
+            // act
+
+            IMatchPair matchPair = queueItem12.GetMatchForPlatoonMateTeamA(queueItems);
+
+            // assert
+            queueItem12.IsInPlatoon().Should().BeTrue();
+            queueItem1.IsInPlatoon().Should().BeTrue();
+            queueItemB.IsInPlatoon().Should().BeFalse();
+            matchPair.Contains(queueItem1).Should().BeTrue();
+            matchPair.Contains(queueItem12).Should().BeFalse();
+            matchPair.Contains(queueItemB).Should().BeTrue();
+
+        }
+
+        [TestMethod]
         public void ShouldReturnFalseIfInPlatoon()
         {
+            // arrange
             QueueItem queueItem1 = new QueueItem(new Player(1, 1), new E75());
             QueueItem queueItem2 = new QueueItem(new Player(2, 1), new E75());
 
+            // act
             queueItem1.AddPlatoonMate(queueItem2);
 
+            // assert
             queueItem1.IsNotInPlatoon().Should().BeFalse();
             queueItem2.IsNotInPlatoon().Should().BeFalse();
         }

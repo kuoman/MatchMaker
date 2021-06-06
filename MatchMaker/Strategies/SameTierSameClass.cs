@@ -9,7 +9,7 @@ namespace MatchMaker.Strategies
         override 
         public IMatchPair CreateMatchPair(QueueItems queueItems, QueueItem queueItem)
         {
-            return queueItems.ByTier(queueItem).ByTankType(queueItem).GetMatchPair(queueItems, queueItem);
+            return queueItems.ByTier(queueItem).ByTankType(queueItem).GetMatchPairTeamA(queueItems, queueItem);
         }
 
     }

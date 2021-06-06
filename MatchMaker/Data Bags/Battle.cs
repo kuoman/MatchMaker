@@ -20,6 +20,16 @@
             return _teamA.HasPlayer(player) || _teamB.HasPlayer(player);
         }
 
+        public bool PlayerOnTeamA(Player player)
+        {
+            return _teamA.HasPlayer(player);
+        }
+
+        public bool PlayerOnTeamB(Player player)
+        {
+            return _teamB.HasPlayer(player);
+        }
+
         public void AddQueueItemToTeamA(QueueItem queueItem)
         {
             AddToQueueItem(_teamA, queueItem);

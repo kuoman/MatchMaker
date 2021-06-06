@@ -104,13 +104,18 @@ namespace MatchMaker.Data_Bags
             return _platoonMate != null;
         }
 
-        /*public IMatchPair GetMatchForPlatoonMate(QueueItems queueItems)
-        {
-            return queueItems.GetMatchPair(queueItems, _platoonMate);
-        }*/
         public bool IsNotInPlatoon()
         {
             return !IsInPlatoon();
+        }
+
+        public IMatchPair GetMatchForPlatoonMateTeamA(QueueItems queueItems)
+        {
+            return queueItems.GetMatchPairTeamA(queueItems, _platoonMate);
+        }
+        public IMatchPair GetMatchForPlatoonMateTeamB(QueueItems queueItems)
+        {
+            return queueItems.GetMatchPairTeamB(queueItems, _platoonMate);
         }
     }
 }

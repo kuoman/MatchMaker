@@ -206,7 +206,7 @@ namespace MatchMaker
             return _queueItems.Remove(queueItem);
         }
 
-        public IMatchPair GetMatchPair(QueueItems baseQueue, QueueItem queueItem)
+        public IMatchPair GetMatchPairTeamA(QueueItems baseQueue, QueueItem queueItem)
         {
             if (0 == _queueItems.Count) return new MatchNotPaired();
 
@@ -220,6 +220,27 @@ namespace MatchMaker
             }
 
             MatchPair matchPair = new MatchPair(queueItem, queueItemToAdd);
+
+            baseQueue.Remove(queueItem);
+            baseQueue.Remove(queueItemToAdd);
+
+            return matchPair;
+        }
+
+        public IMatchPair GetMatchPairTeamB(QueueItems baseQueue, QueueItem queueItem)
+        {
+            if (0 == _queueItems.Count) return new MatchNotPaired();
+
+            QueueItem queueItemToAdd = _queueItems[0];
+
+            if (queueItemToAdd == queueItem)
+            {
+                if (1 >= _queueItems.Count) return new MatchNotPaired();
+
+                queueItemToAdd = _queueItems[1];
+            }
+
+            MatchPair matchPair = new MatchPair(queueItemToAdd, queueItem);
 
             baseQueue.Remove(queueItem);
             baseQueue.Remove(queueItemToAdd);
