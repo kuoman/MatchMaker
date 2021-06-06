@@ -15,11 +15,11 @@ namespace MatchMakerTests.Strategies
         {
             // arrange
             Player player = new Player(1, 51, 6500);
-            QueueItem queueItem1 = new QueueItem(player, new Tank(6, "Medium"));
-            QueueItem queueItem2 = new QueueItem(new Player(2, 53, 9999), new Tank(3, "Medium"));
+            QueueItem queueItem1 = new QueueItem(player, new Tank((int) 6, (string) "Medium", (string) "Heavy"));
+            QueueItem queueItem2 = new QueueItem(new Player(2, 53, 9999), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player(5, 40, 20), new Tank(4, "Heavy")));
+            queueItems.Add(new QueueItem(new Player(5, 40, 20), new Tank((int) 4, (string) "Heavy", (string) "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 

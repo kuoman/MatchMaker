@@ -13,13 +13,13 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPairByQueueItem()
         {
             // arrange
-            QueueItem queueItem1 = new QueueItem(new Player(1), new Tank(6, "Medium"));
-            QueueItem queueItem2 = new QueueItem(new Player(2), new Tank(3, "Medium"));
+            QueueItem queueItem1 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 6, (string) "Medium", (string) "Heavy"));
+            QueueItem queueItem2 = new QueueItem(new Player((int) 2, (double) 50d, (int) 499), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
 
-            QueueItem anchorItem = new QueueItem(new Player(1), new Tank(4, "Medium"));
+            QueueItem anchorItem = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 4, (string) "Medium", (string) "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player(5), new Tank(4, "Heavy")));
+            queueItems.Add(new QueueItem(new Player((int) 5, (double) 50d, (int) 499), new Tank((int) 4, (string) "Heavy", (string) "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 
@@ -35,11 +35,11 @@ namespace MatchMakerTests.Strategies
         public void ShouldPopulateBattle()
         {
             // arrange
-            QueueItem queueItem1 = new QueueItem(new Player(1), new Tank(6, "Medium"));
-            QueueItem queueItem2 = new QueueItem(new Player(2), new Tank(3, "Medium"));
+            QueueItem queueItem1 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 6, (string) "Medium", (string) "Heavy"));
+            QueueItem queueItem2 = new QueueItem(new Player((int) 2, (double) 50d, (int) 499), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player(5), new Tank(4, "Heavy")));
+            queueItems.Add(new QueueItem(new Player((int) 5, (double) 50d, (int) 499), new Tank((int) 4, (string) "Heavy", (string) "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 
@@ -47,8 +47,8 @@ namespace MatchMakerTests.Strategies
             IBattle battle = new SameClass().PopulateBattle(queueItems, new Battle(), queueItem1);
 
             // assert
-            battle.ContainsPlayer(new Player(1)).Should().BeTrue();
-            battle.ContainsPlayer(new Player(2)).Should().BeTrue();
+            battle.ContainsPlayer(new Player((int) 1, (double) 50d, (int) 499)).Should().BeTrue();
+            battle.ContainsPlayer(new Player((int) 2, (double) 50d, (int) 499)).Should().BeTrue();
         }
     }
 }

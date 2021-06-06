@@ -17,7 +17,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldConfirmLevel()
         {
-            Tank tank = new Tank(5, null);
+            Tank tank = new Tank((int) 5, (string) null, (string) "Heavy");
 
             tank.IsSameTankTier(new Crusader()).Should().BeTrue();
         }
@@ -25,7 +25,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldConfirmNotLevel()
         {
-            Tank tank = new Tank(4, null);
+            Tank tank = new Tank((int) 4, (string) null, (string) "Heavy");
 
             tank.IsSameTankTier(new Crusader()).Should().BeFalse();
         }
@@ -33,7 +33,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldConfirmTankType()
         {
-            Tank tank = new Tank(5, "Heavy");
+            Tank tank = new Tank((int) 5, (string) "Heavy", (string) "Heavy");
 
             tank.IsSameTankType(new Mauchen()).Should().BeTrue();
         }
@@ -41,7 +41,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldConfirmNotTankType()
         {
-            Tank tank = new Tank(5, "Light");
+            Tank tank = new Tank((int) 5, (string) "Light", (string) "Heavy");
 
             tank.IsSameTankType(new T110E5()).Should().BeFalse();
         }

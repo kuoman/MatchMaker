@@ -72,10 +72,10 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             IBattle battle = new Battle();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1), new Tank(1, "Heavy"));
+            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Heavy", (string) "Heavy"));
             battle.AddQueueItemToTeamA(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(2), new Tank(1, "Heavy"));
+            QueueItem queueItem02 = new QueueItem(new Player((int) 2, (double) 50d, (int) 499), new Tank((int) 1, (string) "Heavy", (string) "Heavy"));
             battle.AddQueueItemToTeamB(queueItem02);
 
             QueueItems queueItems = new QueueItems();
@@ -84,15 +84,15 @@ namespace MatchMakerTests.Data_Bags
             QueueItems returnQueueItems = battle.FlushTeamsBackToQueue(queueItems);
 
             // assert
-            battle.ContainsPlayer(new Player(1)).Should().BeFalse();
-            battle.ContainsPlayer(new Player(2)).Should().BeFalse();
+            battle.ContainsPlayer(new Player((int) 1, (double) 50d, (int) 499)).Should().BeFalse();
+            battle.ContainsPlayer(new Player((int) 2, (double) 50d, (int) 499)).Should().BeFalse();
             returnQueueItems.Contains(queueItem01).Should().BeTrue();
             returnQueueItems.Contains(queueItem02).Should().BeTrue();
         }
 
         private static QueueItem CreateQueueItem()
         {
-            return new QueueItem(new Player(1), new Tank(1, null));
+            return new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) null, (string) "Heavy"));
         }
     }
 }

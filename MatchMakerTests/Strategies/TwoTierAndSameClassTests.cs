@@ -16,16 +16,16 @@ namespace MatchMakerTests.Strategies
             //Arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(3), new Tank(4, "Tank Destroyer"));
+            QueueItem queueItem01 = new QueueItem(new Player((int) 3, (double) 50d, (int) 499), new Tank((int) 4, (string) "Tank Destroyer", (string) "Heavy"));
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(12), new Tank(4, "Light"));
+            QueueItem queueItem02 = new QueueItem(new Player((int) 12, (double) 50d, (int) 499), new Tank((int) 4, (string) "Light", (string) "Heavy"));
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(13), new Tank(3, "Heavy"));
+            QueueItem queueItem03 = new QueueItem(new Player((int) 13, (double) 50d, (int) 499), new Tank((int) 3, (string) "Heavy", (string) "Heavy"));
             queueItems.Add(queueItem03);
 
-            QueueItem queueItem04 = new QueueItem(new Player(14), new Tank(4, "Light"));
+            QueueItem queueItem04 = new QueueItem(new Player((int) 14, (double) 50d, (int) 499), new Tank((int) 4, (string) "Light", (string) "Heavy"));
             queueItems.Add(queueItem04);
 
             IStrategy sameTierSameClass = new SameTierSameClass();
@@ -46,16 +46,16 @@ namespace MatchMakerTests.Strategies
             //Arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(3), new Tank(4, "Tank Destroyer"));
+            QueueItem queueItem01 = new QueueItem(new Player((int) 3, (double) 50d, (int) 499), new Tank((int) 4, (string) "Tank Destroyer", (string) "Heavy"));
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(12), new Tank(4, "Light"));
+            QueueItem queueItem02 = new QueueItem(new Player((int) 12, (double) 50d, (int) 499), new Tank((int) 4, (string) "Light", (string) "Heavy"));
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(13), new Tank(3, "Heavy"));
+            QueueItem queueItem03 = new QueueItem(new Player((int) 13, (double) 50d, (int) 499), new Tank((int) 3, (string) "Heavy", (string) "Heavy"));
             queueItems.Add(queueItem03);
 
-            QueueItem queueItem04 = new QueueItem(new Player(14), new Tank(4, "Light"));
+            QueueItem queueItem04 = new QueueItem(new Player((int) 14, (double) 50d, (int) 499), new Tank((int) 4, (string) "Light", (string) "Heavy"));
             queueItems.Add(queueItem04);
 
             IStrategy sameTierSameClass = new SameTierSameClass();
@@ -64,8 +64,8 @@ namespace MatchMakerTests.Strategies
             IBattle battle = sameTierSameClass.PopulateBattle(queueItems, new Battle(), queueItem02);
 
             //Assert
-            battle.ContainsPlayer(new Player(12)).Should().BeTrue();
-            battle.ContainsPlayer(new Player(14)).Should().BeTrue();
+            battle.ContainsPlayer(new Player((int) 12, (double) 50d, (int) 499)).Should().BeTrue();
+            battle.ContainsPlayer(new Player((int) 14, (double) 50d, (int) 499)).Should().BeTrue();
         }
     }
 }

@@ -14,8 +14,8 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPair()
         {
             // arrange
-            QueueItem queueItem1 = new QueueItem(new Player(1), new Tank(3, "Medium"));
-            QueueItem queueItem2 = new QueueItem(new Player(2), new Tank(3, "Medium"));
+            QueueItem queueItem1 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
+            QueueItem queueItem2 = new QueueItem(new Player((int) 2, (double) 50d, (int) 499), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
 
             QueueItems queueItems = new QueueItems();
             queueItems.Add(queueItem1);

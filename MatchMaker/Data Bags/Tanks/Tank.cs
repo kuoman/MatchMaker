@@ -6,11 +6,6 @@
         private readonly string _tankType;
         private readonly string _rank;
 
-        public Tank(int tier, string tankType)
-        {
-            _tier = tier;
-            _tankType = tankType;
-        }
         public Tank(int tier, string tankType, string rank)
         {
             _tier = tier;

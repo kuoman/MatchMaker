@@ -6,17 +6,6 @@
         private readonly int _numBattles;
         private readonly int _id;
 
-        public Player(int id)
-        {
-            _id = id;
-        }
-
-        public Player(int id, double winRate)
-        {
-            _id = id;
-            _winRate = winRate;
-        }
-
         public Player(int id, double winRate, int numBattles)
         {
             _id = id;
@@ -34,17 +23,9 @@
             return _id == other._id;
         }
 
-        public bool IsSameWinRateCategory(int winRateCategory)
-        {
-            int playerWinRateCategory = GetWinRateCategory(_winRate);
-
-            return playerWinRateCategory == winRateCategory;
-            
-        }
-
         public bool IsSameWinRateCategory(Player otherPlayer)
         {
-            return otherPlayer.IsSameWinRateCategory(GetWinRateCategory(_winRate));
+            return GetWinRateCategory(otherPlayer._winRate) == GetWinRateCategory(_winRate);
         }
 
         private int GetWinRateCategory(double winRate)
@@ -61,16 +42,12 @@
 
             return 0;
         }
+
         public bool IsSameNumBattlesCategory(Player otherPlayer)
         {
-            return otherPlayer.IsSameNumBattlesCategory(GetNumBattlesCategory(_numBattles));
+            return GetNumBattlesCategory(otherPlayer._numBattles) == GetNumBattlesCategory(_numBattles);
         }
 
-        public bool IsSameNumBattlesCategory(int numBattlesCategory)
-        {
-            int myNumBattlesCategory = GetNumBattlesCategory(_numBattles);
-            return myNumBattlesCategory == numBattlesCategory;
-        }
         private int GetNumBattlesCategory(int numBattles)
         {
             if (numBattles >= 15001) return 4;
