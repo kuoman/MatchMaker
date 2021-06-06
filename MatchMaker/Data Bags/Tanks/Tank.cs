@@ -33,7 +33,7 @@
             return tank._rank == _rank;
         }
 
-        public bool IsNextTierTank(int tier)
+        private bool IsNextTierTank(int tier)
         {
             if (_tier == 10) return 9 == tier;
 

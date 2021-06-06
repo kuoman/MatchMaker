@@ -1,8 +1,8 @@
 ﻿namespace MatchMaker.Data_Bags.Tanks.Tier09
 {
-    public class _ : Tank
+    public class AMX_50_120 : Tank
     {
-        public _(): base (9, "Heavy", "Heavium")
+        public AMX_50_120(): base (9, "Heavy", "Heavium")
         {
         }
     }

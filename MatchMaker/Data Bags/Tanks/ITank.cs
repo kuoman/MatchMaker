@@ -6,6 +6,5 @@
         bool IsSameTankTier(Tank tank);
         bool IsSameTankRank(Tank tank);
         bool IsNextTierTank(Tank tank);
-        bool IsNextTierTank(int tank);
     }
 }

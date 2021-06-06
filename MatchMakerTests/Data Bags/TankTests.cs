@@ -116,7 +116,7 @@ namespace MatchMakerTests.Data_Bags
         {
             ITank tier1 = new PzKpfwIi();
 
-            tier1.IsNextTierTank(2).Should().BeTrue();
+            tier1.IsNextTierTank(new M3Stewart()).Should().BeTrue();
         }
 
         [TestMethod]
@@ -124,7 +124,7 @@ namespace MatchMakerTests.Data_Bags
         {
             ITank tier9 = new E75();
 
-            tier9.IsNextTierTank(10).Should().BeTrue();
+            tier9.IsNextTierTank(new Maus()).Should().BeTrue();
         }
 
         [TestMethod]
@@ -132,7 +132,7 @@ namespace MatchMakerTests.Data_Bags
         {
             ITank tier10 = new E100();
 
-            tier10.IsNextTierTank(9).Should().BeTrue();
+            tier10.IsNextTierTank(new T54()).Should().BeTrue();
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace MatchMakerTests.Data_Bags
         {
             ITank tier9 = new E75();
 
-            tier9.IsNextTierTank(9).Should().BeFalse();
+            tier9.IsNextTierTank(new LeopardPta()).Should().BeFalse();
         }
 
         [TestMethod]
