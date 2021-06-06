@@ -16,7 +16,6 @@ namespace MatchMakerTests
         {            
             QueueItems queueItems = new QueueItems();
             
-
             QueueItem playerA1 = new QueueItem(new Player(1, 50), new E100());
             queueItems.Add(playerA1);
             QueueItem playerB1 = new QueueItem(new Player(11, 50), new E100());
@@ -175,7 +174,6 @@ namespace MatchMakerTests
             QueueItem queueItemB7 = new QueueItem(playerB7, new E100());
             queueItems.Add(queueItemB7);
 
-
             Player playerB8 = new Player(18, 50);
             QueueItem queueItemB3PlatoonMate = new QueueItem(playerB8, new E100());
             queueItemB3.AddPlatoonMate(queueItemB3PlatoonMate);
@@ -184,9 +182,7 @@ namespace MatchMakerTests
             QueueItem queueItemA1PlatoonMate = new QueueItem(playerA8, new E100());
             queueItemA1.AddPlatoonMate(queueItemA1PlatoonMate);
 
-
             // need 2 platoons Team A gets 1 platoon Team B gets another platoon
-            // 
 
             List<QueueItem> items = new List<QueueItem> {queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7 };
 
@@ -195,7 +191,6 @@ namespace MatchMakerTests
             // get oldest queueItem (we don't have sort by date yet)
 
             QueueItem queueItemOldest = queueItemA1;
-
 
             if (queueItemOldest.IsInPlatoon())
             {
@@ -208,18 +203,12 @@ namespace MatchMakerTests
                 IMatchPair platoonMateMatchPair = queueItemOldest.GetMatchForPlatoonMateTeamA(queueItems.ByTier(queueItemA1));
                 platoonMateMatchPair.AddMatchToBattle(battle);
 
-                // find another platoon (same tier)
-                QueueItems byInPlatoon = queueItems.ByTier(queueItemA1).ByInPlatoon();
-
-                // todo: figure out how to get matched platoon
-
                 IMatchPair teamB_PrimaryPlayer_match = queueItems.ByTier(queueItemB3).GetMatchPairTeamB(queueItems.ByTier(queueItemB3), queueItemB3);
                 teamB_PrimaryPlayer_match.AddMatchToBattle(battle);
 
                 IMatchPair teamB_SecondaryPlayer_match = queueItemB3.GetMatchForPlatoonMateTeamB(queueItems.ByTier(queueItemB3));
                 teamB_SecondaryPlayer_match.AddMatchToBattle(battle);
             }
-
 
             for (int i = 0; i < 6; i++)
             {
@@ -245,6 +234,5 @@ namespace MatchMakerTests
             battle.PlayerOnTeamB(playerB3).Should().BeTrue();
             battle.PlayerOnTeamB(playerB8).Should().BeTrue();
         }
-
     }
 }

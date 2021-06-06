@@ -37,7 +37,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            QueueItems result = queueItems.ByTier(10);
+            QueueItems result = queueItems.ByTier(new T110E5());
 
             // assert
             result.Contains(queueItem10A).Should().Be(true);
@@ -163,7 +163,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            QueueItems result = queueItems.ByTankType("Light");
+            QueueItems result = queueItems.ByTankType(new Sheridan());
 
             // assert
             result.Contains(queueItem10B).Should().Be(true);
@@ -288,7 +288,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem03C);
 
             // act
-            QueueItems result = queueItems.ByTankType("Light").ByTier(10);
+            QueueItems result = queueItems.ByTankType(new Sheridan()).ByTier(new E100());
 
             // assert
             result.Contains(queueItem10B).Should().Be(true);
@@ -473,7 +473,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem04);
 
             // act
-           QueueItems items = queueItems.ByRank("Heavy");
+           QueueItems items = queueItems.ByRank(queueItem01);
 
             // assert
             items.Contains(queueItem01).Should().BeTrue();
@@ -518,6 +518,9 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
+            Player rank4Player = new Player(4, 59);
+            QueueItem indexItem = new QueueItem(rank4Player, new E100());
+
             Player player01 = new Player(1, 55);
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
@@ -533,7 +536,7 @@ namespace MatchMakerTests
             queueItems.Add(queueItem04);
 
             // act
-            QueueItems items = queueItems.ByWinRate(4);
+            QueueItems items = queueItems.ByWinRate(indexItem);
 
             // assert
             items.Contains(queueItem01).Should().BeTrue();

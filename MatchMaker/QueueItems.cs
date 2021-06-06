@@ -35,19 +35,8 @@ namespace MatchMaker
             return false;
         }
 
-        public QueueItems ByTier(int tier)
-        {
-            QueueItems returnItems = new QueueItems();
 
-            foreach (QueueItem item in _queueItems)
-            {
-                if (item.IsTier(tier)) returnItems.Add(item);
-            }
-
-            return returnItems;
-        }
-
-        public QueueItems ByTier(ITank tank)
+        public QueueItems ByTier(Tank tank)
         {
             QueueItems returnItems = new QueueItems();
 
@@ -72,19 +61,7 @@ namespace MatchMaker
             return returnItems; 
         }
 
-        public QueueItems ByTankType(string tankType)
-        {
-            QueueItems returnItems = new QueueItems();
-
-            foreach (QueueItem item in _queueItems)
-            {
-                if (item.IsTankType(tankType)) returnItems.Add(item);
-            }
-
-            return returnItems;
-        }
-
-        public QueueItems ByTankType(ITank tank)
+        public QueueItems ByTankType(Tank tank)
         {
             QueueItems returnItems = new QueueItems();
 
@@ -109,18 +86,6 @@ namespace MatchMaker
             return returnItems;
         }
 
-        public QueueItems ByRank(string rank)
-        {
-            QueueItems returnItems = new QueueItems();
-
-            foreach (QueueItem item in _queueItems)
-            {
-                if (item.IsRank(rank)) returnItems.Add(item);
-            }
-
-            return returnItems;
-        }
-
         //public QueueItems ByRank(QueueItem queueItem) => new QueueItems(_queueItems.FindAll(x => x.IsRank(queueItem)));
         public QueueItems ByRank(QueueItem queueItem)
         {
@@ -129,18 +94,6 @@ namespace MatchMaker
             foreach (QueueItem item in _queueItems)
             {
                 if (item.IsRank(queueItem)) returnItems.Add(item);
-            }
-
-            return returnItems;
-        }
-
-        public QueueItems ByWinRate(int winRateCategory)
-        {
-            QueueItems returnItems = new QueueItems();
-
-            foreach (QueueItem item in _queueItems)
-            {
-                if (item.IsSameWinRateCategory(winRateCategory)) returnItems.Add(item);
             }
 
             return returnItems;

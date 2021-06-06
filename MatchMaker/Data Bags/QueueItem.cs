@@ -5,10 +5,10 @@ namespace MatchMaker.Data_Bags
     public class QueueItem
     {
         private readonly Player _player;
-        private readonly ITank _tank;
+        private readonly Tank _tank;
         private QueueItem _platoonMate;
 
-        public QueueItem(Player player, ITank tank)
+        public QueueItem(Player player, Tank tank)
         {
             _player = player;
             _tank = tank;
@@ -19,12 +19,7 @@ namespace MatchMaker.Data_Bags
             return _player.Equals(player);
         }
 
-        public bool IsTier(int tier)
-        {
-            return _tank.IsTier(tier);
-        }
-
-        public bool IsTier(ITank tank)
+        public bool IsTier(Tank tank)
         {
             return _tank.IsSameTankTier(tank);
         }
@@ -34,26 +29,17 @@ namespace MatchMaker.Data_Bags
             return queueItem.IsTier(_tank);
         }
 
-        public bool IsTankType(string type)
-        {
-            return _tank.IsTankType(type);
-        }
-
-        public bool IsTankType(ITank tank)
+        public bool IsTankType(Tank tank)
         {
             return _tank.IsSameTankType(tank);
         }
+
         public bool IsTankType(QueueItem queueItem)
         {
             return queueItem.IsTankType(_tank);
         }
 
-        public bool IsRank(string rank)
-        {
-            return _tank.IsRanking(rank);
-        }
-
-        public bool IsRank(ITank tank)
+        public bool IsRank(Tank tank)
         {
             return _tank.IsSameTankRank(tank);
         }
@@ -63,10 +49,6 @@ namespace MatchMaker.Data_Bags
             return queueItem.IsRank(_tank);
         }
 
-        public bool IsSameWinRateCategory(int winRateCategory)
-        {
-            return _player.IsSameWinRateCategory(winRateCategory);
-        }
 
         public bool IsSameWinRateCategory(Player player)
         {
@@ -78,7 +60,7 @@ namespace MatchMaker.Data_Bags
             return queueItem.IsSameWinRateCategory(_player);
         }
 
-        public bool IsNextTierTank(ITank tank)
+        public bool IsNextTierTank(Tank tank)
         {
             return _tank.IsNextTierTank(tank);
         }
@@ -113,6 +95,7 @@ namespace MatchMaker.Data_Bags
         {
             return queueItems.GetMatchPairTeamA(queueItems, _platoonMate);
         }
+
         public IMatchPair GetMatchForPlatoonMateTeamB(QueueItems queueItems)
         {
             return queueItems.GetMatchPairTeamB(queueItems, _platoonMate);

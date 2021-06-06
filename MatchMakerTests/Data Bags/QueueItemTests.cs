@@ -37,26 +37,6 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
-        public void ShouldReturnTrueIfCorrectTier()
-        {
-            // arrange 
-            QueueItem queueItem = CreateQueueItem(5);
-
-            // act // assert
-            queueItem.IsTier(5).Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void ShouldReturnFalseIfIncorrectTier()
-        {
-            // arrange 
-            QueueItem queueItem = CreateQueueItem(5);
-
-            // act // assert
-            queueItem.IsTier(4).Should().BeFalse();
-        }
-
-        [TestMethod]
         public void ShouldReturnTrueIfCorrectTierByTank()
         {
             // arrange 
@@ -97,27 +77,6 @@ namespace MatchMakerTests.Data_Bags
 
             // act // assert
             queueItem.IsTier(secondQueueItem).Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void ShouldReturnTrueIfCorrectTankType()
-        {
-            // arrange 
-            QueueItem queueItem = CreateQueueItemOfTankType("Heavy", "Light");
-
-            // act // assert
-            queueItem.IsTankType("Heavy").Should().BeTrue();
-        }
-
-
-        [TestMethod]
-        public void ShouldReturnFalseIfIncorrectTankType()
-        {
-            // arrange 
-            QueueItem queueItem = CreateQueueItemOfTankType("Light", "Light");
-
-            // act // assert
-            queueItem.IsTankType("Heavy").Should().BeFalse();
         }
 
         [TestMethod]
@@ -165,26 +124,6 @@ namespace MatchMakerTests.Data_Bags
         }
 
         [TestMethod]
-        public void ShouldReturnTrueIfCorrectTankRank()
-        {
-            // arrange 
-            QueueItem queueItem = CreateQueueItemOfTankType("Heavy", "Heavy");
-
-            // act // assert
-            queueItem.IsRank("Heavy").Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void ShouldReturnFalseIfIncorrectTankRank()
-        {
-            // arrange 
-            QueueItem queueItem = CreateQueueItemOfTankType("Heavy", "Heavy");
-
-            // act // assert
-            queueItem.IsRank("Light").Should().BeFalse();
-        }
-
-        [TestMethod]
         public void ShouldReturnTrueIfCorrectTankRankByTank()
         {
             // arrange 
@@ -225,23 +164,6 @@ namespace MatchMakerTests.Data_Bags
 
             // act // assert
             queueItem.IsRank(queueItemOther).Should().BeFalse();
-        }
-
-        [TestMethod]
-        public void ShouldReturnTrueForSameWinRate()
-        {
-            QueueItem queueItem = new QueueItem(new Player(1, 50), new E100());
-
-
-            queueItem.IsSameWinRateCategory(3).Should().BeTrue();
-        }
-
-        [TestMethod]
-        public void ShouldReturnFalseForSameWinRate()
-        {
-            QueueItem queueItem = new QueueItem(new Player(1, 50), new E100());
-
-            queueItem.IsSameWinRateCategory(1).Should().BeFalse();
         }
 
         [TestMethod]

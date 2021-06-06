@@ -18,32 +18,19 @@
             _rank = rank;
         }
 
-        public bool IsTier(int tier)
+        public bool IsSameTankTier(Tank tank)
         {
-            return tier == _tier;
-        }
-        public bool IsSameTankTier(ITank tank)
-        {
-            return tank.IsTier(_tier);
+            return tank._tier == _tier;
         }
 
-        public bool IsTankType(string tankType)
+        public bool IsSameTankType(Tank tank)
         {
-            return _tankType == tankType;
-        }
-        public bool IsSameTankType(ITank tank)
-        {
-            return tank.IsTankType(_tankType);
+            return tank._tankType == _tankType;
         }
 
-        public bool IsRanking(string tankRanking)
+        public bool IsSameTankRank(Tank tank)
         {
-            return _rank == tankRanking;
-        }
-
-        public bool IsSameTankRank(ITank tank)
-        {
-            return tank.IsRanking(_rank);
+            return tank._rank == _rank;
         }
 
         public bool IsNextTierTank(int tier)
@@ -55,7 +42,7 @@
             return _tier == tier - 1;
         }
 
-        public bool IsNextTierTank(ITank tank)
+        public bool IsNextTierTank(Tank tank)
         {
             return tank.IsNextTierTank(_tier);
         }
