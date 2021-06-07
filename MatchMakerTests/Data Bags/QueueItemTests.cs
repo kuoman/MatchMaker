@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
-using MatchMaker.Data_Bags.Tanks;
 using MatchMaker.Data_Bags.Tanks.Tier01;
 using MatchMaker.Data_Bags.Tanks.Tier02;
 using MatchMaker.Data_Bags.Tanks.Tier09;
@@ -17,7 +16,7 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldFindPlayer()
         {
             // arrange
-            Player player = new Player(1, 50d, 499);
+            Player player = ObjectBuider.CreatePlayer(1, 50d, 499);
 
             QueueItem queueItem = CreateQueueItem(1);
 
@@ -32,7 +31,7 @@ namespace MatchMakerTests.Data_Bags
             QueueItem queueItem = CreateQueueItem(1);
 
             // act // assert
-            queueItem.HasPlayer(new Player(2, 50d, numBattles: 499)).Should().BeFalse();
+            queueItem.HasPlayer(ObjectBuider.CreatePlayer(2, 50d, numBattles: 499)).Should().BeFalse();
         }
 
         [TestMethod]
@@ -168,8 +167,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueForSameWinRateByPlayer()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 499), new E100());
-            Player player = new Player(2, 53, 499);
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 499), new E100());
+            Player player = ObjectBuider.CreatePlayer(2, 53, 499);
 
             queueItem.IsSameWinRateCategory(player).Should().BeTrue();
         }
@@ -177,8 +176,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnFalseForSameWinRateByPlayer()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 499), new E100());
-            Player player = new Player(2, 38, 499);
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 499), new E100());
+            Player player = ObjectBuider.CreatePlayer(2, 38, 499);
 
             queueItem.IsSameWinRateCategory(player).Should().BeFalse();
         }
@@ -186,8 +185,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueForSameWinRateByQueueItem()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 499), new E100());
-            QueueItem queueItemOther = new QueueItem(new Player(2, 53, 499), new E100());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 499), new E100());
+            QueueItem queueItemOther = new QueueItem(ObjectBuider.CreatePlayer(2, 53, 499), new E100());
 
             queueItem.IsSameWinRateCategory(queueItemOther).Should().BeTrue();
         }
@@ -195,8 +194,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnFalseForNotSameWinRateByQueueItem()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 499), new E100());
-            QueueItem queueItemOther = new QueueItem(new Player(2, 38, 499), new E100());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 499), new E100());
+            QueueItem queueItemOther = new QueueItem(ObjectBuider.CreatePlayer(2, 38, 499), new E100());
 
             queueItem.IsSameWinRateCategory(queueItemOther).Should().BeFalse();
         }
@@ -204,8 +203,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueForSameNumBattlesCategoryByPlayer()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 3000), new E100());
-            Player player = new Player(2, 53, 4000);
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 3000), new E100());
+            Player player = ObjectBuider.CreatePlayer(2, 53, 4000);
 
             queueItem.IsSameNumBattlesCategory(player).Should().BeTrue();
         }
@@ -214,8 +213,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnFalseForSameNumBattlesCategoryByPlayer()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 15000), new E100());
-            Player player = new Player(2, 38, 1000);
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 15000), new E100());
+            Player player = ObjectBuider.CreatePlayer(2, 38, 1000);
 
             queueItem.IsSameNumBattlesCategory(player).Should().BeFalse();
         }
@@ -223,8 +222,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueForSameNumBattlesCategoryByQueueItem()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 800), new E100());
-            QueueItem queueItemOther = new QueueItem(new Player(2, 53, 1500), new E100());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 800), new E100());
+            QueueItem queueItemOther = new QueueItem(ObjectBuider.CreatePlayer(2, 53, 1500), new E100());
 
             queueItem.IsSameNumBattlesCategory(queueItemOther).Should().BeTrue();
         }
@@ -232,8 +231,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnFalseForNotSameNumBattlesByQueueItem()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 50, 1788), new E100());
-            QueueItem queueItemOther = new QueueItem(new Player(2, 38, 9000), new E100());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50, 1788), new E100());
+            QueueItem queueItemOther = new QueueItem(ObjectBuider.CreatePlayer(2, 38, 9000), new E100());
 
             queueItem.IsSameNumBattlesCategory(queueItemOther).Should().BeFalse();
         }
@@ -241,7 +240,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldValidateNextTierTankMin()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 1, 499), new PzKpfwIi());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new PzKpfwIi());
 
             queueItem.IsNextTierTank(new M3Stewart()).Should().BeTrue();
         }
@@ -249,7 +248,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldInValidateNextTierTank()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 1, 499), new M3Stewart());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new M3Stewart());
 
             queueItem.IsNextTierTank(new M3Stewart()).Should().BeFalse();
         }
@@ -257,7 +256,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldValidateNextTierTankMax()
         {
-            QueueItem queueItem = new QueueItem(new Player(1, 1, 499), new E75());
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new E75());
 
             queueItem.IsNextTierTank(new E100()).Should().BeTrue();
         }
@@ -265,8 +264,8 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueIfInPlatoon()
         {
-            QueueItem queueItem1 = new QueueItem(new Player(1, 1, 499), new E75());
-            QueueItem queueItem2 = new QueueItem(new Player(2, 1, 499), new E75());
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new E75());
+            QueueItem queueItem2 = new QueueItem(ObjectBuider.CreatePlayer(2, 1, 499), new E75());
             
             queueItem1.AddPlatoonMate(queueItem2);
 
@@ -277,7 +276,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod] 
         public void ShouldReturnFalseIfNotInPlatoon()
         {
-            QueueItem queueItem1 = new QueueItem(new Player(1, 1, 499), new E75());
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new E75());
 
             queueItem1.IsInPlatoon().Should().BeFalse();
         }
@@ -286,7 +285,7 @@ namespace MatchMakerTests.Data_Bags
         [TestMethod]
         public void ShouldReturnTrueIfNotInPlatoon()
         {
-            QueueItem queueItem1 = new QueueItem(new Player(1, 1, 499), new E75());
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new E75());
 
             queueItem1.IsNotInPlatoon().Should().BeTrue();
         }
@@ -296,14 +295,14 @@ namespace MatchMakerTests.Data_Bags
         {
             // arrange
 
-            QueueItem queueItem1 = new QueueItem(new Player(1, 1, 499), new E75());
-            QueueItem queueItem12 = new QueueItem(new Player(12, 1, 499), new E75());
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new E75());
+            QueueItem queueItem12 = new QueueItem(ObjectBuider.CreatePlayer(12, 1, 499), new E75());
 
             queueItem12.AddPlatoonMate(queueItem1);
 
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItemB = new QueueItem(new Player(2, 1, 499), new E75());
+            QueueItem queueItemB = new QueueItem(ObjectBuider.CreatePlayer(2, 1, 499), new E75());
             queueItems.Add(queueItemB);
             // act
 
@@ -323,8 +322,8 @@ namespace MatchMakerTests.Data_Bags
         public void ShouldReturnFalseIfInPlatoon()
         {
             // arrange
-            QueueItem queueItem1 = new QueueItem(new Player(1, 1, 499), new E75());
-            QueueItem queueItem2 = new QueueItem(new Player(2, 1, 499), new E75());
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 1, 499), new E75());
+            QueueItem queueItem2 = new QueueItem(ObjectBuider.CreatePlayer(2, 1, 499), new E75());
 
             // act
             queueItem1.AddPlatoonMate(queueItem2);
@@ -336,12 +335,12 @@ namespace MatchMakerTests.Data_Bags
 
         private static QueueItem CreateQueueItem(int tier)
         {
-            return new QueueItem(new Player(1, 50d, 499), new Tank(tier, null, "Heavy"));
+            return new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(tier, null, "Heavy"));
         }
 
         private static QueueItem CreateQueueItemOfTankType(string tankType, string rank)
         {
-            return new QueueItem(new Player(1, 50d, 499), new Tank(1, tankType, rank));
+            return new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, tankType, rank));
         }
     }
 }

@@ -370,7 +370,7 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
             queueItems.Add(queueItem);
 
             // act
@@ -387,7 +387,7 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
 
             // act
             IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01);
@@ -402,9 +402,9 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
 
-            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
             queueItems.Add(queueItem02);
 
             // act
@@ -421,7 +421,7 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
             queueItems.Add(queueItem01);
 
             // act
@@ -438,10 +438,10 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Light", "Heavy"));
             queueItems.Add(queueItem02);
 
             // act
@@ -460,16 +460,16 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new E100());
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Maus());
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new Maus());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(1, 50d, 499), new Maus());
+            QueueItem queueItem03 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new Maus());
             queueItems.Add(queueItem03);
 
-            QueueItem queueItem04 = new QueueItem(new Player(1, 50d, 499), new T110E5());
+            QueueItem queueItem04 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new T110E5());
             queueItems.Add(queueItem04);
 
             // act
@@ -488,19 +488,19 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new E100());
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Maus());
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new Maus());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(1, 50d, 499), new Maus());
+            QueueItem queueItem03 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new Maus());
             queueItems.Add(queueItem03);
 
-            QueueItem queueItem04 = new QueueItem(new Player(1, 50d, 499), new T110E5());
+            QueueItem queueItem04 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new T110E5());
             queueItems.Add(queueItem04);
 
-            QueueItem testSimilar = new QueueItem(new Player(1, 50d, 499), new Maus());
+            QueueItem testSimilar = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new Maus());
 
             // act
             QueueItems items = queueItems.ByRank(testSimilar);
@@ -518,20 +518,20 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            Player rank4Player = new Player(4, 59, 499);
+            Player rank4Player = ObjectBuider.CreatePlayer(4, 59, 499);
             QueueItem indexItem = new QueueItem(rank4Player, new E100());
 
-            Player player01 = new Player(1, 55, 499);
+            Player player01 = ObjectBuider.CreatePlayer(1, 55, 499);
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(2, 47, 499), new E100());
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(2, 47, 499), new E100());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(3, 49, 499), new E100());
+            QueueItem queueItem03 = new QueueItem(ObjectBuider.CreatePlayer(3, 49, 499), new E100());
             queueItems.Add(queueItem03);
 
-            Player player02 = new Player(4, 56, 499);
+            Player player02 = ObjectBuider.CreatePlayer(4, 56, 499);
             QueueItem queueItem04 = new QueueItem(player02, new E100());
             queueItems.Add(queueItem04);
 
@@ -551,21 +551,21 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            Player player01 = new Player(1, 55, 499);
+            Player player01 = ObjectBuider.CreatePlayer(1, 55, 499);
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(2, 47, 499), new E100());
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(2, 47, 499), new E100());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(3, 49, 499), new E100());
+            QueueItem queueItem03 = new QueueItem(ObjectBuider.CreatePlayer(3, 49, 499), new E100());
             queueItems.Add(queueItem03);
 
-            Player player02 = new Player(4, 56, 499);
+            Player player02 = ObjectBuider.CreatePlayer(4, 56, 499);
             QueueItem queueItem04 = new QueueItem(player02, new E100());
             queueItems.Add(queueItem04);
 
-            Player playerX = new Player(1, 55, 499);
+            Player playerX = ObjectBuider.CreatePlayer(1, 55, 499);
             QueueItem queueItemX = new QueueItem(playerX, new E100());
 
             // act
@@ -584,21 +584,21 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            Player player01 = new Player(1, 47, 9000);
+            Player player01 = ObjectBuider.CreatePlayer(1, 47, 9000);
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(2, 47, 17890), new E100());
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(2, 47, 17890), new E100());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player(3, 49, 110000), new E100());
+            QueueItem queueItem03 = new QueueItem(ObjectBuider.CreatePlayer(3, 49, 110000), new E100());
             queueItems.Add(queueItem03);
 
-            Player player02 = new Player(4, 47, 8000);
+            Player player02 = ObjectBuider.CreatePlayer(4, 47, 8000);
             QueueItem queueItem04 = new QueueItem(player02, new E100());
             queueItems.Add(queueItem04);
 
-            Player playerX = new Player(1, 47, 7800);
+            Player playerX = ObjectBuider.CreatePlayer(1, 47, 7800);
             QueueItem queueItemX = new QueueItem(playerX, new E100());
 
             // act
@@ -671,7 +671,7 @@ namespace MatchMakerTests
 
         private QueueItem CreateQueueItem(int player, int tier, string tankType)
         {
-            return new QueueItem(new Player(player, 50d, 499), new Tank(tier, tankType, "Heavy"));
+            return new QueueItem(ObjectBuider.CreatePlayer(player, 50d, 499), ObjectBuider.CreateTank(tier, tankType, "Heavy"));
         }
 
         private void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, string tankType, QueueItems queueItems)

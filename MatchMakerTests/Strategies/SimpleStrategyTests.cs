@@ -1,7 +1,6 @@
 using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
-using MatchMaker.Data_Bags.Tanks;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,8 +13,8 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPair()
         {
             // arrange
-            QueueItem queueItem1 = new QueueItem(new Player(1, 50d, 499), new Tank(3, "Medium", "Heavy"));
-            QueueItem queueItem2 = new QueueItem(new Player(2, 50d, 499), new Tank(3, "Medium", "Heavy"));
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(3, "Medium", "Heavy"));
+            QueueItem queueItem2 = new QueueItem(ObjectBuider.CreatePlayer(2, 50d, 499), ObjectBuider.CreateTank(3, "Medium", "Heavy"));
 
             QueueItems queueItems = new QueueItems();
             queueItems.Add(queueItem1);

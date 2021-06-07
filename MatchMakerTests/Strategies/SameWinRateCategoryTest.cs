@@ -1,7 +1,6 @@
 using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
-using MatchMaker.Data_Bags.Tanks;
 using MatchMaker.Strategies;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,12 +13,12 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPairByQueueItem()
         {
             // arrange
-            Player player = new Player(1, 51, 499);
-            QueueItem queueItem1 = new QueueItem(player, new Tank(6, "Medium", "Heavy"));
-            QueueItem queueItem2 = new QueueItem(new Player(2, 53, 499), new Tank(3, "Medium", "Heavy"));
+            Player player = ObjectBuider.CreatePlayer(1, 51, 499);
+            QueueItem queueItem1 = new QueueItem(player, ObjectBuider.CreateTank(6, "Medium", "Heavy"));
+            QueueItem queueItem2 = new QueueItem(ObjectBuider.CreatePlayer(2, 53, 499), ObjectBuider.CreateTank(3, "Medium", "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player(5, 40, 499), new Tank(4, "Heavy", "Heavy")));
+            queueItems.Add(new QueueItem(ObjectBuider.CreatePlayer(5, 40, 499), ObjectBuider.CreateTank(4, "Heavy", "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 
@@ -35,12 +34,12 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPairWithoutPlayer()
         {
             // arrange
-            Player player = new Player(1, 51, 499);
-            QueueItem queueItem1 = new QueueItem(player, new Tank(6, "Medium", "Heavy"));
-            QueueItem queueItem2 = new QueueItem(new Player(2, 53, 499), new Tank(3, "Medium", "Heavy"));
+            Player player = ObjectBuider.CreatePlayer(1, 51, 499);
+            QueueItem queueItem1 = new QueueItem(player, ObjectBuider.CreateTank(6, "Medium", "Heavy"));
+            QueueItem queueItem2 = new QueueItem(ObjectBuider.CreatePlayer(2, 53, 499), ObjectBuider.CreateTank(3, "Medium", "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player(5, 40, 499), new Tank(4, "Heavy", "Heavy")));
+            queueItems.Add(new QueueItem(ObjectBuider.CreatePlayer(5, 40, 499), ObjectBuider.CreateTank(4, "Heavy", "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 

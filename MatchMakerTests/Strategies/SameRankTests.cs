@@ -13,14 +13,14 @@ namespace MatchMakerTests.Strategies
         [TestMethod]
         public void ShouldCreateMatchPairSameRank()
         {
-            QueueItem queueItem1 = new QueueItem(new Player(1, 50d, 499), new Maus());
-            QueueItem queueItem2 = new QueueItem(new Player(2, 50d, 499), new E100());
+            QueueItem queueItem1 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), new Maus());
+            QueueItem queueItem2 = new QueueItem(ObjectBuider.CreatePlayer(2, 50d, 499), new E100());
 
-            QueueItem anchorItem = new QueueItem(new Player(2, 50d, 499), new E100());
+            QueueItem anchorItem = new QueueItem(ObjectBuider.CreatePlayer(2, 50d, 499), new E100());
 
             QueueItems queueItems = new QueueItems();
             queueItems.Add(queueItem1);
-            queueItems.Add(new QueueItem(new Player(5, 50d, 499), new T110E5()));
+            queueItems.Add(new QueueItem(ObjectBuider.CreatePlayer(5, 50d, 499), new T110E5()));
             queueItems.Add(queueItem2);
 
             // act 

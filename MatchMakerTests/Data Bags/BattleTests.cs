@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using MatchMaker;
 using MatchMaker.Data_Bags;
-using MatchMaker.Data_Bags.Tanks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MatchMakerTests.Data_Bags
@@ -72,10 +71,10 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             IBattle battle = new Battle();
 
-            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Heavy", "Heavy"));
+            QueueItem queueItem01 = new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, "Heavy", "Heavy"));
             battle.AddQueueItemToTeamA(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(2, 50d, 499), new Tank(1, "Heavy", "Heavy"));
+            QueueItem queueItem02 = new QueueItem(ObjectBuider.CreatePlayer(2, 50d, 499), ObjectBuider.CreateTank(1, "Heavy", "Heavy"));
             battle.AddQueueItemToTeamB(queueItem02);
 
             QueueItems queueItems = new QueueItems();
@@ -84,15 +83,15 @@ namespace MatchMakerTests.Data_Bags
             QueueItems returnQueueItems = battle.FlushTeamsBackToQueue(queueItems);
 
             // assert
-            battle.ContainsPlayer(new Player(1, 50d, 499)).Should().BeFalse();
-            battle.ContainsPlayer(new Player(2, 50d, 499)).Should().BeFalse();
+            battle.ContainsPlayer(ObjectBuider.CreatePlayer(1, 50d, 499)).Should().BeFalse();
+            battle.ContainsPlayer(ObjectBuider.CreatePlayer(2, 50d, 499)).Should().BeFalse();
             returnQueueItems.Contains(queueItem01).Should().BeTrue();
             returnQueueItems.Contains(queueItem02).Should().BeTrue();
         }
 
         private static QueueItem CreateQueueItem()
         {
-            return new QueueItem(new Player(1, 50d, 499), new Tank(1, null, "Heavy"));
+            return new QueueItem(ObjectBuider.CreatePlayer(1, 50d, 499), ObjectBuider.CreateTank(1, null, "Heavy"));
         }
     }
 }
