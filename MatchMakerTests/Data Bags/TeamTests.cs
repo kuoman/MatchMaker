@@ -4,7 +4,6 @@ using MatchMaker.Data_Bags;
 using MatchMaker.Data_Bags.Tanks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-
 namespace MatchMakerTests.Data_Bags
 {
     [TestClass]
@@ -16,10 +15,7 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            for (int i = 0; i < 7; i++)
-            {
-                team.AddQueueItem(CreateQueueItem());
-            }
+            for (int i = 0; i < 7; i++) team.AddQueueItem(CreateQueueItem());
             // act // assert
             team.HasFullTeam().Should().BeTrue();
         }
@@ -30,10 +26,7 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            for (int i = 0; i < 6; i++)
-            {
-                team.AddQueueItem(CreateQueueItem());
-            }
+            for (int i = 0; i < 6; i++) team.AddQueueItem(CreateQueueItem());
             // act // assert
             team.HasFullTeam().Should().BeFalse();
         }
@@ -44,10 +37,7 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            for (int i = 0; i < 6; i++)
-            {
-                team.AddQueueItem(CreateQueueItem());
-            }
+            for (int i = 0; i < 6; i++) team.AddQueueItem(CreateQueueItem());
             // act // assert
             team.TeamIsFull().Should().BeFalse();
         }
@@ -58,10 +48,7 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            for (int i = 0; i < 7; i++)
-            {
-                team.AddQueueItem(CreateQueueItem());
-            }
+            for (int i = 0; i < 7; i++) team.AddQueueItem(CreateQueueItem());
             // act // assert
             team.TeamIsFull().Should().BeTrue();
         }
@@ -72,7 +59,7 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            Player player = new Player((int) 1, (double) 50d, (int) 499);
+            Player player = new Player(1, 50d, 499);
 
             team.AddQueueItem(CreateQueueItem(player));
 
@@ -86,10 +73,10 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            team.AddQueueItem(CreateQueueItem(new Player((int) 2, (double) 50d, (int) 499)));
+            team.AddQueueItem(CreateQueueItem(new Player(2, 50d, 499)));
 
             // act // assert
-            team.HasPlayer(new Player((int) 3, (double) 50d, (int) 499)).Should().BeFalse();
+            team.HasPlayer(new Player(3, 50d, 499)).Should().BeFalse();
         }
 
         [TestMethod]
@@ -98,8 +85,8 @@ namespace MatchMakerTests.Data_Bags
             // arrange
             Team team = new Team();
 
-            Player player = new Player((int) 1, (double) 50d, (int) 499);
-            QueueItem queueItem = new QueueItem(player, new Tank((int) 1, (string) "Heavy", (string) "Heavy"));
+            Player player = new Player(1, 50d, 499);
+            QueueItem queueItem = new QueueItem(player, new Tank(1, "Heavy", "Heavy"));
 
             team.AddQueueItem(queueItem);
 
@@ -115,16 +102,12 @@ namespace MatchMakerTests.Data_Bags
 
         private QueueItem CreateQueueItem()
         {
-            return CreateQueueItem(new Player((int) 1, (double) 50d, (int) 499));
+            return CreateQueueItem(new Player(1, 50d, 499));
         }
 
         private QueueItem CreateQueueItem(Player player)
         {
-            return new QueueItem(player, new Tank((int) 1, (string) null, (string) "Heavy"));
+            return new QueueItem(player, new Tank(1, null, "Heavy"));
         }
     }
-
 }
-
-
-

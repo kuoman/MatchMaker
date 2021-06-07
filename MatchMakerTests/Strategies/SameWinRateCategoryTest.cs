@@ -14,12 +14,12 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPairByQueueItem()
         {
             // arrange
-            Player player = new Player((int) 1, (double) 51, (int) 499);
-            QueueItem queueItem1 = new QueueItem(player, new Tank((int) 6, (string) "Medium", (string) "Heavy"));
-            QueueItem queueItem2 = new QueueItem(new Player((int) 2, (double) 53, (int) 499), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
+            Player player = new Player(1, 51, 499);
+            QueueItem queueItem1 = new QueueItem(player, new Tank(6, "Medium", "Heavy"));
+            QueueItem queueItem2 = new QueueItem(new Player(2, 53, 499), new Tank(3, "Medium", "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player((int) 5, (double) 40, (int) 499), new Tank((int) 4, (string) "Heavy", (string) "Heavy")));
+            queueItems.Add(new QueueItem(new Player(5, 40, 499), new Tank(4, "Heavy", "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 
@@ -35,12 +35,12 @@ namespace MatchMakerTests.Strategies
         public void ShouldCreateMatchPairWithoutPlayer()
         {
             // arrange
-            Player player = new Player((int) 1, (double) 51, (int) 499);
-            QueueItem queueItem1 = new QueueItem(player, new Tank((int) 6, (string) "Medium", (string) "Heavy"));
-            QueueItem queueItem2 = new QueueItem(new Player((int) 2, (double) 53, (int) 499), new Tank((int) 3, (string) "Medium", (string) "Heavy"));
+            Player player = new Player(1, 51, 499);
+            QueueItem queueItem1 = new QueueItem(player, new Tank(6, "Medium", "Heavy"));
+            QueueItem queueItem2 = new QueueItem(new Player(2, 53, 499), new Tank(3, "Medium", "Heavy"));
 
             QueueItems queueItems = new QueueItems();
-            queueItems.Add(new QueueItem(new Player((int) 5, (double) 40, (int) 499), new Tank((int) 4, (string) "Heavy", (string) "Heavy")));
+            queueItems.Add(new QueueItem(new Player(5, 40, 499), new Tank(4, "Heavy", "Heavy")));
             queueItems.Add(queueItem1);
             queueItems.Add(queueItem2);
 

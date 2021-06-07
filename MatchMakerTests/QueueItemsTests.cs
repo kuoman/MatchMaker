@@ -19,12 +19,12 @@ namespace MatchMakerTests
             QueueItem queueItem10A = CreateQueueItem(10, "Heavy");
             QueueItem queueItem10B = CreateQueueItem(10, "Heavy");
             QueueItem queueItem10C = CreateQueueItem(10, "Heavy");
-            QueueItem queueItem09A = CreateQueueItem(9,"Heavy");
-            QueueItem queueItem09B = CreateQueueItem(9,"Heavy");
-            QueueItem queueItem09C = CreateQueueItem(9,"Heavy");
-            QueueItem queueItem03A = CreateQueueItem(3,"Heavy");
-            QueueItem queueItem03B = CreateQueueItem(3,"Heavy");
-            QueueItem queueItem03C = CreateQueueItem(3,"Heavy");
+            QueueItem queueItem09A = CreateQueueItem(9, "Heavy");
+            QueueItem queueItem09B = CreateQueueItem(9, "Heavy");
+            QueueItem queueItem09C = CreateQueueItem(9, "Heavy");
+            QueueItem queueItem03A = CreateQueueItem(3, "Heavy");
+            QueueItem queueItem03B = CreateQueueItem(3, "Heavy");
+            QueueItem queueItem03C = CreateQueueItem(3, "Heavy");
 
             queueItems.Add(queueItem10A);
             queueItems.Add(queueItem10B);
@@ -124,16 +124,16 @@ namespace MatchMakerTests
             QueueItems result = queueItems.ByTier(testSimilar);
 
 
-             // assert
-             result.Contains(queueItem10A).Should().Be(true);
-             result.Contains(queueItem10B).Should().Be(true);
-             result.Contains(queueItem10C).Should().Be(true);
-             result.Contains(queueItem09A).Should().Be(false);
-             result.Contains(queueItem09B).Should().Be(false);
-             result.Contains(queueItem09C).Should().Be(false);
-             result.Contains(queueItem03A).Should().Be(false);
-             result.Contains(queueItem03B).Should().Be(false);
-             result.Contains(queueItem03C).Should().Be(false);
+            // assert
+            result.Contains(queueItem10A).Should().Be(true);
+            result.Contains(queueItem10B).Should().Be(true);
+            result.Contains(queueItem10C).Should().Be(true);
+            result.Contains(queueItem09A).Should().Be(false);
+            result.Contains(queueItem09B).Should().Be(false);
+            result.Contains(queueItem09C).Should().Be(false);
+            result.Contains(queueItem03A).Should().Be(false);
+            result.Contains(queueItem03B).Should().Be(false);
+            result.Contains(queueItem03C).Should().Be(false);
         }
 
         [TestMethod]
@@ -370,7 +370,7 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
             queueItems.Add(queueItem);
 
             // act
@@ -387,10 +387,10 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
 
             // act
-            IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01); 
+            IMatchPair matchPair = queueItems.GetMatchPairTeamA(queueItems, queueItem01);
 
             // assert
             matchPair.Contains(queueItem01).Should().BeFalse();
@@ -402,9 +402,9 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
 
-            QueueItem queueItem02 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
             queueItems.Add(queueItem02);
 
             // act
@@ -421,7 +421,7 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
             queueItems.Add(queueItem01);
 
             // act
@@ -438,10 +438,10 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Tank((int) 1, (string) "Light", (string) "Heavy"));
+            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Tank(1, "Light", "Heavy"));
             queueItems.Add(queueItem02);
 
             // act
@@ -460,20 +460,20 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new E100());
+            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Maus());
+            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Maus());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Maus());
+            QueueItem queueItem03 = new QueueItem(new Player(1, 50d, 499), new Maus());
             queueItems.Add(queueItem03);
 
-            QueueItem queueItem04 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new T110E5());
+            QueueItem queueItem04 = new QueueItem(new Player(1, 50d, 499), new T110E5());
             queueItems.Add(queueItem04);
 
             // act
-           QueueItems items = queueItems.ByRank(queueItem01);
+            QueueItems items = queueItems.ByRank(queueItem01);
 
             // assert
             items.Contains(queueItem01).Should().BeTrue();
@@ -488,19 +488,19 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItem01 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new E100());
+            QueueItem queueItem01 = new QueueItem(new Player(1, 50d, 499), new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Maus());
+            QueueItem queueItem02 = new QueueItem(new Player(1, 50d, 499), new Maus());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Maus());
+            QueueItem queueItem03 = new QueueItem(new Player(1, 50d, 499), new Maus());
             queueItems.Add(queueItem03);
 
-            QueueItem queueItem04 = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new T110E5());
+            QueueItem queueItem04 = new QueueItem(new Player(1, 50d, 499), new T110E5());
             queueItems.Add(queueItem04);
 
-            QueueItem testSimilar = new QueueItem(new Player((int) 1, (double) 50d, (int) 499), new Maus());
+            QueueItem testSimilar = new QueueItem(new Player(1, 50d, 499), new Maus());
 
             // act
             QueueItems items = queueItems.ByRank(testSimilar);
@@ -518,20 +518,20 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            Player rank4Player = new Player((int) 4, (double) 59, (int) 499);
+            Player rank4Player = new Player(4, 59, 499);
             QueueItem indexItem = new QueueItem(rank4Player, new E100());
 
-            Player player01 = new Player((int) 1, (double) 55, (int) 499);
+            Player player01 = new Player(1, 55, 499);
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player((int) 2, (double) 47, (int) 499), new E100());
+            QueueItem queueItem02 = new QueueItem(new Player(2, 47, 499), new E100());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player((int) 3, (double) 49, (int) 499), new E100());
+            QueueItem queueItem03 = new QueueItem(new Player(3, 49, 499), new E100());
             queueItems.Add(queueItem03);
 
-            Player player02 = new Player((int) 4, (double) 56, (int) 499);
+            Player player02 = new Player(4, 56, 499);
             QueueItem queueItem04 = new QueueItem(player02, new E100());
             queueItems.Add(queueItem04);
 
@@ -551,21 +551,21 @@ namespace MatchMakerTests
             // arrange
             QueueItems queueItems = new QueueItems();
 
-            Player player01 = new Player((int) 1, (double) 55, (int) 499);
+            Player player01 = new Player(1, 55, 499);
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player((int) 2, (double) 47, (int) 499), new E100());
+            QueueItem queueItem02 = new QueueItem(new Player(2, 47, 499), new E100());
             queueItems.Add(queueItem02);
 
-            QueueItem queueItem03 = new QueueItem(new Player((int) 3, (double) 49, (int) 499), new E100());
+            QueueItem queueItem03 = new QueueItem(new Player(3, 49, 499), new E100());
             queueItems.Add(queueItem03);
 
-            Player player02 = new Player((int) 4, (double) 56, (int) 499);
+            Player player02 = new Player(4, 56, 499);
             QueueItem queueItem04 = new QueueItem(player02, new E100());
             queueItems.Add(queueItem04);
 
-            Player playerX = new Player((int) 1, (double) 55, (int) 499);
+            Player playerX = new Player(1, 55, 499);
             QueueItem queueItemX = new QueueItem(playerX, new E100());
 
             // act
@@ -588,7 +588,7 @@ namespace MatchMakerTests
             QueueItem queueItem01 = new QueueItem(player01, new E100());
             queueItems.Add(queueItem01);
 
-            QueueItem queueItem02 = new QueueItem(new Player(2, 47,17890), new E100());
+            QueueItem queueItem02 = new QueueItem(new Player(2, 47, 17890), new E100());
             queueItems.Add(queueItem02);
 
             QueueItem queueItem03 = new QueueItem(new Player(3, 49, 110000), new E100());
@@ -666,20 +666,17 @@ namespace MatchMakerTests
 
         private QueueItem CreateQueueItem(int tier, string tankType)
         {
-            return CreateQueueItem(1,tier, tankType);
+            return CreateQueueItem(1, tier, tankType);
         }
 
         private QueueItem CreateQueueItem(int player, int tier, string tankType)
         {
-            return new QueueItem(new Player(player, (double) 50d, (int) 499), new Tank(tier, tankType, (string) "Heavy"));
+            return new QueueItem(new Player(player, 50d, 499), new Tank(tier, tankType, "Heavy"));
         }
 
         private void AddGivenNumberOfTanksOfTier(int numberToAdd, int tier, string tankType, QueueItems queueItems)
         {
-            for (int i = 0; i < numberToAdd; i++)
-            {
-                queueItems.Add(CreateQueueItem(tier, tankType));
-            }
+            for (int i = 0; i < numberToAdd; i++) queueItems.Add(CreateQueueItem(tier, tankType));
         }
     }
 }

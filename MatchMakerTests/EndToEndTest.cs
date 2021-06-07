@@ -13,36 +13,36 @@ namespace MatchMakerTests
     {
         [TestMethod]
         public void ShouldPopulateBattle()
-        {            
+        {
             QueueItems queueItems = new QueueItems();
-            
-            QueueItem playerA1 = new QueueItem(new Player((int) 1, (double) 50, (int) 499), new E100());
+
+            QueueItem playerA1 = new QueueItem(new Player(1, 50, 499), new E100());
             queueItems.Add(playerA1);
-            QueueItem playerB1 = new QueueItem(new Player((int) 11, (double) 50, (int) 499), new E100());
+            QueueItem playerB1 = new QueueItem(new Player(11, 50, 499), new E100());
             queueItems.Add(playerB1);
-            QueueItem playerA2 = new QueueItem(new Player((int) 2, (double) 50, (int) 499), new E100());
+            QueueItem playerA2 = new QueueItem(new Player(2, 50, 499), new E100());
             queueItems.Add(playerA2);
-            QueueItem playerB2 = new QueueItem(new Player((int) 12, (double) 50, (int) 499), new E100());
+            QueueItem playerB2 = new QueueItem(new Player(12, 50, 499), new E100());
             queueItems.Add(playerB2);
-            QueueItem playerA3 = new QueueItem(new Player((int) 3, (double) 50, (int) 499), new E100());
+            QueueItem playerA3 = new QueueItem(new Player(3, 50, 499), new E100());
             queueItems.Add(playerA3);
-            QueueItem playerB3 = new QueueItem(new Player((int) 13, (double) 50, (int) 499), new E100());
+            QueueItem playerB3 = new QueueItem(new Player(13, 50, 499), new E100());
             queueItems.Add(playerB3);
-            QueueItem playerA4 = new QueueItem(new Player((int) 4, (double) 50, (int) 499), new E100());
+            QueueItem playerA4 = new QueueItem(new Player(4, 50, 499), new E100());
             queueItems.Add(playerA4);
-            QueueItem playerB4 = new QueueItem(new Player((int) 14, (double) 50, (int) 499), new E100());
+            QueueItem playerB4 = new QueueItem(new Player(14, 50, 499), new E100());
             queueItems.Add(playerB4);
-            QueueItem playerA5 = new QueueItem(new Player((int) 5, (double) 50, (int) 499), new E100());
+            QueueItem playerA5 = new QueueItem(new Player(5, 50, 499), new E100());
             queueItems.Add(playerA5);
-            QueueItem playerB5 = new QueueItem(new Player((int) 15, (double) 50, (int) 499), new E100());
+            QueueItem playerB5 = new QueueItem(new Player(15, 50, 499), new E100());
             queueItems.Add(playerB5);
-            QueueItem playerA6 = new QueueItem(new Player((int) 6, (double) 50, (int) 499), new E100());
+            QueueItem playerA6 = new QueueItem(new Player(6, 50, 499), new E100());
             queueItems.Add(playerA6);
-            QueueItem playerB6 = new QueueItem(new Player((int) 16, (double) 50, (int) 499), new E100());
+            QueueItem playerB6 = new QueueItem(new Player(16, 50, 499), new E100());
             queueItems.Add(playerB6);
-            QueueItem playerA7 = new QueueItem(new Player((int) 7, (double) 50, (int) 499), new E100());
+            QueueItem playerA7 = new QueueItem(new Player(7, 50, 499), new E100());
             queueItems.Add(playerA7);
-            Player playerB7 = new Player((int) 17, (double) 50, (int) 499);
+            Player playerB7 = new Player(17, 50, 499);
             QueueItem queueItemB7 = new QueueItem(playerB7, new E100());
             queueItems.Add(queueItemB7);
 
@@ -65,40 +65,40 @@ namespace MatchMakerTests
         {
             QueueItems queueItems = new QueueItems();
 
-            QueueItem queueItemA1 = new QueueItem(new Player((int) 1, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA1 = new QueueItem(new Player(1, 50, 499), new E100());
             queueItems.Add(queueItemA1);
-            Player playerA1B = new Player((int) 8, (double) 50, (int) 499);
+            Player playerA1B = new Player(8, 50, 499);
             QueueItem queueItemA1B = new QueueItem(playerA1B, new Tortoise());
             queueItems.Add(queueItemA1B);
-            QueueItem queueItemB1 = new QueueItem(new Player((int) 11, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB1 = new QueueItem(new Player(11, 50, 499), new E100());
             queueItems.Add(queueItemB1);
-            QueueItem queueItemA2 = new QueueItem(new Player((int) 2, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA2 = new QueueItem(new Player(2, 50, 499), new E100());
             queueItems.Add(queueItemA2);
-            QueueItem queueItemB2 = new QueueItem(new Player((int) 12, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB2 = new QueueItem(new Player(12, 50, 499), new E100());
             queueItems.Add(queueItemB2);
-            QueueItem queueItemA3 = new QueueItem(new Player((int) 3, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA3 = new QueueItem(new Player(3, 50, 499), new E100());
             queueItems.Add(queueItemA3);
-            QueueItem queueItemB3 = new QueueItem(new Player((int) 13, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB3 = new QueueItem(new Player(13, 50, 499), new E100());
             queueItems.Add(queueItemB3);
-            QueueItem queueItemA4 = new QueueItem(new Player((int) 4, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA4 = new QueueItem(new Player(4, 50, 499), new E100());
             queueItems.Add(queueItemA4);
-            QueueItem queueItemB4 = new QueueItem(new Player((int) 14, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB4 = new QueueItem(new Player(14, 50, 499), new E100());
             queueItems.Add(queueItemB4);
-            QueueItem queueItemA5 = new QueueItem(new Player((int) 5, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA5 = new QueueItem(new Player(5, 50, 499), new E100());
             queueItems.Add(queueItemA5);
-            QueueItem queueItemB5 = new QueueItem(new Player((int) 15, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB5 = new QueueItem(new Player(15, 50, 499), new E100());
             queueItems.Add(queueItemB5);
-            QueueItem queueItemA6 = new QueueItem(new Player((int) 6, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA6 = new QueueItem(new Player(6, 50, 499), new E100());
             queueItems.Add(queueItemA6);
-            QueueItem queueItemB6 = new QueueItem(new Player((int) 16, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB6 = new QueueItem(new Player(16, 50, 499), new E100());
             queueItems.Add(queueItemB6);
-            QueueItem queueItemA7 = new QueueItem(new Player((int) 7, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA7 = new QueueItem(new Player(7, 50, 499), new E100());
             queueItems.Add(queueItemA7);
-            Player playerB7 = new Player((int) 17, (double) 50, (int) 499);
+            Player playerB7 = new Player(17, 50, 499);
             QueueItem queueItemB7 = new QueueItem(playerB7, new E100());
             queueItems.Add(queueItemB7);
 
-            List<QueueItem> items = new List<QueueItem> { queueItemA1, queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7 };
+            List<QueueItem> items = new List<QueueItem> {queueItemA1, queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7};
 
             QueueItems sortedQueue = queueItems.ByTier(queueItemA1);
 
@@ -132,59 +132,59 @@ namespace MatchMakerTests
         // how to get next tier down sort.  
         // what do you do if your subsearch has no items?
 
-      //  [Ignore]
+        //  [Ignore]
         [TestMethod]
         public void ShouldPopulateBattleWithPlatoons()
         {
             QueueItems queueItems = new QueueItems();
 
-            Player playerA1 = new Player((int) 1, (double) 50, (int) 499);
+            Player playerA1 = new Player(1, 50, 499);
             QueueItem queueItemA1 = new QueueItem(playerA1, new E100());
             queueItems.Add(queueItemA1);
-            Player playerA1B = new Player((int) 9, (double) 50, (int) 499);
+            Player playerA1B = new Player(9, 50, 499);
             QueueItem queueItemTortoise = new QueueItem(playerA1B, new Tortoise());
             queueItems.Add(queueItemTortoise);
-            QueueItem queueItemB1 = new QueueItem(new Player((int) 11, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB1 = new QueueItem(new Player(11, 50, 499), new E100());
             queueItems.Add(queueItemB1);
-            QueueItem queueItemA2 = new QueueItem(new Player((int) 2, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA2 = new QueueItem(new Player(2, 50, 499), new E100());
             queueItems.Add(queueItemA2);
-            QueueItem queueItemB2 = new QueueItem(new Player((int) 12, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB2 = new QueueItem(new Player(12, 50, 499), new E100());
             queueItems.Add(queueItemB2);
-            QueueItem queueItemA3 = new QueueItem(new Player((int) 3, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA3 = new QueueItem(new Player(3, 50, 499), new E100());
             queueItems.Add(queueItemA3);
-            Player playerB3 = new Player((int) 13, (double) 50, (int) 499);
+            Player playerB3 = new Player(13, 50, 499);
             QueueItem queueItemB3 = new QueueItem(playerB3, new E100());
             queueItems.Add(queueItemB3);
-            QueueItem queueItemA4 = new QueueItem(new Player((int) 4, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA4 = new QueueItem(new Player(4, 50, 499), new E100());
             queueItems.Add(queueItemA4);
-            QueueItem queueItemB4 = new QueueItem(new Player((int) 14, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB4 = new QueueItem(new Player(14, 50, 499), new E100());
             queueItems.Add(queueItemB4);
-            QueueItem queueItemA5 = new QueueItem(new Player((int) 5, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA5 = new QueueItem(new Player(5, 50, 499), new E100());
             queueItems.Add(queueItemA5);
-            QueueItem queueItemB5 = new QueueItem(new Player((int) 15, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB5 = new QueueItem(new Player(15, 50, 499), new E100());
             queueItems.Add(queueItemB5);
-            QueueItem queueItemA6 = new QueueItem(new Player((int) 6, (double) 50, (int) 499), new E100());
+            QueueItem queueItemA6 = new QueueItem(new Player(6, 50, 499), new E100());
             queueItems.Add(queueItemA6);
-            QueueItem queueItemB6 = new QueueItem(new Player((int) 16, (double) 50, (int) 499), new E100());
+            QueueItem queueItemB6 = new QueueItem(new Player(16, 50, 499), new E100());
             queueItems.Add(queueItemB6);
-            Player playerA7 = new Player((int) 7, (double) 50, (int) 499);
+            Player playerA7 = new Player(7, 50, 499);
             QueueItem queueItemA7 = new QueueItem(playerA7, new E100());
             queueItems.Add(queueItemA7);
-            Player playerB7 = new Player((int) 17, (double) 50, (int) 499);
+            Player playerB7 = new Player(17, 50, 499);
             QueueItem queueItemB7 = new QueueItem(playerB7, new E100());
             queueItems.Add(queueItemB7);
 
-            Player playerB8 = new Player((int) 18, (double) 50, (int) 499);
+            Player playerB8 = new Player(18, 50, 499);
             QueueItem queueItemB3PlatoonMate = new QueueItem(playerB8, new E100());
             queueItemB3.AddPlatoonMate(queueItemB3PlatoonMate);
 
-            Player playerA8 = new Player((int) 8, (double) 50, (int) 499);
+            Player playerA8 = new Player(8, 50, 499);
             QueueItem queueItemA1PlatoonMate = new QueueItem(playerA8, new E100());
             queueItemA1.AddPlatoonMate(queueItemA1PlatoonMate);
 
             // need 2 platoons Team A gets 1 platoon Team B gets another platoon
 
-            List<QueueItem> items = new List<QueueItem> {queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7 };
+            List<QueueItem> items = new List<QueueItem> {queueItemA2, queueItemA3, queueItemA4, queueItemA5, queueItemA6, queueItemA7};
 
             Battle battle = new Battle();
 
@@ -222,7 +222,7 @@ namespace MatchMakerTests
 
             battle.ContainsPlayer(playerB3).Should().BeTrue();
             battle.ContainsPlayer(playerB8).Should().BeTrue();
-            
+
             battle.ContainsPlayer(playerB7).Should().BeFalse();
             battle.ContainsPlayer(playerA7).Should().BeFalse();
 
